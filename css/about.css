@@ -1,22 +1,21 @@
-/* About / founder page: modelled on sophiawebster.com/pages/biography */
+/* About / founder page: modelled on sophiawebster.com/pages/biography. Uses [data-theme=wine] (wine page, pink ink). */
 @layer pages {
-  .bio-banner{position:relative;aspect-ratio:3/2;max-height:78dvh;min-height:320px;overflow:hidden;background:var(--wine);isolation:isolate}
+  .bio-banner{position:relative;aspect-ratio:3/2;max-height:78dvh;min-height:20rem;overflow:hidden;background:var(--wine);isolation:isolate}
   @media (min-width:768px){.bio-banner{aspect-ratio:2.4/1}}
   @media (min-width:1280px){.bio-banner{aspect-ratio:3.4/1}}
   .bio-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:-2}
   .bio-banner::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(#4A0B0C88,#4A0B0C22 38%,#4A0B0Ccc)}
   .bio-title{position:absolute;inset:auto 0 var(--s7);text-align:center;color:var(--pink);pointer-events:none}
-  .bio-title .caps{display:block;font:700 clamp(1.75rem,6vw,3.5rem)/1 var(--ui);letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 16px #4A0B0C}
-  .bio-title .script{position:absolute;left:50%;top:50%;translate:-50% -62%;white-space:nowrap;font:italic 400 clamp(2.25rem,8vw,5rem)/1 var(--classique);color:#fff;text-shadow:0 2px 24px #4A0B0Cb0}
-  .bio-title .caps{padding-top:clamp(.5rem,2vw,1.5rem)}
+  .bio-title .caps{display:block;padding-top:clamp(.5rem,2vw,1.5rem);font:700 clamp(1.75rem,6vw,3.5rem)/1 var(--ui);letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 1rem #4A0B0C}
+  .bio-title .script{position:absolute;left:50%;top:50%;translate:-50% -62%;white-space:nowrap;font:italic 400 clamp(2.25rem,8vw,5rem)/1 var(--classique);color:#fff;text-shadow:0 2px 1.5rem #4A0B0Cb0}
 
-  .bio{max-width:44rem;margin-inline:auto;padding:clamp(48px,8vw,96px) var(--gutter) var(--s5);text-align:center;color:var(--wine)}
+  .bio{max-width:44rem;margin-inline:auto;padding:clamp(3rem,8vw,6rem) var(--gutter) var(--s5);text-align:center;color:var(--fg)}
   .bio p{font:400 var(--fs-sm)/2.1 var(--ui);letter-spacing:.2em;text-transform:uppercase;margin-bottom:var(--s5)}
   .bio .first{font-size:var(--fs-base)}
-  .bio-photo{width:min(100% - var(--gutter) * 2,1100px);margin:var(--s5) auto var(--s8);
+  .bio-photo{width:min(100% - var(--gutter) * 2,68.75rem);margin:var(--s5) auto var(--s8);
     img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r-sm)}}
-  .bio-quote{max-width:26ch;margin:var(--s7) auto;text-align:center;font:italic 400 var(--fs-h1)/1.2 var(--classique);color:var(--wine)}
-  .bio-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);width:min(100% - var(--gutter) * 2,1100px);margin:0 auto var(--s8);
+  .bio-quote{max-width:26ch;margin:var(--s7) auto;text-align:center;font:italic 400 var(--fs-h1)/1.2 var(--classique);color:var(--fg)}
+  .bio-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);width:min(100% - var(--gutter) * 2,68.75rem);margin:0 auto var(--s8);
     img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-sm)}}
   .bio-cta{display:flex;justify-content:center;gap:var(--s3);flex-wrap:wrap;padding-bottom:var(--s8)}
 }

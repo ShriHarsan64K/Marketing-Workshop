@@ -28,5 +28,5 @@ export default async function home(main) {
       h("div", null, h("p", { class: "eyebrow", style: "color:inherit;opacity:.7" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead" }, C.membershipText)),
       h("div", null, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn", href: "membership.html" }, "Join the community")))),
     section(h("p", { class: "eyebrow" }, "Moments"), h("h2", null, "Good company, ", h("em", null, "caught on camera.")),
-      h("div", { class: "moments", style: "margin-top:32px" }, C.archive.slice(0, 6).map(([f, t]) => h("figure", null, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, t))))));
+      h("div", { class: "moments", style: "margin-top:2rem" }, C.archive.slice(0, 6).map(([f, t]) => h("figure", null, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, t))))));
 }

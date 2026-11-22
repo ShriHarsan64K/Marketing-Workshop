@@ -17,7 +17,7 @@ export default async function event(main) {
     if (e.date < todayISO()) box.append(h("p", { class: "note" }, "Registration for this event has closed. ", h("a", { href: "calendar.html" }, "See upcoming events"), "."));
     else box.append(contactForm({ cfg: C.registerForm, button: "Reserve my spot", extraValues: { event: `${e.title} (${e.date})` },
       success(bot) {
-        box.replaceChildren(bot ? "" : h("div", { class: "note", role: "status" }, h("h3", { style: "margin-bottom:8px" }, "You're on the list."), "We've received your registration. We'll confirm your spot soon."),
+        box.replaceChildren(bot ? "" : h("div", { class: "note", role: "status" }, h("h3", { style: "margin-bottom:.5rem" }, "You're on the list."), "We've received your registration. We'll confirm your spot soon."),
           !bot && safeUrl(e.link) && h("p", null, h("a", { class: "btn", href: safeUrl(e.link), rel: "noopener" }, "Payment and details")));
       } }));
     main.append(h("div", { class: "event-grid" }, info, box));

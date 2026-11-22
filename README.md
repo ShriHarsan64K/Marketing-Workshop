@@ -3,7 +3,7 @@
 Static events website for the code:iconic community in Chennai. No server or database.
 
 - **Events:** Google Sheet (published as CSV). **Sign-ups:** two Google Forms. **Hosting:** GitHub Pages.
-- **Home** has the hero slideshow, what we do, events, a small tile section modelled on leborrel.nl, the membership band and photo moments. **About** is a biography page modelled on sophiawebster.com. Colours: wine `#4A0B0C` and pink `#E6BDC5` only (all tints are mixed from them), with leopard-print texture. Type: New York for text, Classique (Didot/Baskerville-style serif) for headlines, system UI font for labels.
+- **Home** has the hero slideshow, what we do, events, a small tile section modelled on leborrel.nl, the membership band and photo moments. **About** is a biography page modelled on sophiawebster.com. Colours: wine `#4A0B0C` and pink `#E6BDC5` only (all tints are mixed from them): pink page with wine ink, flipped on the founder page, footer and menu. Texture: a scattered kiss-print pattern. Logo: the lips poster (`images/logo/`). Everything is in rem on a 90% root, so the site renders at 90% size. Type: New York for text, Classique (Didot/Baskerville-style serif) for headlines, system UI font for labels.
 
 ## Structure
 ```
@@ -15,7 +15,7 @@ js/
   lib/                 dom.js (helpers, icons) · events.js (sheet, dates, calendar file) · forms.js (Google Forms)
   components/          header.js · footer.js · tiles.js (bento cards)
   pages/               one module per page
-images/  archive/ (event photos) · logo/ · texture/ (leopard) · events/ (posters)
+images/  archive/ (event photos) · logo/ · texture/ (kiss prints) · events/ (posters)
 ```
 
 ## Edit content

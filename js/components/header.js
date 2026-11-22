@@ -24,10 +24,10 @@ export function renderHeader(variant) {
         h("a", { class: "wordmark", href: "index.html", "aria-label": C.name + " home" }, "code", h("b", null, ":"), "iconic"),
         h("div", { class: "icons" }, h("a", { href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Instagram" }, icons.instagram()), menuBtn("")))
     : h("header", { class: "site-header" },
-        h("a", { class: "logo-btn", href: "index.html", "aria-label": C.name + " home" }, logoMark(40)),
+        h("a", { class: "logo-btn", href: "index.html", "aria-label": C.name + " home" }, logoMark()),
         h("nav", { class: "pill-nav", "aria-label": "Main" }, NAV.map(link)),
         h("div", { class: "header-end" }, a11yToggle(), h("a", { class: "cta-pill", href: "membership.html" }, "Join free"), menuBtn("round-btn menu")));
-  const menu = h("nav", { id: "menu", popover: "auto", "aria-label": "Menu" },
+  const menu = h("nav", { id: "menu", popover: "auto", "aria-label": "Menu", "data-theme": "wine" },
     h("button", { class: "close", popovertarget: "menu", popovertargetaction: "hide" }, "Close"), MENU.map(link));
   $("#hdr").replaceWith(header);
   header.after(menu);

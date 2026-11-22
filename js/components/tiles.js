@@ -20,7 +20,7 @@ export function orb() {
       svg("circle", { cx: 200, cy: 200, r: 195 }), svg("circle", { cx: 200, cy: 200, r: 150 }),
       ring("ringTop", `M ${200 - R},200 A ${R},${R} 0 0 1 ${200 + R},200`, C.ringTop, "50%"),
       ring("ringBottom", `M ${200 - R - 12},200 A ${R + 12},${R + 12} 0 0 0 ${200 + R + 12},200`, C.ringBottom, "50%")),
-    h("div", { class: "ball" }));
+    h("div", { class: "ball" }, logoMark()));
 }
 
 export const archiveCard = () => card("archive", "a", { href: "past.html" },
@@ -57,7 +57,7 @@ export const ticketCard = next => card("ticket-card", "section", {},
 export function instaCard() {
   const S = C.instagramStats;
   return card("insta", "section", {},
-    h("div", { class: "who" }, h("div", { class: "avatar" }, logoMark(30)), h("div", null, h("h3", null, C.instagramHandle), h("p", { class: "muted" }, "Photos, previews and the next date."))),
+    h("div", { class: "who" }, h("div", { class: "avatar" }, logoMark()), h("div", null, h("h3", null, C.instagramHandle), h("p", { class: "muted" }, "Photos, previews and the next date."))),
     S ? h("div", { class: "stats" }, [["posts", "posts"], ["followers", "followers"], ["following", "following"]].map(([k, l]) => h("div", null, h("b", null, S[k]), l)))
       : h("a", { class: "link", href: safeUrl(C.instagram), rel: "noopener" }, "Follow on Instagram"));
 }
