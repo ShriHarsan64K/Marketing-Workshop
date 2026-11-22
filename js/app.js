@@ -26,6 +26,8 @@ const dayMon = iso => [fmt(iso, { day: "2-digit" }), fmt(iso, { month: "short" }
 const imgSrc = n => !n ? "" : /^https?:\/\//i.test(n) ? n : "images/events/" + n;
 const slug = e => (e.date + "-" + e.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
+/* Illustrated cups/mugs/sparkles that sit in the white space. Purely decorative. */
+const deco = (name, cls, style) => h("img", { class: "deco " + (cls || ""), src: `images/decor/${name}.svg`, alt: "", "aria-hidden": "true", loading: "lazy", style: style || null });
 
 function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;
@@ -85,7 +87,7 @@ function layout() {
     h("button", { class: "x", type: "button" }, "Close"),
     ALL_MENU.map(([l, u]) => h("a", { href: u, "aria-current": u === here ? "page" : null }, l)));
   bar.after(dr);
-  $("#ftr").replaceWith(h("footer", null, h("div", { class: "in" },
+  $("#ftr").replaceWith(h("footer", null, deco("teacup", "r lg hide-s", "top:1.5rem;--rot:8deg"), deco("sparkle", "sm", "left:8%;top:1.5rem"), h("div", { class: "in" },
     h("p", { class: "foot-mark" }, mark()),
     h("div", { class: "foot-cols" },
       h("div", null, h("div", { style: "font:italic 24px var(--serif);max-width:26ch" }, C.tagline)),
@@ -102,10 +104,6 @@ function layout() {
   mb.onclick = () => tog(true); $(".x", dr).onclick = () => tog(false);
   document.addEventListener("keydown", e => e.key === "Escape" && dr.classList.contains("open") && tog(false));
   dr.querySelectorAll("a").forEach(a => a.addEventListener("click", () => tog(false)));
-  if (document.body.dataset.page === "home") {
-    const sync = () => bar.classList.toggle("solid", scrollY > innerHeight * .6);
-    addEventListener("scroll", sync, { passive: true }); sync();
-  }
 }
 function svgMenu() {
   const ns = "http://www.w3.org/2000/svg", s = document.createElementNS(ns, "svg");
@@ -131,27 +129,25 @@ function eventRow(e) {
 }
 
 function hero() {
-  const S = C.slides;
-  const imgs = S.map((s, i) => h("img", { src: s.image, alt: "", class: i ? null : "on", loading: i ? "lazy" : null, fetchpriority: i ? null : "high" }));
-  const cap = h("p", { class: "hero-cap", "aria-live": "off" }, S[0].heading);
-  const count = h("span", { "aria-live": "off" }, `01 / ${String(S.length).padStart(2, "0")}`);
+  const S = C.slides, pad = n => String(n).padStart(2, "0");
+  const imgs = S.map((s, i) => h("img", { src: s.image, alt: i ? "" : "Women at a code:iconic event", class: i ? null : "on", loading: i ? "lazy" : null, fetchpriority: i ? null : "high" }));
+  const count = h("span", { "aria-live": "off" }, `01 / ${pad(S.length)}`);
   const pp = h("button", { class: "pp", type: "button" }, "Pause");
   const prev = h("button", { type: "button", "aria-label": "Previous photo" }, "‹"), next = h("button", { type: "button", "aria-label": "Next photo" }, "›");
   const el = h("section", { class: "hero", id: "hero", "aria-label": "Welcome" },
-    h("div", { class: "hero-media" }, imgs),
-    h("div", { class: "hero-in" },
-      h("p", { class: "eyebrow", style: "color:var(--blush)" }, "A women's social club · Chennai"),
-      h("h1", { class: "mark" }, mark()),
-      h("p", { class: "lede" }, C.tagline),
-      h("div", { class: "cta" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "#events" }, "See what's on"))),
-    cap, h("div", { class: "hero-ctrl" }, count, prev, next, pp));
+    deco("mug", "l hide-s", "top:8%;--rot:-8deg"), deco("sparkle", "sm hide-s", "left:48%;top:7%"), deco("latte", "l hide-s", "bottom:5%;--rot:6deg"), deco("sparkle", "sm slow", "right:6%;bottom:12%"),
+    h("div", { class: "hero-grid" },
+      h("div", null,
+        h("p", { class: "eyebrow" }, "A women's social club · Chennai"),
+        h("h1", { class: "mark" }, mark()),
+        h("p", { class: "lede" }, C.tagline),
+        h("div", { class: "cta" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "#events" }, "See what's on"))),
+      h("div", { class: "arch" }, h("div", { class: "arch-frame" }, imgs), h("div", { class: "sticker" }, h("span", null, "Free", h("br"), "to join")),
+        h("div", { class: "hero-ctrl" }, prev, count, next, pp))));
   let i = 0, timer = null, paused = reduced;
-  const show = n => {
-    i = (n + S.length) % S.length; imgs.forEach((im, k) => im.classList.toggle("on", k === i));
-    cap.textContent = S[i].heading; count.textContent = `${String(i + 1).padStart(2, "0")} / ${String(S.length).padStart(2, "0")}`;
-  };
+  const show = n => { i = (n + S.length) % S.length; imgs.forEach((im, k) => im.classList.toggle("on", k === i)); count.textContent = `${pad(i + 1)} / ${pad(S.length)}`; };
   const stop = () => { clearInterval(timer); timer = null; };
-  const start = () => { if (!paused && !timer) timer = setInterval(() => show(i + 1), 6000); };
+  const start = () => { if (!paused && !timer) timer = setInterval(() => show(i + 1), 5500); };
   prev.onclick = () => show(i - 1); next.onclick = () => show(i + 1);
   pp.textContent = paused ? "Play" : "Pause";
   pp.onclick = () => { paused = !paused; pp.textContent = paused ? "Play" : "Pause"; paused ? stop() : start(); };
@@ -201,7 +197,7 @@ const pages = {
     main.before(hero());
     main.before(h("div", { class: "ribbon", "aria-hidden": "true" }, h("div", null, [0, 1].flatMap(() => C.vibes.map(v => h("span", null, v))))));
     main.removeAttribute("class");
-    main.append(h("p", { class: "eyebrow" }, "Next up"), h("h2", { id: "events", style: "margin-bottom:40px;scroll-margin-top:90px" }, "Come sit with us."));
+    main.append(deco("mug", "r hide-s", "top:1.5rem;--rot:6deg"), h("p", { class: "eyebrow" }, "Next up"), h("h2", { id: "events", style: "margin-bottom:1.6rem;scroll-margin-top:5rem" }, "Come sit with us."));
     const list = h("div"); main.append(list);
     await withEvents(main, evs => {
       const up = upcoming(evs).slice(0, 5);
@@ -211,12 +207,12 @@ const pages = {
       reveal(main);
     });
     // membership band + moments (after the list so they sit below events)
-    const band = h("section", { class: "sect band" }, h("div", { class: "in grid" },
+    const band = h("section", { class: "sect band" }, deco("teacup", "r lg hide-s", "bottom:1.5rem;--rot:-6deg;opacity:.9"), deco("sparkle", "sm", "left:5%;top:2rem"), h("div", { class: "in grid" },
       h("div", { class: "rv" }, h("p", { class: "eyebrow", style: "color:var(--rose)" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")),
         h("p", { style: "margin-top:24px;max-width:42ch" }, C.membershipText)),
       h("div", { class: "rv" }, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))),
         h("a", { class: "btn light", href: "membership.html" }, "Join the community"))));
-    const mom = h("section", { class: "sect" }, h("div", { class: "in" },
+    const mom = h("section", { class: "sect" }, deco("latte", "l hide-s", "top:2rem;--rot:-6deg"), deco("sparkle", "sm slow", "right:8%;top:3rem"), h("div", { class: "in" },
       h("p", { class: "eyebrow" }, "Moments"), h("h2", null, "Good company, ", h("em", null, "caught on camera.")),
       h("div", { class: "moments" }, C.slides.map(s => h("figure", { class: "rv" }, h("img", { src: s.image, alt: s.heading, loading: "lazy" }), h("figcaption", null, s.heading))))));
     main.after(mom); main.after(band); reveal(document);
@@ -287,5 +283,16 @@ const pages = {
 };
 
 layout();
-pages[document.body.dataset.page]($("#main"));
+const mainEl = $("#main");
+pages[document.body.dataset.page](mainEl);
+const PAGE_DECO = {
+  calendar: [["mug", "r hide-s", "top:3rem;--rot:6deg"], ["sparkle", "sm", "left:55%;top:2rem"]],
+  past: [["teacup", "r hide-s", "top:3rem;--rot:-6deg"]],
+  event: [["latte", "r hide-s", "top:1.5rem;--rot:6deg"]],
+  membership: [["latte", "r lg hide-s", "top:3rem;--rot:6deg"], ["mug", "l hide-s", "bottom:3rem;--rot:-8deg"], ["sparkle", "sm", "right:12%;bottom:6rem"]],
+  about: [["teacup", "r lg hide-s", "top:3rem;--rot:6deg"], ["mug", "l hide-s", "bottom:4rem;--rot:-8deg"]],
+  contact: [["mug", "r lg hide-s", "top:3rem;--rot:6deg"], ["latte", "l hide-s", "bottom:3rem"]],
+  notfound: [["teacup", "r lg", "top:3rem"]]
+};
+(PAGE_DECO[document.body.dataset.page] || []).forEach(d => mainEl.append(deco(...d)));
 reveal(document);
