@@ -26,8 +26,6 @@ const dayMon = iso => [fmt(iso, { day: "2-digit" }), fmt(iso, { month: "short" }
 const imgSrc = n => !n ? "" : /^https?:\/\//i.test(n) ? n : "images/events/" + n;
 const slug = e => (e.date + "-" + e.title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
-/* Illustrated cups/mugs/sparkles that sit in the white space. Purely decorative. */
-const deco = (name, cls, style) => h("img", { class: "deco " + (cls || ""), src: `images/decor/${name}.svg`, alt: "", "aria-hidden": "true", loading: "lazy", style: style || null });
 
 function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;
@@ -77,44 +75,25 @@ async function withEvents(into, render) {
 /* ---------- layout ---------- */
 function layout() {
   const here = location.pathname.split("/").pop() || "index.html";
-  const bar = h("header", { class: "bar" },
+  const link = ([l, u]) => h("a", { href: u, "aria-current": u === here ? "page" : null }, l);
+  $("#hdr").replaceWith(h("header", { class: "bar" }, h("div", { class: "wrap" },
     h("a", { class: "brand", href: "index.html", "aria-label": C.name + " home" }, mark()),
-    h("nav", { class: "nav", "aria-label": "Main" }, MENU.map(([l, u]) => h("a", { href: u, "aria-current": u === here ? "page" : null }, l)),
-      h("a", { class: "btn", href: "membership.html" }, "Join free")),
-    h("button", { id: "mb", "aria-label": "Open menu", "aria-expanded": "false", "aria-controls": "dr" }, svgMenu()));
-  $("#hdr").replaceWith(bar);
-  const dr = h("nav", { class: "drawer", id: "dr", "aria-label": "Menu" },
-    h("button", { class: "x", type: "button" }, "Close"),
-    ALL_MENU.map(([l, u]) => h("a", { href: u, "aria-current": u === here ? "page" : null }, l)));
-  bar.after(dr);
-  $("#ftr").replaceWith(h("footer", null, deco("teacup", "r lg hide-s", "top:1.5rem;--rot:8deg"), deco("sparkle", "sm", "left:8%;top:1.5rem"), h("div", { class: "in" },
-    h("p", { class: "foot-mark" }, mark()),
-    h("div", { class: "foot-cols" },
-      h("div", null, h("div", { style: "font:italic 24px var(--serif);max-width:26ch" }, C.tagline)),
+    h("nav", { class: "nav", "aria-label": "Main" }, MENU.map(link), h("a", { class: "btn", href: "membership.html" }, "Join free")),
+    h("button", { class: "menu-btn", popovertarget: "menu", "aria-label": "Open menu" }, svgMenu()))));
+  // native Popover API: opens/closes, traps Escape and returns focus with no JavaScript
+  $(".bar").after(h("nav", { id: "menu", popover: "auto", "aria-label": "Menu" },
+    h("button", { class: "close", popovertarget: "menu", popovertargetaction: "hide" }, "Close"), ALL_MENU.map(link)));
+  $("#ftr").replaceWith(h("footer", null, h("div", { class: "wrap" },
+    h("div", { class: "cols" },
+      h("div", null, h("a", { class: "brand", href: "index.html", style: "display:inline" }, mark()), h("p", { class: "tag" }, C.headline)),
       h("div", null, ALL_MENU.map(([l, u]) => h("a", { href: u }, l))),
-      h("div", null, h("a", { href: safeUrl(C.instagram), rel: "noopener" }, "Instagram"), C.email && h("a", { href: "mailto:" + C.email }, C.email)))),
-    h("p", { class: "tiny" }, `© ${new Date().getFullYear()} ${C.name}. Made in Chennai.`)));
-
-  const mb = $("#mb");
-  const tog = open => {
-    dr.classList.toggle("open", open); mb.setAttribute("aria-expanded", open);
-    document.body.style.overflow = open ? "hidden" : "";
-    if (open) $(".x", dr).focus(); else mb.focus();
-  };
-  mb.onclick = () => tog(true); $(".x", dr).onclick = () => tog(false);
-  document.addEventListener("keydown", e => e.key === "Escape" && dr.classList.contains("open") && tog(false));
-  dr.querySelectorAll("a").forEach(a => a.addEventListener("click", () => tog(false)));
+      h("div", null, h("a", { href: safeUrl(C.instagram), rel: "noopener" }, "Instagram"), C.email && h("a", { href: "mailto:" + C.email }, C.email))),
+    h("p", { class: "tiny" }, `© ${new Date().getFullYear()} ${C.name}. Made in Chennai.`))));
 }
 function svgMenu() {
   const ns = "http://www.w3.org/2000/svg", s = document.createElementNS(ns, "svg");
-  for (const [k, v] of Object.entries({ width: 28, height: 28, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.6, "aria-hidden": "true" })) s.setAttribute(k, v);
-  const p = document.createElementNS(ns, "path"); p.setAttribute("d", "M3 8h18M3 16h18"); s.append(p); return s;
-}
-function reveal(root = document) {
-  const els = [...root.querySelectorAll(".rv:not(.in)")];
-  if (reduced || !("IntersectionObserver" in window)) return els.forEach(e => e.classList.add("in"));
-  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { threshold: .12 });
-  els.forEach(e => io.observe(e));
+  for (const [k, v] of Object.entries({ width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.8, "stroke-linecap": "round", "aria-hidden": "true" })) s.setAttribute(k, v);
+  const p = document.createElementNS(ns, "path"); p.setAttribute("d", "M4 8h16M4 16h16"); s.append(p); return s;
 }
 
 /* ---------- pieces ---------- */
@@ -130,20 +109,17 @@ function eventRow(e) {
 
 function hero() {
   const S = C.slides, pad = n => String(n).padStart(2, "0");
-  const imgs = S.map((s, i) => h("img", { src: s.image, alt: i ? "" : "Women at a code:iconic event", class: i ? null : "on", loading: i ? "lazy" : null, fetchpriority: i ? null : "high" }));
-  const count = h("span", { "aria-live": "off" }, `01 / ${pad(S.length)}`);
-  const pp = h("button", { class: "pp", type: "button" }, "Pause");
-  const prev = h("button", { type: "button", "aria-label": "Previous photo" }, "‹"), next = h("button", { type: "button", "aria-label": "Next photo" }, "›");
-  const el = h("section", { class: "hero", id: "hero", "aria-label": "Welcome" },
-    deco("mug", "l hide-s", "top:8%;--rot:-8deg"), deco("sparkle", "sm hide-s", "left:48%;top:7%"), deco("latte", "l hide-s", "bottom:5%;--rot:6deg"), deco("sparkle", "sm slow", "right:6%;bottom:12%"),
-    h("div", { class: "hero-grid" },
-      h("div", null,
-        h("p", { class: "eyebrow" }, "A women's social club · Chennai"),
-        h("h1", { class: "mark" }, mark()),
-        h("p", { class: "lede" }, C.tagline),
-        h("div", { class: "cta" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "#events" }, "See what's on"))),
-      h("div", { class: "arch" }, h("div", { class: "arch-frame" }, imgs), h("div", { class: "sticker" }, h("span", null, "Free", h("br"), "to join")),
-        h("div", { class: "hero-ctrl" }, prev, count, next, pp))));
+  const imgs = S.map((s, i) => h("img", { src: s.image, alt: i ? "" : "Women at a code:iconic event", class: i ? null : "on", width: 800, height: 1000, loading: i ? "lazy" : null, fetchpriority: i ? null : "high", decoding: "async" }));
+  const count = h("span", null, `${pad(1)} / ${pad(S.length)}`);
+  const pp = h("button", { type: "button" }, "Pause");
+  const prev = h("button", { type: "button", "aria-label": "Previous photo" }, "←"), next = h("button", { type: "button", "aria-label": "Next photo" }, "→");
+  const el = h("section", { class: "hero", "aria-label": "Welcome" }, h("div", { class: "wrap hero-grid" },
+    h("div", null,
+      h("p", { class: "eyebrow" }, "Women's social club · Chennai"),
+      h("h1", null, C.headline),
+      h("p", { class: "lead" }, C.lede),
+      h("div", { class: "cta" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "#events" }, "See what's on"))),
+    h("div", null, h("div", { class: "hero-photo" }, imgs), h("div", { class: "hero-ctrl" }, count, h("div", null, prev, next, pp)))));
   let i = 0, timer = null, paused = reduced;
   const show = n => { i = (n + S.length) % S.length; imgs.forEach((im, k) => im.classList.toggle("on", k === i)); count.textContent = `${pad(i + 1)} / ${pad(S.length)}`; };
   const stop = () => { clearInterval(timer); timer = null; };
@@ -189,33 +165,29 @@ function contactForm({ cfg, extra, button, success, extraValues }) {
   });
   return form;
 }
-const head = (eyebrow, title, lead) => h("div", { class: "page-head" }, h("p", { class: "eyebrow" }, eyebrow), h("h1", null, title), lead && h("p", null, lead));
+const head = (eyebrow, title, lead) => h("div", { class: "page-head" }, h("p", { class: "eyebrow" }, eyebrow), h("h1", null, title), lead && h("p", { class: "lead" }, lead));
 
 /* ---------- pages ---------- */
 const pages = {
   async home(main) {
     main.before(hero());
-    main.before(h("div", { class: "ribbon", "aria-hidden": "true" }, h("div", null, [0, 1].flatMap(() => C.vibes.map(v => h("span", null, v))))));
-    main.removeAttribute("class");
-    main.append(deco("mug", "r hide-s", "top:1.5rem;--rot:6deg"), h("p", { class: "eyebrow" }, "Next up"), h("h2", { id: "events", style: "margin-bottom:1.6rem;scroll-margin-top:5rem" }, "Come sit with us."));
+    main.before(h("section", { class: "wrap section" }, h("p", { class: "eyebrow" }, "What we do"), h("h2", null, C.whatTitle),
+      h("ul", { class: "pillars" }, C.pillars.map(p => h("li", { class: "rv" }, h("h3", null, p[0]), h("p", null, p[1]))))));
+    main.id = "events";
+    main.append(h("div", { class: "section-head" }, h("div", null, h("p", { class: "eyebrow" }, "Upcoming"), h("h2", null, "Come sit with us.")),
+      h("a", { class: "btn ghost", href: "calendar.html" }, "Full calendar")));
     const list = h("div"); main.append(list);
     await withEvents(main, evs => {
       const up = upcoming(evs).slice(0, 5);
       if (!up.length) main.append(h("p", { class: "note" }, "New events are being planned. Follow ", h("a", { href: safeUrl(C.instagram), rel: "noopener" }, "us on Instagram"), " to hear first."));
       up.forEach(e => list.append(eventRow(e)));
-      if (up.length) main.append(h("p", { style: "margin-top:36px" }, h("a", { class: "btn ghost", href: "calendar.html" }, "Full calendar")));
-      reveal(main);
     });
-    // membership band + moments (after the list so they sit below events)
-    const band = h("section", { class: "sect band" }, deco("teacup", "r lg hide-s", "bottom:1.5rem;--rot:-6deg;opacity:.9"), deco("sparkle", "sm", "left:5%;top:2rem"), h("div", { class: "in grid" },
-      h("div", { class: "rv" }, h("p", { class: "eyebrow", style: "color:var(--rose)" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")),
-        h("p", { style: "margin-top:24px;max-width:42ch" }, C.membershipText)),
-      h("div", { class: "rv" }, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))),
-        h("a", { class: "btn light", href: "membership.html" }, "Join the community"))));
-    const mom = h("section", { class: "sect" }, deco("latte", "l hide-s", "top:2rem;--rot:-6deg"), deco("sparkle", "sm slow", "right:8%;top:3rem"), h("div", { class: "in" },
-      h("p", { class: "eyebrow" }, "Moments"), h("h2", null, "Good company, ", h("em", null, "caught on camera.")),
-      h("div", { class: "moments" }, C.slides.map(s => h("figure", { class: "rv" }, h("img", { src: s.image, alt: s.heading, loading: "lazy" }), h("figcaption", null, s.heading))))));
-    main.after(mom); main.after(band); reveal(document);
+    const band = h("section", { class: "section band" }, h("div", { class: "wrap grid" },
+      h("div", null, h("p", { class: "eyebrow" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead", style: "margin-top:16px;color:inherit;opacity:.85" }, C.membershipText)),
+      h("div", null, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn light", href: "membership.html" }, "Join the community"))));
+    const mom = h("section", { class: "wrap section" }, h("p", { class: "eyebrow" }, "Moments"), h("h2", null, "Good company, ", h("em", null, "caught on camera.")),
+      h("div", { class: "moments" }, C.slides.map(s => h("figure", { class: "rv" }, h("img", { src: s.image, alt: s.heading, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, s.heading)))));
+    main.after(mom); main.after(band);
   },
   async calendar(main) {
     main.append(head("Calendar", "Upcoming events", "Pick a date, register in a minute, and we'll confirm your spot."));
@@ -224,7 +196,6 @@ const pages = {
       if (!up.length) main.append(h("p", { class: "note" }, "No upcoming events yet. Check back soon, or join free to hear first."));
       let last = "";
       for (const e of up) { const m = monthName(e.date); if (m !== last) { main.append(h("div", { class: "month" }, m)); last = m; } main.append(eventRow(e)); }
-      reveal(main);
     });
   },
   async past(main) {
@@ -232,10 +203,10 @@ const pages = {
     await withEvents(main, evs => {
       const old = past(evs);
       if (!old.length) main.append(h("p", { class: "note" }, "Our first memories are still to be made."));
-      for (const e of old) main.append(h("article", { style: "margin-bottom:72px" }, h("p", { class: "eyebrow" }, pretty(e.date) + (e.venue ? " · " + e.venue : "")), h("h2", { style: "font-size:clamp(30px,4vw,52px);margin-bottom:16px" }, e.title),
-        h("p", { style: "max-width:60ch" }, e.description),
-        e.image && h("img", { src: imgSrc(e.image), alt: e.title, loading: "lazy", style: "max-height:460px;border-radius:8px;margin-top:20px" }),
-        e.photoList.length > 0 && h("div", { class: "moments", style: "grid-template-columns:repeat(auto-fill,minmax(200px,1fr))" }, e.photoList.map(p => h("figure", { style: "grid-column:auto!important;grid-row:auto!important" }, h("img", { src: imgSrc(p), alt: e.title + " photo", loading: "lazy" }))))));
+      for (const e of old) main.append(h("article", { style: "margin-bottom:64px" }, h("p", { class: "eyebrow" }, pretty(e.date) + (e.venue ? " · " + e.venue : "")), h("h2", null, e.title),
+        e.description && h("p", { class: "lead", style: "margin-top:12px" }, e.description),
+        e.image && h("img", { class: "event-img", src: imgSrc(e.image), alt: e.title, loading: "lazy" }),
+        e.photoList.length > 0 && h("div", { class: "moments" }, e.photoList.map(p => h("figure", null, h("img", { src: imgSrc(p), alt: e.title + " photo", loading: "lazy" }))))));
     });
   },
   async event(main) {
@@ -244,10 +215,10 @@ const pages = {
       const e = evs.find(x => x.id === id);
       if (!e) { main.append(head("Event", "We couldn't find that event."), h("a", { class: "btn", href: "calendar.html" }, "See upcoming events")); return; }
       document.title = e.title + " · " + C.name;
-      const info = h("div", null, h("p", { class: "eyebrow" }, "Register"), h("h1", { style: "font-size:clamp(40px,6vw,76px)" }, e.title),
-        h("dl", null, h("dt", null, "When"), h("dd", null, pretty(e.date) + (e.time ? ", " + e.time : "")), e.venue && [h("dt", null, "Where"), h("dd", null, e.venue)], e.price && [h("dt", null, "Price"), h("dd", null, e.price)]),
-        e.description && h("p", { style: "margin-top:28px;max-width:52ch" }, e.description),
-        e.image && h("img", { src: imgSrc(e.image), alt: e.title, style: "margin-top:28px;border-radius:8px;max-height:480px" }));
+      const info = h("div", null, h("p", { class: "eyebrow" }, "Register"), h("h1", null, e.title),
+        h("dl", { class: "facts" }, h("dt", null, "When"), h("dd", null, pretty(e.date) + (e.time ? ", " + e.time : "")), e.venue && [h("dt", null, "Where"), h("dd", null, e.venue)], e.price && [h("dt", null, "Price"), h("dd", null, e.price)]),
+        e.description && h("p", { class: "lead" }, e.description),
+        e.image && h("img", { class: "event-img", src: imgSrc(e.image), alt: e.title }));
       const box = h("div");
       if (e.date < todayISO()) box.append(h("p", { class: "note" }, "Registration for this event has closed. ", h("a", { href: "calendar.html" }, "See upcoming events"), "."));
       else box.append(contactForm({
@@ -270,29 +241,16 @@ const pages = {
     }));
   },
   about(main) {
-    main.append(head("About", "Who we are"), h("p", { style: "white-space:pre-line;font-size:20px" }, C.aboutWho),
-      h("h2", { style: "margin:64px 0 20px;font-size:clamp(30px,4vw,48px)" }, "What we do"), h("p", { style: "white-space:pre-line;font-size:20px" }, C.aboutWhat),
-      h("p", { style: "margin-top:40px" }, h("a", { class: "btn", href: "membership.html" }, "Join free")));
+    main.append(head("About", "Who we are"), h("div", { class: "prose" }, h("p", { style: "white-space:pre-line" }, C.aboutWho), h("h2", null, "What we do"), h("p", { style: "white-space:pre-line" }, C.aboutWhat),
+      h("a", { class: "btn", href: "membership.html" }, "Join free")));
   },
   contact(main) {
     main.append(head("Contact", "Say hello", C.contactNote),
-      h("div", { style: "display:grid;gap:14px;font-size:20px" }, C.email && h("a", { href: "mailto:" + C.email }, C.email), C.phone && h("span", null, C.phone),
+      h("div", { class: "links" }, C.email && h("a", { href: "mailto:" + C.email }, C.email), C.phone && h("span", null, C.phone),
         h("a", { href: safeUrl(C.instagram), rel: "noopener" }, C.instagram.replace(/^https?:\/\/(www\.)?/, ""))));
   },
   notfound(main) { main.append(head("404", "That page isn't here."), h("a", { class: "btn", href: "index.html" }, "Back home")); }
 };
 
 layout();
-const mainEl = $("#main");
-pages[document.body.dataset.page](mainEl);
-const PAGE_DECO = {
-  calendar: [["mug", "r hide-s", "top:3rem;--rot:6deg"], ["sparkle", "sm", "left:55%;top:2rem"]],
-  past: [["teacup", "r hide-s", "top:3rem;--rot:-6deg"]],
-  event: [["latte", "r hide-s", "top:1.5rem;--rot:6deg"]],
-  membership: [["latte", "r lg hide-s", "top:3rem;--rot:6deg"], ["mug", "l hide-s", "bottom:3rem;--rot:-8deg"], ["sparkle", "sm", "right:12%;bottom:6rem"]],
-  about: [["teacup", "r lg hide-s", "top:3rem;--rot:6deg"], ["mug", "l hide-s", "bottom:4rem;--rot:-8deg"]],
-  contact: [["mug", "r lg hide-s", "top:3rem;--rot:6deg"], ["latte", "l hide-s", "bottom:3rem"]],
-  notfound: [["teacup", "r lg", "top:3rem"]]
-};
-(PAGE_DECO[document.body.dataset.page] || []).forEach(d => mainEl.append(deco(...d)));
-reveal(document);
+pages[document.body.dataset.page]($("#main"));

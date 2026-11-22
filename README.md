@@ -1,6 +1,6 @@
 # code: iconic
 
-Static events website (plain HTML/CSS/JS) for the code: iconic community in Chennai. No server or database:
+Static events website (plain HTML/CSS/JS, modern CSS, system fonts) for the code:iconic community in Chennai. No server or database:
 
 - **Events** come from a Google Sheet (published as CSV).
 - **Event registrations** and **membership sign-ups** go into Google Forms (responses land in Google Sheets).

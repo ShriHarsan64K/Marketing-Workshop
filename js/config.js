@@ -1,6 +1,14 @@
 // Everything you may want to edit lives here. Events live in the Google Sheet.
 window.SITE = {
   name: "code: iconic",
+  headline: "Finally, a space that's yours.",
+  lede: "code:iconic is a women's social club in Chennai. Brunches, themed nights, creative workshops, picnics and trips. Free to join.",
+  whatTitle: "Plans worth showing up for.",
+  pillars: [
+    ["Brunches and nights out", "Themed gatherings with good food and better company."],
+    ["Creative workshops", "Journaling, mood boards and making things with your hands."],
+    ["Picnics and trips", "Easy afternoons outdoors and weekends away."]
+  ],
   tagline: "The energy. The dress. The life. Finally, a space that's yours.",
   instagram: "https://instagram.com/code.iconic",
   email: "",            // shown on the Contact page
