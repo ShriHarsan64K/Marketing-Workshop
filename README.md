@@ -30,3 +30,8 @@ python3 -m http.server 8000     # then open http://localhost:8000
 
 ## Files
 `index.html calendar.html past.html event.html membership.html about.html contact.html` share `css/style.css` and `js/app.js` (header, footer, rendering). Settings: `js/config.js`.
+
+## Google setup (already done)
+- Events sheet "code iconic - Events": File > Share > Publish to web > CSV (URL in `js/config.js`).
+- Two Forms (registration, membership), each with responses linked to a Sheet. The site posts to each Form's `formResponse` URL using the `entry.NNN` ids in `js/config.js`. If you rebuild a Form, re-read its entry ids (view-source of the live form, search `FB_PUBLIC_LOAD_DATA_`).
+- Confirm/reject: add a "Status" column in the responses sheet and update it by hand.

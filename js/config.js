@@ -12,11 +12,13 @@ window.SITE = {
   timezone: "Asia/Kolkata",
 
   // Google Sheet > File > Share > Publish to web > "Events" tab > CSV. Paste that link:
-  eventsCsv: "",
+  eventsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJ0JDY3tDtsbVejQI17tjiOvlFl_EyL41-ZJjNhqUY-BFcjrp9rqZIGYzh2xm3n9rcGbTgJ5b1uHwy/pub?output=csv",
 
   // Google Forms: `action` is the form's .../formResponse URL, `fields` maps our fields to its entry.NNN ids.
-  registerForm: { action: "", fields: { event: "", name: "", email: "", phone: "" } },
-  memberForm:   { action: "", fields: { name: "", email: "", phone: "", message: "" } },
+  registerForm: { action: "https://docs.google.com/forms/d/e/1FAIpQLSd2PQBLORqpE-TgJrJrn6kV2Yaf5Zgv2z30uUzO0IDJWUzHhA/formResponse",
+    fields: { event: "entry.438693767", name: "entry.2092647898", email: "entry.997670100", phone: "entry.1932758490" } },
+  memberForm: { action: "https://docs.google.com/forms/d/e/1FAIpQLSfWJ9Ootrg3DxA1UAmzwD61qAPnmeibn3cZsTNs1lgaDydjjA/formResponse",
+    fields: { message: "entry.438693767", name: "entry.2092647898", email: "entry.997670100", phone: "entry.1932758490" } },
 
   // Home page slideshow: photos live in /images
   slides: [
