@@ -1,5 +1,0 @@
-{% macro csrf() %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endmacro %}
-{% macro post(action, label, cls='btn alt', confirm='', extra='') -%}
-<form method="post" action="{{ action }}" style="display:inline"{% if confirm %} onsubmit="return confirm('{{ confirm }}')"{% endif %}>{{ csrf() }}{{ extra|safe }}<button class="{{ cls }}">{{ label }}</button></form>
-{%- endmacro %}
-{% macro honeypot() %}<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">{% endmacro %}

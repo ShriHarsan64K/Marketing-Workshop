@@ -1,7 +1,0 @@
-{% extends "base.html" %}{% block title %}Calendar · {{ site.name }}{% endblock %}
-{% block body %}<main id="main"><h1>Calendar</h1>
-{% if not months %}<p class="ok mt">No upcoming events yet. Check back soon.</p>{% endif %}
-{% for m, evs in months.items() %}<h2 class="mt">{{ m }}</h2>
-{% for e in evs %}<div class="cal"><div class="d"><b>{{ day_month(e.event_date)[0] }}</b>{{ day_month(e.event_date)[1] }}</div>
-<div style="flex:1"><b style="font-size:22px">{{ e.title }}</b><div class="muted">{{ e.event_time or '' }}{% if e.venue %} · {{ e.venue }}{% endif %}</div></div>
-<a class="btn" href="{{ url_for('public.event_register', eid=e.id) }}">Register</a></div>{% endfor %}{% endfor %}</main>{% endblock %}
