@@ -2,7 +2,7 @@
   .contact-grid{display:grid;gap:var(--s4)}
   @media (min-width:768px){.contact-grid{grid-template-columns:1.1fr .9fr;align-items:stretch}}
   .contact-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5);display:grid;gap:var(--s4);align-content:start}
-  .contact-card h2{font-size:var(--fs-h1)}
+  .contact-card h2{font-size:clamp(2rem,4vw,3rem)}
   .crows{display:grid;gap:var(--s2)}
   .crow{display:flex;align-items:center;gap:var(--s3);padding:var(--s3);border:1px solid var(--line);border-radius:var(--r-sm);text-decoration:none;transition:border-color .2s,background .2s;
     &:hover{border-color:var(--fg);background:color-mix(in srgb,var(--fg) 8%,transparent)}

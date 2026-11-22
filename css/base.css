@@ -13,7 +13,9 @@
   main{flex:1 0 auto}
   a{color:inherit;text-underline-offset:.25rem}
   h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em;line-height:1.1;text-wrap:balance}
-  h1,h2{font-family:var(--classique)}
+  /* thick and dark: Impact titles; thin: Didot leads; script: the one accent word in a title */
+  h1,h2{font-family:var(--impact);font-weight:400;text-transform:uppercase;letter-spacing:.015em;line-height:.98}
+  h1 em,h2 em{font-family:var(--script);font-style:normal;font-weight:400;text-transform:none;letter-spacing:0;font-size:1.18em;line-height:.8}
   h1{font-size:var(--fs-h1)} h2{font-size:var(--fs-h2)} h3{font-size:var(--fs-h3)}
   p{text-wrap:pretty}
   em,.script{font-style:italic}
@@ -24,6 +26,5 @@
   .muted{font:400 var(--fs-sm)/1.5 var(--ui);color:var(--muted)}
   .wrap{width:100%;max-width:calc(var(--max) + var(--gutter) * 2);margin-inline:auto;padding-inline:var(--gutter)}
   .section{padding-block:var(--section)}
-  .lead{font-size:var(--fs-lead);color:var(--muted);max-width:52ch}
-  .logo-img{width:100%;height:auto}
+  .lead{font:400 var(--fs-lead)/1.5 var(--classique);color:var(--muted);max-width:52ch}
 }

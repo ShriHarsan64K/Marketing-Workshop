@@ -37,7 +37,6 @@ export default {
     { image: "images/slide5.webp", heading: "Cut. Paste. Dream." },
     { image: "images/slide6.webp", heading: "Proud of what we made" }
   ],
-  mapCenter: [13.0827, 80.2707],   // Chennai
   membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",
   contactNote: "We'd love to hear from you.",
 

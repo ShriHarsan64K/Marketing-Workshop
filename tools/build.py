@@ -46,7 +46,9 @@ NAV = [("Events", "calendar.html"), ("Archive", "past.html"), ("About", "about.h
 MENU = [("Home", "index.html")] + NAV + [("Join free", "membership.html")]
 digits = re.sub(r"\D", "", C["phone"])[-10:]
 tel, wa = "tel:+91" + digits, f"https://wa.me/91{digits}?text=Hi%20code%3Aiconic"
+PARENT = {"event.html": "calendar.html"}   # inner pages keep their parent button highlighted
 def link(label, href, page):
+    page = PARENT.get(page, page)
     cur = ' aria-current="page"' if href == page else ""
     return f'<a href="{href}"{cur}>{label}</a>'
 def header(page, bio):
@@ -55,8 +57,9 @@ def header(page, bio):
         return (f'<header class="site-header bio"><a class="wordmark" href="index.html" aria-label="{C["name"]} home">code<b>:</b>iconic</a>'
                 f'<div class="icons"><a href="{C["instagram"]}" rel="noopener" aria-label="Instagram">{icon("instagram", 22)}</a>{menu_btn("")}</div></header>')
     nav = "".join(link(l, h, page) for l, h in NAV)
+    cta_cur = ' aria-current="page"' if page == "membership.html" else ""
     return (f'<header class="site-header"><a class="logo-btn" href="index.html" aria-label="{C["name"]} home"><img src="images/logo/logo.webp" alt="{C["name"]}" width="480" height="330"></a>'
-            f'<div class="header-right"><nav class="pill-nav" aria-label="Main">{nav}</nav><a class="cta-pill" href="membership.html">Join free</a>{menu_btn("round-btn menu")}</div></header>')
+            f'<div class="header-right"><nav class="pill-nav" aria-label="Main">{nav}</nav><a class="cta-pill" href="membership.html"{cta_cur}>Join free</a>{menu_btn("round-btn menu")}</div></header>')
 def menu(page):
     return (f'<nav id="menu" popover="auto" aria-label="Menu"><button class="close" popovertarget="menu" popovertargetaction="hide" aria-label="Close menu">{icon("close", 26)}</button>'
             + "".join(link(l, h, page) for l, h in MENU) + "</nav>")
@@ -66,7 +69,7 @@ def footer():
             '<div class="cols">'
             + col("Explore", '<a href="calendar.html">Events</a>', '<a href="past.html">Archive</a>', '<a href="membership.html">Membership</a>')
             + col("About us", '<a href="about.html">Jaisu\'s story</a>', '<a href="contact.html">Contact</a>', f'<a href="{C["instagram"]}" rel="noopener">Instagram</a>')
-            + col("Get in touch", f'<a href="mailto:{C["email"]}">{C["email"]}</a>', f'<a href="{tel}">+91 {C["phone"]}</a>',
+            + col("Get in touch",
                   f'<div class="social"><a href="{C["instagram"]}" rel="noopener" aria-label="Instagram">{icon("instagram")}</a><a href="{wa}" rel="noopener" aria-label="WhatsApp">{icon("chat")}</a><a href="mailto:{C["email"]}" aria-label="Email">{icon("mail")}</a></div>')
             + f'</div><div class="legal"><span>{C["city"]} / India</span><span>©{C["name"]} {time.strftime("%Y")}</span><span>Free to join</span></div></div></footer>')
 def hero():

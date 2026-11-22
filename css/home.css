@@ -1,4 +1,4 @@
-/* Home: full-photo hero, what we get up to, a small tile section modelled on leborrel.nl, membership band */
+/* Home: full-photo hero, what we do, a small non-interactive tile section modelled on leborrel.nl (Instagram is the only link), membership band */
 @layer pages {
   /* ---------- hero: full photo, words on top of a wine veil ---------- */
   .hero-full{position:relative;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:var(--wine);isolation:isolate;overflow:hidden}
@@ -8,7 +8,8 @@
     background:linear-gradient(100deg,color-mix(in srgb,var(--wine) 92%,transparent) 0%,color-mix(in srgb,var(--wine) 68%,transparent) 48%,color-mix(in srgb,var(--wine) 34%,transparent) 100%),
                linear-gradient(0deg,color-mix(in srgb,var(--wine) 78%,transparent),transparent 45%)}
   .hero-in{padding-top:7rem;padding-bottom:var(--s5)}
-  .hero-in h1{font-size:clamp(2.5rem,7.2vw,5.5rem);line-height:1;max-width:11ch;margin-bottom:var(--s4);color:#fff}
+  .hero-in h1{font:400 clamp(2.75rem,8.4vw,6.75rem)/.95 var(--classique);text-transform:none;letter-spacing:-.015em;max-width:10ch;margin-bottom:var(--s5);color:#fff}
+  .hero-in h1 em{display:inline-block;font-family:var(--script);font-size:1.3em;color:var(--pink);line-height:.9;padding-bottom:.12em}
   .hero-in .eyebrow{color:var(--pink)}
   .hero-in .lead{color:color-mix(in srgb,var(--pink) 92%,#fff);margin-bottom:var(--s4);max-width:40ch}
   .cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
@@ -16,30 +17,30 @@
   .hero-full .btn.ghost{background:transparent;color:#fff;border-color:#fffa;&:hover{background:#fff;color:var(--wine)}}
   .hero-ctrl{display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--s4);font:400 var(--fs-sm) var(--ui);color:var(--pink)}
   .hero-ctrl div{display:flex;gap:var(--s2)}
-  .hero-ctrl button{display:grid;place-items:center;width:2.25rem;height:2.25rem;border:1px solid #fff9;border-radius:50%;background:color-mix(in srgb,var(--wine) 45%,transparent);color:#fff;cursor:pointer;&:hover{background:#fff;color:var(--wine)}}
+  .hero-ctrl button{display:grid;place-items:center;width:var(--btn-h);height:var(--btn-h);border:1px solid #fff9;border-radius:50%;background:color-mix(in srgb,var(--wine) 45%,transparent);color:#fff;cursor:pointer;&:hover{background:#fff;color:var(--wine)}}
 
-  /* ---------- what we get up to: 3 across (2 across on phones), photo + words, no boxes ---------- */
+  /* ---------- what we do: 3 across (2 on phones), photo + words, no boxes ---------- */
   .pillars{display:grid;gap:var(--s5) var(--s4);margin-top:var(--s5);grid-template-columns:repeat(2,1fr)}
   @media (min-width:768px){.pillars{grid-template-columns:repeat(3,1fr);gap:var(--s6) var(--s5)}}
   .pillars li{display:grid;gap:var(--s2);align-content:start}
   .pillars img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);border-radius:var(--r);margin-bottom:var(--s1)}
-  .pillars h3{font:400 var(--fs-h3)/1.15 var(--classique)}
+  .pillars h3{font:400 var(--fs-h3)/1.1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
   .pillars p{color:var(--muted);font:400 var(--fs-sm)/1.5 var(--ui)}
 
-  /* ---------- tiles (bento) ---------- */
+  /* ---------- tiles (bento): nothing here is clickable except Instagram ---------- */
   .tiles{max-width:calc(60rem + var(--gutter) * 2)}
-  .bento-intro{text-align:center;max-width:44rem;margin:0 auto var(--s5)}
-  .bento{position:relative;display:grid;gap:var(--s3);max-width:60rem;margin-inline:auto;font-size:.875rem;grid-template-columns:1fr;
-    grid-template-areas:"hero" "orb" "archive" "count" "insta" "loc" "cart" "ticket" "since" "map"}
+  .bento{position:relative;display:grid;gap:var(--s3);max-width:60rem;margin-inline:auto;font-size:.875rem;grid-template-columns:1fr;cursor:default;
+    grid-template-areas:"hero" "orb" "archive" "count" "loc" "cart" "ticket" "insta"}
   .bento > .card{min-height:10rem;padding:var(--s3);border-radius:1.25rem;background:var(--card-bg)}
   @media (min-width:768px){
-    .bento{grid-template-columns:repeat(2,1fr);grid-template-areas:"hero hero" "orb orb" "archive count" "insta loc" "cart ticket" "since map"}
+    .bento{grid-template-columns:repeat(2,1fr);grid-template-areas:"hero hero" "orb orb" "archive count" "loc loc" "cart ticket" "insta insta"}
+    .bento > .loc{min-height:6rem}
   }
   @media (min-width:1024px){
-    .bento{--r1:9rem;--r2:9rem;grid-template-columns:repeat(4,1fr);grid-template-rows:var(--r1) var(--r2) 12rem 8.5rem;
-      grid-template-areas:"archive hero hero insta" "archive hero hero loc" "count cart ticket map" "since cart ticket map"}
+    .bento{--r1:9rem;--r2:9rem;grid-template-columns:repeat(4,1fr);grid-template-rows:var(--r1) var(--r2) 12rem 6rem;
+      grid-template-areas:"archive hero hero loc" "archive hero hero count" "cart cart ticket ticket" "insta insta insta insta"}
     .bento > .card{min-height:0}
-    .cart,.ticket-card{padding-top:var(--s7)!important}
+    .cart,.ticket-card{padding-top:var(--s3)!important}
     .hero-card{padding-bottom:0}
   }
 
@@ -50,85 +51,69 @@
     &:nth-child(1){rotate:-4deg;translate:0 .25rem}&:nth-child(2){rotate:2deg;translate:0 -.375rem}&:nth-child(3){rotate:-3deg;translate:0 .5rem}}
   .tilt figcaption{font-size:var(--fs-sm)}
 
-  /* centre: the plain logo in a circle that is cut out of the cards behind it (it paints the same fixed page gradient) */
+  /* centre: the plain logo in a circle cut out of the three cards it overlaps (it paints the same fixed page gradient; each card is masked by the same circle) */
   .orb{grid-area:orb;position:relative;justify-self:center;display:grid;place-items:center;width:min(62vw,12rem);aspect-ratio:1;z-index:5;margin-block:calc(var(--s6) * -1);border-radius:50%;
     background-color:var(--bg);background-image:var(--page-bg);background-attachment:fixed;border:1px solid var(--line);outline:1px solid var(--line);outline-offset:.5rem}
   .orb img{width:82%;height:auto}
   @media (min-width:1024px){
     .orb{position:absolute;left:50%;top:calc(var(--r1) + var(--r2) + var(--s3) * 1.5);translate:-50% -50%;width:13rem;margin:0;pointer-events:none}
-  }
-
-  /* the logo circle is cut out of the three cards it overlaps (hero card, cartridge, ticket); the same circle masks each card */
-  @media (min-width:1024px){
     .bento{--cut:7.25rem;--half:calc(var(--s3) / 2)}
     .hero-card{-webkit-mask:radial-gradient(circle at 50% calc(100% + var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at 50% calc(100% + var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
     .cart{-webkit-mask:radial-gradient(circle at calc(100% + var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at calc(100% + var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
     .ticket-card{-webkit-mask:radial-gradient(circle at calc(0px - var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at calc(0px - var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
   }
+
   .archive{grid-area:archive;padding-bottom:var(--s4)}
   .fan{position:relative;flex:1;min-height:9rem}
-  .fan .polaroid{position:absolute;left:50%;top:0;width:min(54%,10.625rem);translate:-50% 0;transform-origin:50% 100%;transition:rotate .4s,translate .4s;
+  .fan .polaroid{position:absolute;left:50%;top:0;width:min(54%,10.625rem);translate:-50% 0;transform-origin:50% 100%;
     &:nth-child(1){rotate:-10deg;translate:-90% .875rem}&:nth-child(2){rotate:0deg;z-index:1}&:nth-child(3){rotate:10deg;translate:-10% .875rem}}
-  .archive:hover .fan .polaroid:nth-child(1){rotate:-14deg;translate:-98% .625rem}
-  .archive:hover .fan .polaroid:nth-child(3){rotate:14deg;translate:-2% .625rem}
-  .archive h3{font-size:var(--fs-h3)}
+  .archive h3{font:400 var(--fs-h3)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
 
   .count{grid-area:count;align-items:center;text-align:center;justify-content:center;gap:var(--s3)}
   .count .eyebrow{margin:0}
   .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);width:100%;max-width:18rem}
   .cd div{text-align:center}
-  .cd b{display:grid;place-items:center;aspect-ratio:1;border:1px solid var(--deep);border-radius:var(--r-sm);background:var(--deep);color:var(--on-deep);font:400 clamp(1rem,1.8vw,1.25rem)/1 var(--classique);font-variant-numeric:tabular-nums}
+  .cd b{display:grid;place-items:center;aspect-ratio:1;border:1px solid var(--deep);border-radius:var(--r-sm);background:var(--deep);color:var(--on-deep);font:400 clamp(1.1rem,2vw,1.5rem)/1 var(--impact);letter-spacing:.02em;font-variant-numeric:tabular-nums}
   .cd span{display:block;margin-top:var(--s2);font:500 .625rem/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-
-  /* membership / free: plain solid pink with wine ink */
-  .bento > .since{grid-area:since;background:var(--deep);color:var(--on-deep);border-color:var(--deep);
-    .eyebrow{color:var(--on-deep);opacity:.75;margin:0}
-    b{font:400 clamp(2.5rem,4vw,3.25rem)/1 var(--classique);color:var(--on-deep)}}
-  a.since:hover{border-color:var(--deep)}
-
-  .cart{grid-area:cart;padding:var(--s3) var(--s3) var(--s4);gap:var(--s2)}
-  .cartridge{position:relative;flex:1;min-height:8.5rem;margin-inline:var(--s2);border:1px solid var(--deep);border-radius:.625rem .625rem .875rem .875rem;background:linear-gradient(color-mix(in srgb,var(--pink) 88%,#fff),color-mix(in srgb,var(--pink) 70%,var(--wine)));padding:var(--s4) var(--s3) var(--s3);box-shadow:0 .875rem 1.875rem color-mix(in srgb,#000 40%,transparent);transform:rotate(-3deg)}
-  .cartridge::before{content:"";position:absolute;inset:.375rem .625rem auto;height:.625rem;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--wine) 35%,transparent) 0 2px,#0000 2px 6px);border-radius:3px}
-  .cartridge .win{height:100%;min-height:6rem;border-radius:.375rem;overflow:hidden;background:var(--wine);display:grid;place-items:center
-    ;img{width:100%;height:100%;object-fit:cover}}
-  .cart .eyebrow{margin:0}
-  .cart h3{font-size:var(--fs-base)}
-
-  .ticket-card{grid-area:ticket;padding:var(--s3);justify-content:center}
-  .ticket{position:relative;display:grid;grid-template-columns:1fr 2.75rem;border:1px solid var(--deep);border-radius:.5rem;background:var(--deep);color:var(--on-deep);box-shadow:0 .875rem 1.875rem color-mix(in srgb,#000 40%,transparent),.375rem .375rem 0 color-mix(in srgb,var(--pink) 45%,var(--wine));transform:rotate(-4deg);margin:var(--s2);overflow:hidden}
-  .ticket > div{padding:var(--s3)}
-  .ticket small{font:600 .5625rem/1.4 var(--ui);letter-spacing:.14em;text-transform:uppercase}
-  .ticket h3{font:400 clamp(1.125rem,1.7vw,1.5rem)/1.05 var(--classique);color:var(--on-deep);margin:var(--s2) 0}
-  .ticket p{font:400 .6875rem/1.5 var(--ui)}
-  .ticket .stub{padding:0;border-left:2px dashed var(--on-deep);display:grid;place-items:center
-    ;span{writing-mode:vertical-rl;font:700 .8125rem/1 var(--ui);letter-spacing:.3em;rotate:180deg}}
-  .ticket::before,.ticket::after{content:"";position:absolute;left:calc(100% - 2.75rem - .4375rem);width:.875rem;height:.875rem;border-radius:50%;background:var(--wine)}
-  .ticket::before{top:-.4375rem}.ticket::after{bottom:-.4375rem}
-
-  .insta{grid-area:insta;justify-content:center;gap:var(--s2)}
-  .insta .avatar{display:grid;place-items:center;width:3rem;height:3rem;border:1px solid var(--line);border-radius:50%;background:var(--pink);overflow:hidden;img{width:82%}}
-  .insta h3{font:400 var(--fs-h3)/1.2 var(--display)}
-  .insta .follow{display:inline-flex;align-items:center;gap:var(--s1);font:600 var(--fs-sm) var(--ui)}
 
   .loc{grid-area:loc;justify-content:space-between}
   .loc .eyebrow{margin:0}
-  .loc h3{font:400 var(--fs-h2)/1.1 var(--classique);margin-bottom:var(--s1)}
+  .loc h3{font:400 var(--fs-h2)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em;margin-bottom:var(--s1)}
 
-  /* map: fixed on Chennai. Cropped evenly on all sides (so the centre is still Chennai) to hide the embed's zoom buttons and footer text. */
-  .map{grid-area:map;padding:0;min-height:16rem}
-  .map iframe{position:absolute;inset:-6rem;width:calc(100% + 12rem);height:calc(100% + 12rem);border:0;pointer-events:none;filter:grayscale(1) invert(.92) contrast(.85) brightness(.9)}
-  .map::after{content:"";position:absolute;inset:0;background:var(--wine);mix-blend-mode:color;pointer-events:none}
-  .map .pin{position:absolute;z-index:2;left:50%;top:50%;width:1rem;height:1rem;translate:-50% -50%;border-radius:50%;background:var(--pink);border:2px solid var(--wine);box-shadow:0 0 0 .5rem color-mix(in srgb,var(--pink) 32%,transparent)}
-  .map .bubble{position:absolute;z-index:2;left:50%;top:50%;translate:-50% calc(-100% - 1.1rem);background:var(--deep);color:var(--on-deep);border:1px solid var(--deep);border-radius:var(--r-sm);padding:var(--s2) var(--s4);box-shadow:0 .625rem 1.875rem color-mix(in srgb,#000 45%,transparent);pointer-events:none;
-    h3{font:400 var(--fs-h3)/1.2 var(--classique);color:var(--on-deep)}}
-  .map .osm{position:absolute;z-index:3;right:var(--s2);bottom:var(--s1);font:400 .625rem var(--ui);color:var(--pink);text-decoration:none}
+  /* event cartridge + ticket sit side by side under the logo, each with room to breathe */
+  .cart{grid-area:cart;flex-direction:row;align-items:center;justify-content:center;gap:var(--s5);padding:var(--s3) var(--s5)}
+  .cartridge{position:relative;flex:none;width:min(46%,9.5rem);aspect-ratio:4/5;border:1px solid var(--deep);border-radius:.625rem .625rem .875rem .875rem;background:linear-gradient(color-mix(in srgb,var(--pink) 88%,#fff),color-mix(in srgb,var(--pink) 70%,var(--wine)));padding:var(--s4) var(--s2) var(--s2);box-shadow:0 .875rem 1.875rem color-mix(in srgb,#000 40%,transparent);transform:rotate(-3deg)}
+  .cartridge::before{content:"";position:absolute;inset:.375rem .625rem auto;height:.625rem;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--wine) 35%,transparent) 0 2px,#0000 2px 6px);border-radius:3px}
+  .cartridge .win{height:100%;border-radius:.375rem;overflow:hidden;background:var(--wine);img{width:100%;height:100%;object-fit:cover}}
+  .cart .eyebrow{margin:0 0 var(--s2)}
+  .cart h3{font:400 var(--fs-h2)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
+  .ticket-card{grid-area:ticket;padding:var(--s3) var(--s5);justify-content:center}
+  .ticket{position:relative;display:grid;grid-template-columns:1fr 2.75rem;border:1px solid var(--deep);border-radius:.5rem;background:var(--deep);color:var(--on-deep);box-shadow:0 .875rem 1.875rem color-mix(in srgb,#000 40%,transparent),.375rem .375rem 0 color-mix(in srgb,var(--pink) 45%,var(--wine));transform:rotate(-3deg);margin:var(--s2) var(--s3);overflow:hidden}
+  .ticket > div{padding:var(--s3)}
+  .ticket small{font:600 .5625rem/1.4 var(--ui);letter-spacing:.14em;text-transform:uppercase}
+  .ticket h3{font:400 clamp(1.25rem,2vw,1.75rem)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em;color:var(--on-deep);margin:var(--s2) 0}
+  .ticket p{font:400 .6875rem/1.5 var(--ui)}
+  .ticket .stub{padding:0;border-left:2px dashed var(--on-deep);display:grid;place-items:center
+    ;span{writing-mode:vertical-rl;font:400 .875rem/1 var(--impact);letter-spacing:.3em;rotate:180deg}}
+  .ticket::before,.ticket::after{content:"";position:absolute;left:calc(100% - 2.75rem - .4375rem);width:.875rem;height:.875rem;border-radius:50%;background:var(--wine)}
+  .ticket::before{top:-.4375rem}.ticket::after{bottom:-.4375rem}
+
+  /* Instagram: the one link. A full-width strip: logo + handle on the left, real photos filling the middle, the button on the right. */
+  .insta{grid-area:insta;flex-direction:row;align-items:center;justify-content:space-between;gap:var(--s4);text-decoration:none;cursor:pointer;padding:var(--s3) var(--s4)}
+  .insta .who{display:flex;align-items:center;gap:var(--s3);min-width:0}
+  .insta .avatar{display:grid;place-items:center;width:var(--btn-h);height:var(--btn-h);border:1px solid var(--line);border-radius:50%;background:var(--pink);overflow:hidden;flex:none;img{width:82%}}
+  .insta h3{font:400 var(--fs-h3)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  .insta .thumbs{display:none;gap:var(--s2);margin-inline:auto;img{width:3.25rem;height:3.25rem;object-fit:cover;border:1px solid var(--line);border-radius:var(--r-sm)}}
+  .insta .btn{flex:none;background:var(--pink);color:var(--wine);border-color:var(--pink)}
+  @media (min-width:768px){.insta .thumbs{display:flex}}
+  a.insta:hover{border-color:var(--pink);translate:0 -2px}
 
   /* ---------- membership band ---------- */
   .band{margin-top:var(--s7);background:var(--deep);color:var(--on-deep);border:1px solid var(--deep);border-radius:var(--r);padding:var(--s6) var(--s5);display:grid;gap:var(--s5);align-items:center}
-  .band h2{color:var(--on-deep);font-size:clamp(2.5rem,6vw,4.5rem);line-height:1;margin-bottom:var(--s3)}
+  .band h2{color:var(--on-deep);font-size:clamp(2.75rem,6.5vw,5rem);margin-bottom:var(--s3)}
   .band .lead{color:var(--on-deep);opacity:.85}
   .perks{margin:var(--s4) 0;display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s4);border-top:1px solid color-mix(in srgb,var(--on-deep) 28%,transparent);padding-top:var(--s3)
-    ;dt{font-weight:600}dd{margin:0;opacity:.85}}
+    ;dt{font-weight:700}dd{margin:0;opacity:.85}}
   .band .btn{background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
   .duo{position:relative;min-height:15rem;
     figure{position:absolute;width:52%}

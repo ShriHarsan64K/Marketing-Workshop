@@ -1,6 +1,7 @@
 /* code:iconic design tokens. Two brand colours only: wine #4A0B0C and pink #E6BDC5. Every tint is mixed from them.
    The site is WINE with pink ink, lifted by soft pink glows and gradients so it never reads flat; [data-theme=pink] flips it (footer, founder page).
-   Type: New York (Apple's system serif via ui-serif) for text, Classique (Didot/Baskerville-style serif) for headlines, system UI sans for small labels.
+   Type, all system fonts: New York for text, Classique (Didot, hairline) for thin display, Impact for thick dark titles, Snell Roundhand script for accent words, system UI for labels.
+   One button size everywhere: --btn-h / --btn-px / --btn-fs.
    Sizes: everything is in rem and the root is 90%, so the whole site renders at 90% of the browser default.
    Scale: 4/8px spacing grid, 12 14 16 18 20 24 32 40 56 type steps, breakpoints 640 / 768 / 1024 / 1280. */
 @layer reset, tokens, base, layout, components, pages, motion;
@@ -23,10 +24,12 @@
 
     --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
     --classique:"Didot","Bodoni 72","Baskerville","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --impact:Impact,"Haettenschweiler","Arial Narrow Bold","Franklin Gothic Condensed","Arial Black",sans-serif;
+    --script:"Snell Roundhand","Apple Chancery","Segoe Script","Brush Script MT","Lucida Handwriting",cursive;
     --ui:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
     --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.5rem;--s6:2rem;--s7:3rem;--s8:4rem;--s9:6rem;
-    --gutter:1rem;--section:2.5rem;--header:4rem;--control:2.7rem;--max:75rem;
+    --gutter:1rem;--section:2.5rem;--header:4rem;--control:2.75rem;--btn-h:2.75rem;--btn-px:1.25rem;--btn-fs:.8125rem;--max:75rem;
     --r-sm:.75rem;--r:1.25rem;--gap:.875rem;
     --fs-xs:.75rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lead:1.125rem;--fs-h3:1.25rem;--fs-h2:1.5rem;--fs-h1:2rem;--fs-hero:2.5rem;
   }

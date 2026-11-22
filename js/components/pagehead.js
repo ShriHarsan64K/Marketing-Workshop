@@ -1,3 +1,3 @@
-import { h } from "../lib/dom.js?v=20261122174510";
+import { h } from "../lib/dom.js?v=20261122175707";
 /* Plain page title with one line under it. */
 export const head = (title, lead) => h("header", { class: "page-head" }, h("h1", null, title), lead && h("p", { class: "lead" }, lead));
