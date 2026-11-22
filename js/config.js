@@ -24,6 +24,30 @@ window.SITE = {
   ],
   contactNote: "We'd love to hear from you.",
   timezone: "Asia/Kolkata",
+  city: "Chennai",
+  cityLine: "Tamil Nadu, India",
+  instagramHandle: "@code.iconic",
+  // Photos for the archive tile, home gallery and past-events page. Files live in /images/archive
+  archive: [
+    ["group-1.jpg", "The whole circle"], ["crochet.jpg", "Crochet and chats"], ["table-1.jpg", "Around the workshop table"],
+    ["table-2.jpg", "Making things together"], ["circle-1.jpg", "Mood board morning"], ["circle-2.jpg", "Proud of what we made"],
+    ["hug.jpg", "Hellos at the door"], ["sparkle.jpg", "Little sparkly details"], ["gather.jpg", "Everyone arrives"],
+    ["mugs.jpg", "Journals and smiles"], ["trio.jpg", "New friends"]
+  ],
+  // Founder page (about.html). Design only: swap in the real words later.
+  story: {
+    kicker: "The founder",
+    title: ["Jaisu's", "story"],
+    banner: "images/archive/group-1.jpg",
+    intro: "A short opening that tells people who Jaisu is and why code:iconic exists. Two or three sentences work best.",
+    paragraphs: [
+      "How it began. Add the moment the idea for code:iconic came to life, in Jaisu's own words.",
+      "Who it is for. Add a few lines about the women who come along and what they find here.",
+      "Where it is going. Add what Jaisu hopes the community becomes in Chennai and beyond."
+    ],
+    quote: "A line from Jaisu that sums up what code:iconic is about.",
+    images: [["images/archive/crochet.jpg", "Crochet and chats"], ["images/archive/circle-2.jpg", "Proud of what we made"]]
+  },
 
   // Google Sheet > File > Share > Publish to web > "Events" tab > CSV. Paste that link:
   eventsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJ0JDY3tDtsbVejQI17tjiOvlFl_EyL41-ZJjNhqUY-BFcjrp9rqZIGYzh2xm3n9rcGbTgJ5b1uHwy/pub?output=csv",

@@ -16,6 +16,7 @@ function h(tag, attrs, ...kids) {
   for (const k of kids.flat()) if (k != null && k !== false) e.append(k);
   return e;
 }
+const logoMark = () => h("img", { src: "images/logo/mark.svg", alt: "", width: 28, height: 20 });
 const mark = cls => h("span", { class: cls || null }, "code", h("span", { class: "colon" }, ":"), h("span", { class: "it" }, "iconic"));
 const safeUrl = u => /^https?:\/\//i.test((u || "").trim()) ? u.trim() : "";
 const todayISO = () => new Intl.DateTimeFormat("en-CA", { timeZone: C.timezone }).format(new Date());
@@ -77,7 +78,7 @@ function layout() {
   const here = location.pathname.split("/").pop() || "index.html";
   const link = ([l, u]) => h("a", { href: u, "aria-current": u === here ? "page" : null }, l);
   $("#hdr").replaceWith(h("header", { class: "bar" }, h("div", { class: "wrap" },
-    h("a", { class: "brand", href: "index.html", "aria-label": C.name + " home" }, mark()),
+    h("a", { class: "brand", href: "index.html", "aria-label": C.name + " home" }, logoMark(), mark()),
     h("nav", { class: "nav", "aria-label": "Main" }, MENU.map(link), h("a", { class: "btn", href: "membership.html" }, "Join free")),
     h("button", { class: "menu-btn", popovertarget: "menu", "aria-label": "Open menu" }, svgMenu()))));
   // native Popover API: opens/closes, traps Escape and returns focus with no JavaScript
@@ -85,7 +86,7 @@ function layout() {
     h("button", { class: "close", popovertarget: "menu", popovertargetaction: "hide" }, "Close"), ALL_MENU.map(link)));
   $("#ftr").replaceWith(h("footer", null, h("div", { class: "wrap" },
     h("div", { class: "cols" },
-      h("div", null, h("a", { class: "brand", href: "index.html", style: "display:inline" }, mark()), h("p", { class: "tag" }, C.headline)),
+      h("div", null, h("a", { class: "brand", href: "index.html" }, logoMark(), mark()), h("p", { class: "tag" }, C.headline)),
       h("div", null, ALL_MENU.map(([l, u]) => h("a", { href: u }, l))),
       h("div", null, h("a", { href: safeUrl(C.instagram), rel: "noopener" }, "Instagram"), C.email && h("a", { href: "mailto:" + C.email }, C.email))),
     h("p", { class: "tiny" }, `© ${new Date().getFullYear()} ${C.name}. Made in Chennai.`))));
@@ -94,6 +95,50 @@ function svgMenu() {
   const ns = "http://www.w3.org/2000/svg", s = document.createElementNS(ns, "svg");
   for (const [k, v] of Object.entries({ width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.8, "stroke-linecap": "round", "aria-hidden": "true" })) s.setAttribute(k, v);
   const p = document.createElementNS(ns, "path"); p.setAttribute("d", "M4 8h16M4 16h16"); s.append(p); return s;
+}
+
+
+/* ---------- bento tiles ---------- */
+const arch = n => "images/archive/" + n;
+function startOf(e) {   // "2:30 PM - 4:00 PM" -> Date in the site's timezone (IST, +05:30)
+  const m = (e.time || "").match(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/i);
+  let hh = 9, mm = 0;
+  if (m) { hh = +m[1] % 12 + (/pm/i.test(m[3]) ? 12 : 0); mm = +(m[2] || 0); }
+  return new Date(`${e.date}T${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:00+05:30`);
+}
+function icsLink(e) {
+  const d = startOf(e), end = new Date(d.getTime() + 2 * 3600e3), z = x => x.toISOString().replace(/[-:]|\.\d{3}/g, "");
+  const esc = t => (t || "").replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
+  const body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//code:iconic//EN", "BEGIN:VEVENT", `UID:${e.id}@codeiconic`, `DTSTAMP:${z(new Date())}`, `DTSTART:${z(d)}`, `DTEND:${z(end)}`,
+    `SUMMARY:${esc(e.title)}`, `LOCATION:${esc(e.venue)}`, `DESCRIPTION:${esc(e.description)}`, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  return h("a", { href: URL.createObjectURL(new Blob([body], { type: "text/calendar" })), download: "code-iconic-event.ics" }, "Add to calendar");
+}
+function countdown(e) {
+  const cells = ["Days", "Hours", "Min", "Sec"].map(l => [h("b", null, "00"), h("span", null, l)]);
+  const tick = () => {
+    let s = Math.max(0, Math.floor((startOf(e) - Date.now()) / 1000));
+    [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60].forEach((v, i) => cells[i][0].textContent = String(v).padStart(2, "0"));
+  };
+  tick(); setInterval(tick, 1000);
+  return h("div", { class: "cd", role: "timer", "aria-label": "Time until " + e.title }, cells.map(c => h("div", null, c)));
+}
+function bento(next) {
+  const A = C.archive.slice(0, 3);
+  const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(C.city);
+  return h("section", { class: "wrap section" }, h("p", { class: "eyebrow" }, "Inside code:iconic"), h("h2", { style: "margin-bottom:32px" }, "Stories, dates and where to find us."),
+    h("div", { class: "bento" },
+      h("a", { class: "tile archive", href: "past.html" },
+        h("div", { class: "fan", "aria-hidden": "true" }, A.map(([f], i) => h("img", { src: arch(f), alt: "", loading: "lazy", width: 400, height: 500 }))),
+        h("div", null, h("h3", null, "The archive"), h("p", { class: "muted" }, "Moments from past events"))),
+      h("div", { class: "tile count" }, h("p", { class: "eyebrow" }, "Next gathering"),
+        next ? [h("h3", null, next.title), h("p", { class: "muted" }, pretty(next.date) + (next.time ? " · " + next.time : "")), countdown(next), h("p", { class: "muted" }, "Save the date. ", icsLink(next))]
+             : [h("h3", null, "New dates soon"), h("p", { class: "muted" }, "Join free and we'll tell you first.")]),
+      h("div", { class: "tile insta" }, h("img", { src: "images/logo/mark.svg", alt: "", width: 56, height: 39 }), h("div", null, h("p", { class: "eyebrow" }, "Instagram"), h("h3", null, C.instagramHandle),
+        h("p", { class: "muted" }, "Photos, previews and the next date, as it happens.")), h("a", { class: "btn ghost", href: safeUrl(C.instagram), rel: "noopener" }, "Follow us")),
+      h("a", { class: "tile free", href: "membership.html" }, h("b", null, "Free"), h("div", null, h("h3", null, "Membership"), h("p", { class: "muted" }, "Join the community, no fee."))),
+      h("div", { class: "tile map" },
+        h("iframe", { title: "Map of " + C.city, loading: "lazy", referrerpolicy: "no-referrer", src: "https://www.openstreetmap.org/export/embed.html?bbox=80.19%2C13.02%2C80.35%2C13.15&layer=mapnik" }),
+        h("div", { class: "place" }, h("h3", null, C.city), h("p", { class: "muted" }, C.cityLine), h("a", { href: maps, rel: "noopener" }, "Open in Maps →")))));
 }
 
 /* ---------- pieces ---------- */
@@ -176,9 +221,10 @@ const pages = {
     main.id = "events";
     main.append(h("div", { class: "section-head" }, h("div", null, h("p", { class: "eyebrow" }, "Upcoming"), h("h2", null, "Come sit with us.")),
       h("a", { class: "btn ghost", href: "calendar.html" }, "Full calendar")));
-    const list = h("div"); main.append(list);
+    const list = h("div"); main.append(list); let next = null;
     await withEvents(main, evs => {
-      const up = upcoming(evs).slice(0, 5);
+      const all = upcoming(evs); next = all[0] || null;
+      const up = all.slice(0, 5);
       if (!up.length) main.append(h("p", { class: "note" }, "New events are being planned. Follow ", h("a", { href: safeUrl(C.instagram), rel: "noopener" }, "us on Instagram"), " to hear first."));
       up.forEach(e => list.append(eventRow(e)));
     });
@@ -186,8 +232,8 @@ const pages = {
       h("div", null, h("p", { class: "eyebrow" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead", style: "margin-top:16px;color:inherit;opacity:.85" }, C.membershipText)),
       h("div", null, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn light", href: "membership.html" }, "Join the community"))));
     const mom = h("section", { class: "wrap section" }, h("p", { class: "eyebrow" }, "Moments"), h("h2", null, "Good company, ", h("em", null, "caught on camera.")),
-      h("div", { class: "moments" }, C.slides.map(s => h("figure", { class: "rv" }, h("img", { src: s.image, alt: s.heading, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, s.heading)))));
-    main.after(mom); main.after(band);
+      h("div", { class: "moments" }, C.archive.slice(0, 6).map(([f, t]) => h("figure", { class: "rv" }, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, t)))));
+    main.after(mom); main.after(band); main.after(bento(next));
   },
   async calendar(main) {
     main.append(head("Calendar", "Upcoming events", "Pick a date, register in a minute, and we'll confirm your spot."));
@@ -199,7 +245,8 @@ const pages = {
     });
   },
   async past(main) {
-    main.append(head("Archive", "Past events", "Photos and memories from afternoons gone by."));
+    main.append(head("Archive", "Past events", "Photos and memories from afternoons gone by."),
+      h("div", { class: "moments", style: "margin:0 0 64px" }, C.archive.map(([f, t]) => h("figure", { class: "rv" }, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, t)))));
     await withEvents(main, evs => {
       const old = past(evs);
       if (!old.length) main.append(h("p", { class: "note" }, "Our first memories are still to be made."));
@@ -241,8 +288,15 @@ const pages = {
     }));
   },
   about(main) {
-    main.append(head("About", "Who we are"), h("div", { class: "prose" }, h("p", { style: "white-space:pre-line" }, C.aboutWho), h("h2", null, "What we do"), h("p", { style: "white-space:pre-line" }, C.aboutWhat),
-      h("a", { class: "btn", href: "membership.html" }, "Join free")));
+    const S = C.story;
+    main.before(h("section", { class: "bio-hero" }, h("img", { src: S.banner, alt: "", width: 1400, height: 1050, fetchpriority: "high" }),
+      h("div", { class: "wrap" }, h("p", { class: "eyebrow" }, S.kicker), h("h1", null, S.title[0], " ", h("em", null, S.title[1])))));
+    main.append(h("p", { class: "lead bio-intro" }, S.intro),
+      ...S.paragraphs.map(p => h("p", { class: "bio-p" }, p)),
+      h("figure", { class: "bio-fig" }, h("img", { src: arch("group-1.jpg"), alt: "The code:iconic community together", loading: "lazy", width: 1400, height: 1050 })),
+      h("blockquote", { class: "bio-quote" }, S.quote),
+      h("div", { class: "bio-pair" }, S.images.map(([src, alt]) => h("img", { src, alt, loading: "lazy", width: 800, height: 1000 }))),
+      h("div", { class: "section-head", style: "justify-content:center;margin:48px 0 0" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "calendar.html" }, "See events")));
   },
   contact(main) {
     main.append(head("Contact", "Say hello", C.contactNote),
