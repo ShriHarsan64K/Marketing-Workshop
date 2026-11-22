@@ -11,8 +11,8 @@
   .hero-in h1{font:400 clamp(2.75rem,8.4vw,6.75rem)/.95 var(--classique);text-transform:none;letter-spacing:-.015em;max-width:10ch;margin-bottom:var(--s5);color:#fff}
   .hero-in h1 em{display:inline-block;font-family:var(--script);font-size:1.3em;color:var(--pink);line-height:.9;padding-bottom:.12em}
   .hero-in .eyebrow{color:var(--pink)}
-  .hero-in .club{font:500 clamp(2.25rem,8vw,5rem)/1 var(--classique);letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:var(--s3);text-shadow:0 2px 1.5rem #4A0B0C99}
-  .hero-in .club b{color:var(--pink);font-weight:500}
+  .hero-in .club{font:500 clamp(2.75rem,10vw,6.25rem)/1 ui-serif,"New York","Iowan Old Style",Georgia,serif;letter-spacing:.04em;color:var(--pink);margin:0 0 var(--s2);text-shadow:0 2px 1.5rem #4A0B0C99}
+  .hero-in .club + .eyebrow{margin-bottom:var(--s5)}
   .hero-in .lead{color:color-mix(in srgb,var(--pink) 92%,#fff);margin-bottom:var(--s4);max-width:40ch}
   .cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
   .hero-full .btn{background:var(--pink);color:var(--wine);border-color:var(--pink)}

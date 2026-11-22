@@ -1,7 +1,7 @@
-import { h } from "../lib/dom.js?v=20261122181820";
-import { upcoming, monthName, eventRow } from "../lib/events.js?v=20261122181820";
-import { liveEvents } from "../lib/events-live.js?v=20261122181820";
-import { head } from "../components/pagehead.js?v=20261122181820";
+import { h } from "../lib/dom.js?v=20261122182123";
+import { upcoming, monthName, eventRow } from "../lib/events.js?v=20261122182123";
+import { liveEvents } from "../lib/events-live.js?v=20261122182123";
+import { head } from "../components/pagehead.js?v=20261122182123";
 
 export default async function calendar(main) {
   const list = h("div");

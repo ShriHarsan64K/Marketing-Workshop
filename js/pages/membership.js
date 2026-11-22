@@ -1,7 +1,7 @@
-import C from "../config.js?v=20261122181820";
-import { h } from "../lib/dom.js?v=20261122181820";
-import { contactForm, field } from "../lib/forms.js?v=20261122181820";
-import { head } from "../components/pagehead.js?v=20261122181820";
+import C from "../config.js?v=20261122182123";
+import { h } from "../lib/dom.js?v=20261122182123";
+import { contactForm, field } from "../lib/forms.js?v=20261122182123";
+import { head } from "../components/pagehead.js?v=20261122182123";
 
 export default function membership(main) {
   main.classList.add("narrow");

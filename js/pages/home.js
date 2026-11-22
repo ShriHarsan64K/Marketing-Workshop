@@ -1,9 +1,9 @@
 /* Home: full-photo hero, what we do, upcoming events, a small tile section, membership band. Events refresh themselves. */
-import C from "../config.js?v=20261122181820";
-import { h, arch } from "../lib/dom.js?v=20261122181820";
-import { loadEvents, peekEvents, upcoming, nextEvent, eventRow } from "../lib/events.js?v=20261122181820";
-import { hero } from "../components/hero.js?v=20261122181820";
-import * as T from "../components/tiles.js?v=20261122181820";
+import C from "../config.js?v=20261122182123";
+import { h, arch } from "../lib/dom.js?v=20261122182123";
+import { loadEvents, peekEvents, upcoming, nextEvent, eventRow } from "../lib/events.js?v=20261122182123";
+import { hero } from "../components/hero.js?v=20261122182123";
+import * as T from "../components/tiles.js?v=20261122182123";
 
 const section = (...kids) => h("section", { class: "wrap section" }, ...kids);
 
