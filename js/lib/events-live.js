@@ -1,6 +1,6 @@
 /* Draws event lists into a container and redraws them when the sheet is refreshed in the background. */
-import { h } from "./dom.js?v=20261122174300";
-import { loadEvents, peekEvents } from "./events.js?v=20261122174300";
+import { h } from "./dom.js?v=20261122174510";
+import { loadEvents, peekEvents } from "./events.js?v=20261122174510";
 
 export async function liveEvents(container, build) {
   const draw = evs => container.replaceChildren(...[].concat(build(evs)).filter(Boolean));
