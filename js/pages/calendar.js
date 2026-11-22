@@ -1,11 +1,11 @@
-import { h } from "../lib/dom.js?v=20261122175707";
-import { upcoming, monthName, eventRow } from "../lib/events.js?v=20261122175707";
-import { liveEvents } from "../lib/events-live.js?v=20261122175707";
-import { head } from "../components/pagehead.js?v=20261122175707";
+import { h } from "../lib/dom.js?v=20261122180336";
+import { upcoming, monthName, eventRow } from "../lib/events.js?v=20261122180336";
+import { liveEvents } from "../lib/events-live.js?v=20261122180336";
+import { head } from "../components/pagehead.js?v=20261122180336";
 
 export default async function calendar(main) {
   const list = h("div");
-  main.append(head(["Upcoming ", h("em", null, "events")], "Pick a date and register. We confirm your spot by message."), list);
+  main.append(head(["Upcoming ", h("em", null, "events")]), list);
   await liveEvents(list, evs => {
     const up = upcoming(evs);
     if (!up.length) return h("p", { class: "note" }, "No dates yet. Join free and we'll tell you first.");

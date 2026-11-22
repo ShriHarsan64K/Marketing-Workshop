@@ -23,11 +23,6 @@ export default {
     ["Galentine's", "A night to celebrate your people.", "images/slide2.webp"],
     ["Book club", "Read, sip and talk it over.", "images/archive/group-1.webp"]
   ],
-  perks: [   // shown in the membership band on the home page
-    ["No fee, no catch", "Joining code:iconic costs nothing."],
-    ["Hear about events first", "New dates reach members before they reach everyone else."],
-    ["Women who show up", "A warm circle in Chennai for brunches, workshops and trips."]
-  ],
   // Home page slideshow photos live in /images
   slides: [
     { image: "images/slide1.webp", heading: "Good company, great afternoons" },
@@ -37,7 +32,6 @@ export default {
     { image: "images/slide5.webp", heading: "Cut. Paste. Dream." },
     { image: "images/slide6.webp", heading: "Proud of what we made" }
   ],
-  membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",
   contactNote: "We'd love to hear from you.",
 
   // Google Sheet > File > Share > Publish to web > CSV

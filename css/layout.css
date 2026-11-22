@@ -21,14 +21,6 @@
     &:hover{translate:0 -1px;opacity:.92}
     &[aria-current=page]{box-shadow:0 0 0 .2rem var(--bg),0 0 0 .3rem var(--deep)}}
 
-  /* bio variant (about page): giant wordmark over the banner, as on sophiawebster.com */
-  .site-header.bio{position:absolute;inset:var(--s4) var(--gutter) auto;color:#fff;justify-content:space-between;align-items:flex-start;
-    .wordmark{font:500 clamp(1.5rem,6.6vw,5.4rem)/1 var(--classique);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:#fff;text-shadow:0 2px 1.5rem #0004}
-    .wordmark b{font-weight:500;color:var(--pink)}
-    .icons{display:flex;gap:var(--s3);align-items:center;color:#fff}
-    .icons a,.icons button{display:grid;place-items:center;width:var(--btn-h);height:var(--btn-h);background:none;border:0;color:inherit;cursor:pointer}}
-  @media (min-width:1024px){.site-header.bio{inset:var(--s5) var(--s6) auto}}
-
   /* full-screen menu (native popover) */
   #menu{inset:0;width:100%;max-width:none;height:100dvh;margin:0;border:0;padding:var(--s9) var(--gutter) var(--s6);background:var(--bg);color:var(--fg);opacity:0;transition:opacity .25s,display .25s allow-discrete,overlay .25s allow-discrete;
     &:popover-open{display:flex;flex-direction:column;justify-content:center;gap:var(--s2);opacity:1;

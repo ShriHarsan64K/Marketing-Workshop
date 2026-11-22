@@ -1,6 +1,6 @@
 /* Service worker: repeat visits load from the device. Versioned files (?v=) and images are cache-first; pages are network-first.
    The version below is rewritten on every deploy by tools/build.py, which also retires the previous cache. */
-const VER = "20261122175707";
+const VER = "20261122180336";
 const CACHE = "ci-" + VER;
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil((async () => {

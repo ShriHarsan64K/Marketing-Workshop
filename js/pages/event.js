@@ -1,9 +1,9 @@
-import C from "../config.js?v=20261122175707";
-import { h, safeUrl } from "../lib/dom.js?v=20261122175707";
-import { pretty, todayISO, imgSrc } from "../lib/events.js?v=20261122175707";
-import { liveEvents } from "../lib/events-live.js?v=20261122175707";
-import { contactForm } from "../lib/forms.js?v=20261122175707";
-import { head } from "../components/pagehead.js?v=20261122175707";
+import C from "../config.js?v=20261122180336";
+import { h, safeUrl } from "../lib/dom.js?v=20261122180336";
+import { pretty, todayISO, imgSrc } from "../lib/events.js?v=20261122180336";
+import { liveEvents } from "../lib/events-live.js?v=20261122180336";
+import { contactForm } from "../lib/forms.js?v=20261122180336";
+import { head } from "../components/pagehead.js?v=20261122180336";
 
 export default async function event(main) {
   const id = new URLSearchParams(location.search).get("e");

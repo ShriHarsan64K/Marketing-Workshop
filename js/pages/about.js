@@ -1,12 +1,13 @@
 /* Founder page, modelled on sophiawebster.com/pages/biography */
-import C from "../config.js?v=20261122175707";
-import { h, whatsapp } from "../lib/dom.js?v=20261122175707";
-import { icon } from "../lib/icons.js?v=20261122175707";
+import C from "../config.js?v=20261122180336";
+import { h, whatsapp } from "../lib/dom.js?v=20261122180336";
+import { icon } from "../lib/icons.js?v=20261122180336";
 
 export default function about(main) {
   const S = C.story;
   main.className = "";
   main.before(h("section", { class: "bio-banner" }, h("img", { src: S.banner, alt: "", width: 1400, height: 1050, fetchpriority: "high" }),
+    h("p", { class: "bio-wordmark", "aria-hidden": "true" }, "code", h("b", null, ":"), "iconic"),
     h("div", { class: "bio-title" }, h("span", { class: "script" }, S.title), h("span", { class: "caps" }, S.kicker))));
   main.append(h("div", { class: "bio" }, S.paragraphs.map((p, i) => h("p", { class: i ? null : "first" }, p))),
     h("figure", { class: "bio-photo" }, h("img", { src: S.photo[0], alt: S.photo[1], loading: "lazy", width: 1400, height: 1050 })),

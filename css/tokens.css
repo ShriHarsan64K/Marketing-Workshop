@@ -1,6 +1,6 @@
 /* code:iconic design tokens. Two brand colours only: wine #4A0B0C and pink #E6BDC5. Every tint is mixed from them.
    The site is WINE with pink ink, lifted by soft pink glows and gradients so it never reads flat; [data-theme=pink] flips it (footer, founder page).
-   Type, all system fonts: New York for text, Classique (Didot, hairline) for thin display, Impact for thick dark titles, Snell Roundhand script for accent words, system UI for labels.
+   Type, all system fonts: Avenir Next for text, Classique (Didot, hairline) for thin display, Impact for thick dark titles, Snell Roundhand script for accent words, system UI for labels.
    One button size everywhere: --btn-h / --btn-px / --btn-fs.
    Sizes: everything is in rem and the root is 90%, so the whole site renders at 90% of the browser default.
    Scale: 4/8px spacing grid, 12 14 16 18 20 24 32 40 56 type steps, breakpoints 640 / 768 / 1024 / 1280. */
@@ -22,7 +22,7 @@
     --card-bg:linear-gradient(155deg,color-mix(in srgb,var(--wine) 80%,var(--pink)),color-mix(in srgb,var(--wine) 92%,#000));
     --deep:var(--pink); --on-deep:var(--wine);
 
-    --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --display:"Avenir Next","Avenir","Gill Sans","Gill Sans MT","Segoe UI",system-ui,sans-serif;   /* regular text */
     --classique:"Didot","Bodoni 72","Baskerville","Iowan Old Style","Palatino Linotype",Georgia,serif;
     --impact:Impact,"Haettenschweiler","Arial Narrow Bold","Franklin Gothic Condensed","Arial Black",sans-serif;
     --script:"Snell Roundhand","Apple Chancery","Segoe Script","Brush Script MT","Lucida Handwriting",cursive;

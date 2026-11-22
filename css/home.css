@@ -110,10 +110,7 @@
 
   /* ---------- membership band ---------- */
   .band{margin-top:var(--s7);background:var(--deep);color:var(--on-deep);border:1px solid var(--deep);border-radius:var(--r);padding:var(--s6) var(--s5);display:grid;gap:var(--s5);align-items:center}
-  .band h2{color:var(--on-deep);font-size:clamp(2.75rem,6.5vw,5rem);margin-bottom:var(--s3)}
-  .band .lead{color:var(--on-deep);opacity:.85}
-  .perks{margin:var(--s4) 0;display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s4);border-top:1px solid color-mix(in srgb,var(--on-deep) 28%,transparent);padding-top:var(--s3)
-    ;dt{font-weight:700}dd{margin:0;opacity:.85}}
+  .band h2{color:var(--on-deep);font-size:clamp(2.75rem,6.5vw,5rem);margin-bottom:var(--s5)}
   .band .btn{background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
   .duo{position:relative;min-height:15rem;
     figure{position:absolute;width:52%}

@@ -51,11 +51,8 @@ def link(label, href, page):
     page = PARENT.get(page, page)
     cur = ' aria-current="page"' if href == page else ""
     return f'<a href="{href}"{cur}>{label}</a>'
-def header(page, bio):
+def header(page):
     menu_btn = lambda cls: f'<button class="{cls}" popovertarget="menu" aria-label="Open menu">{icon("menu", 22)}</button>'
-    if bio:
-        return (f'<header class="site-header bio"><a class="wordmark" href="index.html" aria-label="{C["name"]} home">code<b>:</b>iconic</a>'
-                f'<div class="icons"><a href="{C["instagram"]}" rel="noopener" aria-label="Instagram">{icon("instagram", 22)}</a>{menu_btn("")}</div></header>')
     nav = "".join(link(l, h, page) for l, h in NAV)
     cta_cur = ' aria-current="page"' if page == "membership.html" else ""
     return (f'<header class="site-header"><a class="logo-btn" href="index.html" aria-label="{C["name"]} home"><img src="images/logo/logo.webp" alt="{C["name"]}" width="480" height="330"></a>'
@@ -113,7 +110,7 @@ for fname, (page, title, desc, uses_events) in PAGES.items():
 {extra}{"".join(pre)}
 </head><body data-page="{page}" data-theme="{theme}">
 <a class="skip" href="#main">Skip to content</a>
-{header(fname, bio)}{menu(fname)}
+{header(fname)}{menu(fname)}
 {hero() if page == "home" else ""}<main id="main"{main_cls}></main>
 {footer()}
 <noscript><p style="padding:20px">Please turn on JavaScript to see this page.</p></noscript>
