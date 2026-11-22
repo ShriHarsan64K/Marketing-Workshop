@@ -23,7 +23,7 @@
     &:user-invalid{border-color:#a11d2b}}
   textarea{min-height:6.5rem;resize:vertical}
   .hp{position:absolute;left:-9999px}
-  .card-form .btn{width:100%;margin-top:var(--s4);background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
+  .card-form .btn{margin-top:var(--s4);background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
   .bad{color:#8a1220;font:600 var(--fs-sm) var(--ui);margin-top:var(--s3)}
   .note{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4) var(--s5);margin-block:var(--s4)}
 

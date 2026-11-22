@@ -89,7 +89,7 @@ PAGES = {  # file: (data-page, title, description, uses events sheet)
     "404.html": ("notfound", "Not found · code:iconic", "Page not found.", False),
 }
 for fname, (page, title, desc, uses_events) in PAGES.items():
-    bio = page == "about"; theme = "pink" if bio else "wine"
+    theme = "wine"
     mods = [m for m in graph("js/main.js") + graph(f"js/pages/{page}.js") if m != "js/main.js"]
     seen, pre = set(), []
     for m in ["js/main.js"] + mods:
@@ -104,7 +104,7 @@ for fname, (page, title, desc, uses_events) in PAGES.items():
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:type" content="website"><meta property="og:image" content="images/logo/logo-og.png">
-<meta name="theme-color" content="{"#E6BDC5" if bio else "#4A0B0C"}">
+<meta name="theme-color" content="{"#4A0B0C"}">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="stylesheet" href="css/site.css?v={VER}">
 {extra}{"".join(pre)}

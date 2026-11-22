@@ -31,7 +31,7 @@
 
   main{padding-top:clamp(5.5rem,12vw,8rem)}
   main:empty{min-height:60dvh}
-  body[data-page=about] main,body[data-page=home] main{padding-top:0}
+  body[data-page=home] main{padding-top:0}
 
   /* ---------- footer ---------- */
   .site-footer{background:var(--bg);color:var(--fg);margin-top:var(--section);border-top:1px solid var(--line);
@@ -47,8 +47,4 @@
     .legal{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s6);align-items:center;justify-content:space-between;padding-block:var(--s5);border-top:1px solid var(--line);font:400 var(--fs-xs)/1.4 var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}}
   @media (min-width:768px){.site-footer .cols{grid-template-columns:repeat(3,1fr)}.site-footer .top{grid-template-columns:auto 1fr;gap:var(--s7)}}
 
-  /* floating pill + chat bubble (bio page) */
-  .promo{position:fixed;left:var(--s4);bottom:var(--s4);z-index:70;display:flex;align-items:center;gap:var(--s3);min-height:var(--btn-h);padding:0 var(--s2) 0 var(--btn-px);border:1px solid var(--deep);border-radius:999px;background:var(--deep);color:var(--on-deep);font:500 var(--fs-xs)/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;box-shadow:0 .5rem 1.75rem #0003;text-decoration:none;
-    button{display:grid;place-items:center;width:1.75rem;height:1.75rem;border:0;background:none;color:inherit;cursor:pointer}}
-  .chat{position:fixed;right:var(--s4);bottom:var(--s4);z-index:70;display:grid;place-items:center;width:var(--btn-h);height:var(--btn-h);border-radius:50%;border:1px solid var(--deep);background:var(--deep);color:var(--on-deep);box-shadow:0 .5rem 1.75rem #0004;text-decoration:none}
 }
