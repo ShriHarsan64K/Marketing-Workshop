@@ -1,7 +1,7 @@
 /* Home hero: a full-bleed photo slideshow with the words on top of a wine veil. */
-import C from "../config.js";
-import { h } from "../lib/dom.js";
-import { icon } from "../lib/icons.js";
+import C from "../config.js?v=20261122173409";
+import { h } from "../lib/dom.js?v=20261122173409";
+import { icon } from "../lib/icons.js?v=20261122173409";
 
 const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
 const pad = n => String(n).padStart(2, "0");

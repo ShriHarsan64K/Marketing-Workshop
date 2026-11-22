@@ -1,6 +1,6 @@
-import C from "../config.js";
-import { h, $, logoMark, safeUrl } from "../lib/dom.js";
-import { icon } from "../lib/icons.js";
+import C from "../config.js?v=20261122173409";
+import { h, $, logoMark, safeUrl } from "../lib/dom.js?v=20261122173409";
+import { icon } from "../lib/icons.js?v=20261122173409";
 
 const NAV = [["Events", "calendar.html"], ["Archive", "past.html"], ["About", "about.html"], ["Contact", "contact.html"]];
 const MENU = [["Home", "index.html"], ...NAV, ["Join free", "membership.html"]];

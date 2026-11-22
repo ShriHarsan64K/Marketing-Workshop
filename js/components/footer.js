@@ -1,6 +1,6 @@
-import C from "../config.js";
-import { h, $, logoMark, safeUrl, whatsapp, telHref } from "../lib/dom.js";
-import { icon } from "../lib/icons.js";
+import C from "../config.js?v=20261122173409";
+import { h, $, logoMark, safeUrl, whatsapp, telHref } from "../lib/dom.js?v=20261122173409";
+import { icon } from "../lib/icons.js?v=20261122173409";
 
 export function renderFooter() {
   const col = (title, ...links) => h("div", null, h("h3", null, title), links);

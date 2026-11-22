@@ -1,7 +1,7 @@
-import C from "../config.js";
-import { h, arch } from "../lib/dom.js";
-import { withEvents, past, pretty, imgSrc } from "../lib/events.js";
-import { head } from "../components/pagehead.js";
+import C from "../config.js?v=20261122173409";
+import { h, arch } from "../lib/dom.js?v=20261122173409";
+import { withEvents, past, pretty, imgSrc } from "../lib/events.js?v=20261122173409";
+import { head } from "../components/pagehead.js?v=20261122173409";
 
 export default async function pastEvents(main) {
   main.append(head("Archive", "Past events", "Photos and memories from afternoons gone by."),

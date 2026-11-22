@@ -1,8 +1,8 @@
 /* The small tile section on the home page, modelled on leborrel.nl. */
-import C from "../config.js";
-import { h, arch, logoMark, safeUrl } from "../lib/dom.js";
-import { icon } from "../lib/icons.js";
-import { startOf, imgSrc, pretty } from "../lib/events.js";
+import C from "../config.js?v=20261122173409";
+import { h, arch, logoMark, safeUrl } from "../lib/dom.js?v=20261122173409";
+import { icon } from "../lib/icons.js?v=20261122173409";
+import { startOf, imgSrc, pretty } from "../lib/events.js?v=20261122173409";
 
 const polaroid = (src, caption, small) => h("figure", { class: "polaroid" }, h("img", { src, alt: caption, loading: "lazy", width: 400, height: 500 }), h("figcaption", null, caption, small && h("small", null, small)));
 const card = (cls, tag, attrs, ...kids) => h(tag, { class: "card " + cls, ...attrs }, ...kids);

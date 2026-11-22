@@ -1,7 +1,7 @@
-import C from "../config.js";
-import { h, arch, safeUrl, whatsapp, telHref } from "../lib/dom.js";
-import { icon } from "../lib/icons.js";
-import { head } from "../components/pagehead.js";
+import C from "../config.js?v=20261122173409";
+import { h, arch, safeUrl, whatsapp, telHref } from "../lib/dom.js?v=20261122173409";
+import { icon } from "../lib/icons.js?v=20261122173409";
+import { head } from "../components/pagehead.js?v=20261122173409";
 
 const pretty = p => { const d = String(p).replace(/\D/g, "").slice(-10); return `+91 ${d.slice(0, 5)} ${d.slice(5)}`; };
 const row = (ic, label, href, text) => h("a", { class: "crow", href, rel: href.startsWith("http") ? "noopener" : null }, h("span", { class: "ci" }, icon(ic, 20)), h("span", null, h("small", null, label), text));

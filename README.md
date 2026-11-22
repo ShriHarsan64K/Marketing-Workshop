@@ -29,6 +29,9 @@ images/  archive/ (event photos) · logo/ · events/ (posters)
 
 Sheet columns: `title, date, time, venue, price, description, image, link, published, photos` (`published` = `TRUE` to show).
 
+## Deploy
+GitHub Pages caches files for 10 minutes, so before every push run `python3 tools/stamp.py` (adds `?v=<time>` to every import, script and stylesheet).
+
 ## Run locally
 ```bash
 python3 -m http.server 8000     # ES modules need http://, not file://
