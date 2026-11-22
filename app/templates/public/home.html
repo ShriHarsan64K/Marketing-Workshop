@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+{% if slides %}<section class="hero" aria-roledescription="carousel" aria-label="Highlights" id="hero">
+{% for s in slides %}<div class="sl{% if loop.first %} on{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}">
+ <div class="bg" style="background-image:url('{{ s.image|media }}')"></div>
+ <img src="{{ s.image|media }}" alt=""{% if not loop.first %} loading="lazy"{% endif %}>
+ <div class="cap"><h2>{{ s.heading }}</h2><p>{{ s.caption }}</p><a class="btn alt" style="margin-top:16px" href="#main">See what's on</a></div></div>{% endfor %}
+<button class="ar" style="left:8px" aria-label="Previous slide" id="pv">‹</button><button class="ar" style="right:8px" aria-label="Next slide" id="nx">›</button>
+<div class="dots">{% for x in slides %}<button data-i="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"{% if loop.first %} class="on"{% endif %}></button>{% endfor %}<button class="pp" id="pp" type="button">Pause</button></div></section>{% endif %}
+<main id="main"><h1>Upcoming events, come join us</h1>
+{% if not events %}<p class="ok mt">New events are being planned. Follow <a href="{{ site.instagram }}" rel="noopener">us on Instagram</a> to hear first.</p>{% endif %}
+<div class="evt">{% for e in events %}<article class="card"><div class="date"><b>{{ day_month(e.event_date)[0] }}</b><span>{{ day_month(e.event_date)[1] }}</span></div>
+ {% if e.image %}<img src="{{ e.image|media }}" alt="{{ e.title }}" loading="lazy">{% else %}<div class="noimg">{{ site.name }}</div>{% endif %}
+ <div class="in"><h3>{{ e.title }}</h3>
+ <div class="meta">🗓 {{ e.event_date|pretty }}{% if e.event_time %} · {{ e.event_time }}{% endif %}</div>{% if e.venue %}<div class="meta">📍 {{ e.venue }}</div>{% endif %}
+ {% if e.price %}<span class="price">{{ e.price }}</span>{% endif %}<p style="margin:4px 0;font-size:15px">{{ e.description }}</p>
+ <div style="margin-top:auto"><a class="btn" href="{{ url_for('public.event_register', eid=e.id) }}">Register now</a></div></div></article>{% endfor %}</div></main>
+{% endblock %}

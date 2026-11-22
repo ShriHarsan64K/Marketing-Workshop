@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS signups (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, phone TEXT, message TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL, event_date TEXT NOT NULL, event_time TEXT, venue TEXT,
+    description TEXT, price TEXT, link TEXT, image TEXT,
+    published INTEGER NOT NULL DEFAULT 1);
+
+CREATE TABLE IF NOT EXISTS registrations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    name TEXT NOT NULL, email TEXT NOT NULL, phone TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','confirmed','rejected')),
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(event_id, email));
+
+CREATE TABLE IF NOT EXISTS event_photos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    image TEXT NOT NULL);
+
+CREATE TABLE IF NOT EXISTS slides (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image TEXT NOT NULL, heading TEXT, caption TEXT, sort INTEGER DEFAULT 0);
+
+CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);

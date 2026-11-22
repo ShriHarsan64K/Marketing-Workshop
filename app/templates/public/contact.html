@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Contact · {{ site.name }}{% endblock %}
+{% block body %}<main id="main" class="narrow"><h1>Contact us</h1>
+<p style="white-space:pre-line">{{ site.contact_note }}</p>
+{% if site.email %}<p>Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>{% endif %}
+{% if site.phone %}<p>Phone: {{ site.phone }}</p>{% endif %}
+<p>Instagram: <a href="{{ site.instagram }}" rel="noopener">{{ site.instagram }}</a></p></main>{% endblock %}

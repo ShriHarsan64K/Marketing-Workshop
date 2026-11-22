@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% from "_macros.html" import csrf %}{% block title %}Website text · {{ site.name }}{% endblock %}
+{% block body %}<main id="main" style="max-width:700px"><h1>Website text</h1>
+<p>Change anything here, then save. It updates the whole site.</p><form method="post">{{ csrf() }}
+{% for k, label, big in fields %}<label>{{ label }}{% if big %}<textarea name="{{ k }}" rows="5" maxlength="2000">{{ cur[k] }}</textarea>{% else %}<input name="{{ k }}" maxlength="300" value="{{ cur[k] }}">{% endif %}</label>{% endfor %}
+<button class="btn" style="margin-top:18px">Save</button> <a href="{{ url_for('admin.dashboard') }}" style="margin-left:14px">Cancel</a></form></main>{% endblock %}
