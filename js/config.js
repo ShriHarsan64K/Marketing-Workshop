@@ -7,7 +7,13 @@ window.SITE = {
   phone: "",            // optional
   aboutWho: "Tell your story here: who you are, why you started, and what you stand for.",
   aboutWhat: "Brunches, themed nights out, creative workshops, picnics and trips.",
-  membershipText: "Join our community of women in Chennai. Leave your details and we'll be in touch.",
+  membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",
+  vibes: ["Brunches", "Themed nights", "Creative workshops", "Picnics", "Trips", "New friends"],
+  perks: [   // edit freely: shown on the home page membership section
+    ["No fee, no catch", "Joining code: iconic costs nothing."],
+    ["Hear about events first", "New dates reach members before they reach everyone else."],
+    ["Women who show up", "A warm circle in Chennai for brunches, workshops and trips."]
+  ],
   contactNote: "We'd love to hear from you.",
   timezone: "Asia/Kolkata",
 

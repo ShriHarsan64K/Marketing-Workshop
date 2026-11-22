@@ -11,7 +11,7 @@ Static events website (plain HTML/CSS/JS) for the code: iconic community in Chen
 |---|---|
 | Add/edit/hide events | Google Sheet "Events" tab (live in about 5 minutes) |
 | See / confirm registrations | Registration Form > Responses > Sheet (add a Status column) |
-| Site text, Instagram, email, slideshow captions | `js/config.js` |
+| Site text, Instagram, email, perks, slideshow captions | `js/config.js` |
 | Event posters / gallery photos | add the file to `images/events/`, put its filename in the sheet |
 | Slideshow photos | `images/slide1.jpg` ... (list in `js/config.js`) |
 
