@@ -1,5 +1,5 @@
 /* code:iconic design tokens. Two brand colours only (wine #4A0B0C, pink #E6BDC5); every tint is mixed from them.
-   Type: New York (Apple's system serif via ui-serif) for display and reading, system UI sans for small labels.
+   Type: New York (Apple's system serif via ui-serif) for text, Classique (classic Didot/Baskerville-style serif) for headlines, system UI sans for small labels.
    Scale: 4/8px spacing grid, 12 14 16 18 20 24 32 40 56 type steps, breakpoints 640 / 768 / 1024 / 1280. */
 @layer reset, tokens, base, layout, components, pages, motion;
 
@@ -16,6 +16,7 @@
     --leopard-pink:url("../images/texture/leopard-pink.svg");
 
     --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --classique:"Didot","Bodoni 72","Baskerville","Iowan Old Style","Palatino Linotype",Georgia,serif;
     --ui:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
     --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;

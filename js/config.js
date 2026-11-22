@@ -12,6 +12,26 @@ export default {
   city: "Chennai",
   cityLine: "Tamil Nadu, India",
   timezone: "Asia/Kolkata",
+  whatTitle: "Plans worth showing up for.",
+  pillars: [
+    ["Brunches and nights out", "Themed gatherings with good food and better company."],
+    ["Creative workshops", "Journaling, mood boards and making things with your hands."],
+    ["Picnics and trips", "Easy afternoons outdoors and weekends away."]
+  ],
+  perks: [   // shown in the membership band on the home page
+    ["No fee, no catch", "Joining code:iconic costs nothing."],
+    ["Hear about events first", "New dates reach members before they reach everyone else."],
+    ["Women who show up", "A warm circle in Chennai for brunches, workshops and trips."]
+  ],
+  // Home page slideshow photos live in /images
+  slides: [
+    { image: "images/slide1.jpg", heading: "Good company, great afternoons" },
+    { image: "images/slide2.jpg", heading: "Women who show up for each other" },
+    { image: "images/slide3.jpg", heading: "Make something that's yours" },
+    { image: "images/slide4.jpg", heading: "Laughter is part of the plan" },
+    { image: "images/slide5.jpg", heading: "Cut. Paste. Dream." },
+    { image: "images/slide6.jpg", heading: "Proud of what we made" }
+  ],
   ringTop: "BRUNCH · CREATE · CONNECT · ENJOY ·",
   ringBottom: "CODE:ICONIC · CHENNAI ·",
   membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",

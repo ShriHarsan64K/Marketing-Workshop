@@ -25,7 +25,7 @@
 
   /* bio variant (about page): giant wordmark over the banner, as on sophiawebster.com */
   .site-header.bio{position:absolute;inset:var(--s4) var(--gutter) auto;color:#fff;justify-content:space-between;align-items:flex-start;
-    .wordmark{font:500 clamp(1.5rem,6.6vw,5.4rem)/1 var(--display);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:#fff;text-shadow:0 2px 24px #0004}
+    .wordmark{font:500 clamp(1.5rem,6.6vw,5.4rem)/1 var(--classique);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:#fff;text-shadow:0 2px 24px #0004}
     .wordmark b{font-weight:500;color:var(--pink)}
     .icons{display:flex;gap:var(--s3);align-items:center;color:#fff}
     .icons a,.icons button{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer}}
@@ -35,7 +35,7 @@
   #menu{inset:0;width:100%;max-width:none;height:100dvh;margin:0;border:0;padding:var(--s9) var(--gutter) var(--s6);background:var(--wine);color:var(--pink);opacity:0;transition:opacity .25s,display .25s allow-discrete,overlay .25s allow-discrete;
     &:popover-open{display:flex;flex-direction:column;justify-content:center;gap:var(--s2);opacity:1;
       @starting-style{opacity:0}}
-    a{font:italic 400 clamp(2.25rem,10vw,3.5rem)/1.2 var(--display);text-decoration:none;padding-block:var(--s2)}
+    a{font:italic 400 clamp(2.25rem,10vw,3.5rem)/1.2 var(--classique);text-decoration:none;padding-block:var(--s2)}
     a[aria-current=page]{color:var(--pink-soft)}
     .close{position:absolute;top:var(--s4);right:var(--gutter);min-height:var(--control);padding:0 var(--s3);background:none;border:0;font:600 var(--fs-sm) var(--ui);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}}
 

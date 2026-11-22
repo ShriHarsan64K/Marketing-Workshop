@@ -1,7 +1,7 @@
 /* The bento cards on the home page, modelled on leborrel.nl. */
 import C from "../config.js";
 import { h, svg, arch, logoMark, safeUrl } from "../lib/dom.js";
-import { pretty, startOf, icsLink, imgSrc } from "../lib/events.js";
+import { dayMon, startOf, icsLink, imgSrc } from "../lib/events.js";
 
 const polaroid = (src, caption, small) => h("figure", { class: "polaroid" }, h("img", { src, alt: caption, loading: "lazy", width: 400, height: 500 }), h("figcaption", null, caption, small && h("small", null, small)));
 const card = (cls, tag, attrs, ...kids) => h(tag, { class: "card " + cls, ...attrs }, ...kids);
@@ -50,7 +50,7 @@ export const cartCard = next => card("cart", "a", { href: next ? "event.html?e="
 export const ticketCard = next => card("ticket-card", "section", {},
   h("div", { class: "ticket", "aria-hidden": "true" },
     h("div", null, h("small", null, "code:iconic presents"), h("h3", null, next ? next.title : "Next gathering"),
-      h("p", null, next ? [pretty(next.date), h("br"), [next.time, next.venue].filter(Boolean).join(" · ")] : "Dates are on the way.")),
+      h("p", null, next ? dayMon(next.date).join(" ") + (next.time ? " · " + next.time.split("-")[0].trim() : "") : "Dates are on the way.")),
     h("div", { class: "stub" }, h("span", null, "ADMIT ONE"))),
   h("div", { class: "row" }, h("a", { href: next ? "event.html?e=" + encodeURIComponent(next.id) : "calendar.html" }, next ? "Register" : "Calendar"), h("a", { href: "calendar.html" }, "All events")));
 

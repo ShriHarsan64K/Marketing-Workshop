@@ -3,7 +3,7 @@
 Static events website for the code:iconic community in Chennai. No server or database.
 
 - **Events:** Google Sheet (published as CSV). **Sign-ups:** two Google Forms. **Hosting:** GitHub Pages.
-- **Home** is a bento grid modelled on leborrel.nl. **About** is a biography page modelled on sophiawebster.com. Colours: wine `#4A0B0C` and pink `#E6BDC5` only (all tints are mixed from them), with leopard-print texture. Type: New York (Apple system serif) with the system UI font for labels.
+- **Home** has the hero slideshow, what we do, events, a small tile section modelled on leborrel.nl, the membership band and photo moments. **About** is a biography page modelled on sophiawebster.com. Colours: wine `#4A0B0C` and pink `#E6BDC5` only (all tints are mixed from them), with leopard-print texture. Type: New York for text, Classique (Didot/Baskerville-style serif) for headlines, system UI font for labels.
 
 ## Structure
 ```
