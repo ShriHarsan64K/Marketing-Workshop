@@ -1,8 +1,8 @@
 /* The small tile section on the home page, modelled on leborrel.nl. Nothing here is a link except the Instagram strip. */
-import C from "../config.js?v=20261122181202";
-import { h, arch, logoMark, safeUrl } from "../lib/dom.js?v=20261122181202";
-import { icon } from "../lib/icons.js?v=20261122181202";
-import { startOf, imgSrc, pretty } from "../lib/events.js?v=20261122181202";
+import C from "../config.js?v=20261122181820";
+import { h, arch, logoMark, safeUrl } from "../lib/dom.js?v=20261122181820";
+import { icon } from "../lib/icons.js?v=20261122181820";
+import { startOf, imgSrc, pretty } from "../lib/events.js?v=20261122181820";
 
 const polaroid = (src, caption, small) => h("figure", { class: "polaroid" }, h("img", { src, alt: caption, loading: "lazy", width: 400, height: 500 }), h("figcaption", null, caption, small && h("small", null, small)));
 const card = (cls, ...kids) => h("section", { class: "card " + cls }, ...kids);

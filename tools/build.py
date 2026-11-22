@@ -73,7 +73,7 @@ def hero():
     slides = "".join(f'<img src="{s["image"]}" alt="{"Women at a code:iconic event" if i == 0 else ""}"' + (' class="on" fetchpriority="high" decoding="async"' if i == 0 else ' loading="lazy" decoding="async"') + ">" for i, s in enumerate(C["slides"]))
     n = len(C["slides"])
     return ('<section class="hero-full" aria-label="Welcome"><div class="slides">' + slides + '</div>'
-            f'<div class="wrap hero-in"><p class="eyebrow">Women\'s social club · Chennai</p><h1>Finally, a space that\'s <em>yours.</em></h1><p class="lead">{C["lede"]}</p>'
+            f'<div class="wrap hero-in"><p class="club">code<b>:</b>iconic</p><p class="eyebrow">Women\'s social club · Chennai</p><h1>Finally, a space that\'s <em>yours.</em></h1><p class="lead">{C["lede"]}</p>'
             '<div class="cta"><a class="btn" href="membership.html">Join free</a><a class="btn ghost" href="#events">See what\'s on</a></div></div>'
             f'<div class="wrap hero-ctrl"><span id="hero-count">01 / {n:02d}</span><div><button id="hero-prev" type="button" aria-label="Previous photo">{icon("left", 18)}</button><button id="hero-next" type="button" aria-label="Next photo">{icon("right", 18)}</button>'
             f'<button id="hero-pp" type="button" aria-label="Pause slideshow">{icon("pause", 18)}<template>{icon("play", 18)}</template></button></div></div></section>')

@@ -1,7 +1,7 @@
 /* Founder page: same page head as Archive, then the story beside a photo. */
-import C from "../config.js?v=20261122181202";
-import { h } from "../lib/dom.js?v=20261122181202";
-import { head } from "../components/pagehead.js?v=20261122181202";
+import C from "../config.js?v=20261122181820";
+import { h } from "../lib/dom.js?v=20261122181820";
+import { head } from "../components/pagehead.js?v=20261122181820";
 
 export default function about(main) {
   const S = C.story, img = (src, alt, w, hh) => h("img", { src, alt, loading: "lazy", width: w, height: hh });
