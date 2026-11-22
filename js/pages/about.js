@@ -1,6 +1,7 @@
 /* Founder page, modelled on sophiawebster.com/pages/biography */
 import C from "../config.js";
-import { h, $, icons, safeUrl } from "../lib/dom.js";
+import { h, safeUrl } from "../lib/dom.js";
+import { icon } from "../lib/icons.js";
 
 export default function about(main) {
   const S = C.story;
@@ -14,6 +15,6 @@ export default function about(main) {
     h("div", { class: "bio-cta" }, h("a", { class: "btn", href: "membership.html" }, "Join free"), h("a", { class: "btn ghost", href: "calendar.html" }, "See events")));
   // floating pill + chat bubble, as on the reference
   const promo = h("div", { class: "promo" }, h("a", { href: "membership.html", style: "text-decoration:none" }, "Free to join | Join now"),
-    h("button", { type: "button", "aria-label": "Dismiss", onclick: () => promo.remove() }, "×"));
-  document.body.append(promo, h("a", { class: "chat", href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Message us on Instagram" }, icons.chat()));
+    h("button", { type: "button", "aria-label": "Dismiss", onclick: () => promo.remove() }, icon("close", 16)));
+  document.body.append(promo, h("a", { class: "chat", href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Message us on Instagram" }, icon("chat", 24)));
 }

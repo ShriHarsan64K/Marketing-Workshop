@@ -12,11 +12,15 @@ export default {
   city: "Chennai",
   cityLine: "Tamil Nadu, India",
   timezone: "Asia/Kolkata",
-  whatTitle: "Plans worth showing up for.",
+  whatTitle: "What we get up to.",
   pillars: [
-    ["Brunches and nights out", "Themed gatherings with good food and better company."],
-    ["Creative workshops", "Journaling, mood boards and making things with your hands."],
-    ["Picnics and trips", "Easy afternoons outdoors and weekends away."]
+    ["Crochet workshops", "Learn a stitch and make something soft."],
+    ["Journaling", "Slow mornings with a pen and a prompt."],
+    ["Picnics", "Blankets, snacks and open sky."],
+    ["Brunch", "Long tables and good food."],
+    ["Vision boards", "Cut, paste and dream out loud."],
+    ["Galentine's", "A night to celebrate your people."],
+    ["Book club", "Read, sip and talk it over."]
   ],
   perks: [   // shown in the membership band on the home page
     ["No fee, no catch", "Joining code:iconic costs nothing."],

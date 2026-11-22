@@ -12,19 +12,17 @@
     --bg-glow:color-mix(in srgb,var(--pink) 55%,#fff);
     --bg-end:color-mix(in srgb,var(--pink) 86%,var(--wine));
     --muted:color-mix(in srgb,var(--wine) 68%,transparent);
-    --line:color-mix(in srgb,var(--wine) 18%,transparent);
+    --line:color-mix(in srgb,var(--wine) 32%,transparent);
     --card:color-mix(in srgb,var(--pink) 50%,#fff);
     --card-hi:color-mix(in srgb,var(--pink) 28%,#fff);
     --deep:var(--wine); --on-deep:var(--pink);
-    --kiss-wine:url("../images/texture/kisses-wine.svg");
-    --kiss-pink:url("../images/texture/kisses-pink.svg");
 
     --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
     --classique:"Didot","Bodoni 72","Baskerville","Iowan Old Style","Palatino Linotype",Georgia,serif;
     --ui:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
     --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.5rem;--s6:2rem;--s7:3rem;--s8:4rem;--s9:6rem;
-    --gutter:1rem;--section:3rem;--header:4rem;--control:3rem;--max:75rem;
+    --gutter:1rem;--section:3rem;--header:4rem;--control:2.7rem;--max:75rem;
     --r-sm:.75rem;--r:1.5rem;--gap:1rem;
     --fs-xs:.75rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lead:1.125rem;--fs-h3:1.25rem;--fs-h2:1.5rem;--fs-h1:2rem;--fs-hero:2.5rem;
   }
@@ -33,7 +31,7 @@
     --bg-glow:color-mix(in srgb,var(--wine) 82%,var(--pink));
     --bg-end:color-mix(in srgb,var(--wine) 55%,#000);
     --muted:color-mix(in srgb,var(--pink) 70%,transparent);
-    --line:color-mix(in srgb,var(--pink) 18%,transparent);
+    --line:color-mix(in srgb,var(--pink) 32%,transparent);
     --card:color-mix(in srgb,var(--wine) 82%,#000);
     --card-hi:color-mix(in srgb,var(--wine) 86%,var(--pink));
     --deep:var(--pink); --on-deep:var(--wine);

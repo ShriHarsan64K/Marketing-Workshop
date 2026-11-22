@@ -1,6 +1,7 @@
 /* Events come from the published Google Sheet (CSV). */
 import C from "../config.js";
 import { h } from "./dom.js";
+import { icon } from "./icons.js";
 
 export function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;
@@ -32,10 +33,10 @@ export const monthName = iso => fmt(iso, { month: "long", year: "numeric" });
 export const dayMon = iso => [fmt(iso, { day: "2-digit" }), fmt(iso, { month: "short" })];
 
 let cache;
-export async function loadEvents() {
-  if (cache) return cache;
+export async function loadEvents(fresh = false) {
+  if (cache && !fresh) return cache;
   if (!C.eventsCsv) throw new Error("not-configured");
-  const res = await fetch(C.eventsCsv);
+  const res = await fetch(fresh ? C.eventsCsv + (C.eventsCsv.includes("?") ? "&" : "?") + "_=" + Date.now() : C.eventsCsv);
   if (!res.ok) throw new Error("fetch");
   const [head, ...rows] = parseCSV(await res.text());
   const keys = head.map(k => k.trim().toLowerCase());
@@ -47,6 +48,8 @@ export async function loadEvents() {
   return cache;
 }
 export const upcoming = evs => evs.filter(e => e.date >= todayISO()).sort((a, b) => a.date.localeCompare(b.date));
+/* The next event that has not started yet (flips to the following one the moment it starts). */
+export const nextEvent = evs => evs.filter(e => startOf(e) > Date.now()).sort((a, b) => startOf(a) - startOf(b))[0] || null;
 export const past = evs => evs.filter(e => e.date < todayISO()).sort((a, b) => b.date.localeCompare(a.date));
 
 /* Runs render(events); shows a friendly message instead if the sheet can't be read. */
@@ -65,18 +68,11 @@ export function startOf(e) {
   return new Date(`${e.date}T${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}:00+05:30`);
 }
 
-export function icsLink(e) {
-  const d = startOf(e), end = new Date(d.getTime() + 2 * 3600e3), z = x => x.toISOString().replace(/[-:]|\.\d{3}/g, "");
-  const esc = t => (t || "").replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
-  const body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//code:iconic//EN", "BEGIN:VEVENT", `UID:${e.id}@codeiconic`, `DTSTAMP:${z(new Date())}`,
-    `DTSTART:${z(d)}`, `DTEND:${z(end)}`, `SUMMARY:${esc(e.title)}`, `LOCATION:${esc(e.venue)}`, `DESCRIPTION:${esc(e.description)}`, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
-  return h("a", { href: URL.createObjectURL(new Blob([body], { type: "text/calendar" })), download: "code-iconic-event.ics" }, "Add to your calendar");
-}
 
 export function eventRow(e) {
   const [d, m] = dayMon(e.date);
   return h("article", { class: "ev" }, h("a", { href: "event.html?e=" + encodeURIComponent(e.id) },
     h("div", { class: "ev-date" }, h("b", null, d), h("span", null, m)),
     h("div", null, h("h3", null, e.title), h("p", { class: "meta" }, [pretty(e.date), e.time, e.venue].filter(Boolean).join(" · ")), e.description && h("p", { class: "desc" }, e.description)),
-    h("div", { class: "ev-side" }, e.price && h("span", { class: "price" }, e.price), h("span", { class: "go" }, "Register"))));
+    h("div", { class: "ev-side" }, e.price && h("span", { class: "price" }, e.price), h("span", { class: "go" }, "Register", icon("right", 16)))));
 }

@@ -25,15 +25,3 @@ export const safeUrl = u => /^https?:\/\//i.test((u || "").trim()) ? u.trim() : 
 export const logoMark = (light = false) => h("img", { src: `images/logo/${light ? "logo-light" : "logo"}.png`, alt: "code:iconic", width: 640, height: 440 });
 export const arch = n => "images/archive/" + n;
 
-/* Small line icons (24px grid) */
-const icon = (paths, extra) => svg("svg", { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.7, "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true", ...extra }, paths.map(d => svg("path", { d })));
-export const icons = {
-  menu: () => icon(["M4 8h16", "M4 16h16"]),
-  instagram: () => svg("svg", { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.7, "aria-hidden": "true" },
-    svg("rect", { x: 3.5, y: 3.5, width: 17, height: 17, rx: 5 }), svg("circle", { cx: 12, cy: 12, r: 4 }), svg("circle", { cx: 17.2, cy: 6.8, r: 1, fill: "currentColor", stroke: "none" })),
-  mail: () => icon(["M4 6h16v12H4z", "m4 7 8 6 8-6"]),
-  access: () => svg("svg", { width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.7, "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" },
-    svg("circle", { cx: 12, cy: 12, r: 9 }), svg("circle", { cx: 12, cy: 7.8, r: 1, fill: "currentColor" }), svg("path", { d: "M7.5 10.5c3 .9 6 .9 9 0M12 11v3.5m0 0-2.2 3.5m2.2-3.5 2.2 3.5" })),
-  chat: () => svg("svg", { width: 24, height: 24, viewBox: "0 0 24 24", fill: "currentColor", "aria-hidden": "true" },
-    svg("circle", { cx: 7, cy: 12, r: 1.600 }), svg("circle", { cx: 12, cy: 12, r: 1.600 }), svg("circle", { cx: 17, cy: 12, r: 1.600 }))
-};

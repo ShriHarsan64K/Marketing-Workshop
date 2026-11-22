@@ -1,6 +1,6 @@
 /* Reusable pieces: buttons, cards, polaroids, forms, event rows, photo grid */
 @layer components {
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:var(--control);padding:0 var(--s5);border-radius:999px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:600 var(--fs-sm)/1 var(--ui);letter-spacing:.06em;text-decoration:none;cursor:pointer;transition:opacity .2s,translate .2s,background .2s,color .2s;
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:var(--control);padding:0 1.35rem;border-radius:999px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:600 .8rem/1 var(--ui);letter-spacing:.06em;text-decoration:none;cursor:pointer;transition:opacity .2s,translate .2s,background .2s,color .2s;
     &:hover{opacity:.9;translate:0 -1px}
     &.ghost{background:transparent;color:var(--fg);&:hover{background:var(--fg);color:var(--bg);opacity:1}}
     &[disabled]{opacity:.5;cursor:wait}}
@@ -9,7 +9,7 @@
     h2,h3{color:var(--fg)}}
   a.card:hover{border-color:color-mix(in srgb,var(--fg) 45%,transparent);translate:0 -2px}
 
-  .polaroid{background:#fff;color:var(--wine);padding:var(--s2) var(--s2) var(--s3);border-radius:.25rem;box-shadow:0 .625rem 1.75rem color-mix(in srgb,var(--wine) 30%,transparent);
+  .polaroid{background:#fff;color:var(--wine);border:1px solid var(--line);padding:var(--s2) var(--s2) var(--s3);border-radius:.25rem;box-shadow:0 .625rem 1.75rem color-mix(in srgb,var(--wine) 30%,transparent);
     img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:.125rem}
     figcaption{padding:var(--s2) var(--s1) 0;font:400 var(--fs-base)/1.1 var(--display)}
     figcaption small{display:block;font:400 var(--fs-xs)/1.4 var(--ui);opacity:.7;margin-top:2px}}
@@ -33,12 +33,12 @@
   .ev h3{margin-bottom:var(--s1)}
   .ev .meta{font:400 var(--fs-sm)/1.5 var(--ui);color:var(--muted)}
   .ev .desc{margin-top:var(--s2);color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .ev-date{text-align:center;min-width:4rem;line-height:1;border-radius:var(--r-sm);padding:var(--s3) var(--s2);background:var(--deep);color:var(--on-deep)}
+  .ev-date{text-align:center;min-width:4rem;line-height:1;border:1px solid var(--deep);border-radius:var(--r-sm);padding:var(--s3) var(--s2);background:var(--deep);color:var(--on-deep)}
   .ev-date b{display:block;font:400 var(--fs-h2)/1 var(--classique)}
   .ev-date span{font:600 var(--fs-xs)/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;opacity:.8}
   .ev-side{grid-column:2;display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
   .price{font:600 var(--fs-xs)/1 var(--ui);letter-spacing:.08em;text-transform:uppercase;padding:var(--s2) var(--s3);border:1px solid var(--fg);border-radius:999px}
-  .go{font:600 var(--fs-sm)/1 var(--ui);&::after{content:" →"}}
+  .go{display:inline-flex;align-items:center;gap:var(--s1);font:600 var(--fs-sm)/1 var(--ui)}
   @container (min-width:640px){.ev a{grid-template-columns:auto 1fr auto;align-items:center}.ev-side{grid-column:auto;flex-direction:column;align-items:flex-end;gap:var(--s2)}}
   .month{font:600 var(--fs-xs)/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:var(--s6) 0 var(--s2);&:first-of-type{margin-top:0}}
   .section-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s6)}
@@ -47,7 +47,7 @@
 
   .moments{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3)}
   @media (min-width:768px){.moments{grid-template-columns:repeat(3,1fr);gap:var(--s4)}}
-  .moments figure{overflow:hidden;border-radius:var(--r-sm);position:relative;background:var(--card);
+  .moments figure{overflow:hidden;border-radius:var(--r-sm);position:relative;background:var(--card);border:1px solid var(--line);
     img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:scale .6s}
     &:hover img{scale:1.04}
     figcaption{position:absolute;inset:auto 0 0;padding:var(--s6) var(--s4) var(--s4);font:italic 400 var(--fs-base) var(--classique);color:#fff;background:linear-gradient(transparent,color-mix(in srgb,var(--wine) 90%,transparent))}}
@@ -56,6 +56,6 @@
   @media (min-width:1024px){.event-grid{grid-template-columns:1.1fr .9fr;gap:var(--s8)}}
   .facts{display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5);margin-block:var(--s5);
     dt{font:600 var(--fs-xs)/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-top:var(--s1)}dd{margin:0}}
-  .event-img{border-radius:var(--r-sm);margin-top:var(--s5);max-height:30rem;object-fit:cover;width:100%}
+  .event-img{border:1px solid var(--line);border-radius:var(--r-sm);margin-top:var(--s5);max-height:30rem;object-fit:cover;width:100%}
   .links{display:grid;gap:var(--s3);font-size:var(--fs-lead)}
 }

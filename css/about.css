@@ -13,9 +13,9 @@
   .bio p{font:400 var(--fs-sm)/2.1 var(--ui);letter-spacing:.2em;text-transform:uppercase;margin-bottom:var(--s5)}
   .bio .first{font-size:var(--fs-base)}
   .bio-photo{width:min(100% - var(--gutter) * 2,68.75rem);margin:var(--s5) auto var(--s8);
-    img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r-sm)}}
+    img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);border-radius:var(--r-sm)}}
   .bio-quote{max-width:26ch;margin:var(--s7) auto;text-align:center;font:italic 400 var(--fs-h1)/1.2 var(--classique);color:var(--fg)}
   .bio-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);width:min(100% - var(--gutter) * 2,68.75rem);margin:0 auto var(--s8);
-    img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-sm)}}
+    img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);border-radius:var(--r-sm)}}
   .bio-cta{display:flex;justify-content:center;gap:var(--s3);flex-wrap:wrap;padding-bottom:var(--s8)}
 }

@@ -1,5 +1,6 @@
 import C from "../config.js";
-import { h, $, icons, logoMark, safeUrl } from "../lib/dom.js";
+import { h, $, logoMark, safeUrl } from "../lib/dom.js";
+import { icon } from "../lib/icons.js";
 
 const NAV = [["Events", "calendar.html"], ["Archive", "past.html"], ["About", "about.html"], ["Contact", "contact.html"]];
 const MENU = [["Home", "index.html"], ...NAV, ["Join free", "membership.html"]];
@@ -14,21 +15,22 @@ function a11yToggle() {
       const next = !document.documentElement.classList.contains("a11y");
       document.documentElement.classList.toggle("a11y", next); e.currentTarget.setAttribute("aria-pressed", String(next));
       try { localStorage.setItem("a11y", next ? "1" : "0"); } catch {}
-    } }, icons.access());
+    } }, icon("access", 22));
 }
 
 export function renderHeader(variant) {
-  const menuBtn = (cls) => h("button", { class: cls, popovertarget: "menu", "aria-label": "Open menu" }, icons.menu());
+  const menuBtn = cls => h("button", { class: cls, popovertarget: "menu", "aria-label": "Open menu" }, icon("menu", 22));
   const header = variant === "bio"
     ? h("header", { class: "site-header bio" },
         h("a", { class: "wordmark", href: "index.html", "aria-label": C.name + " home" }, "code", h("b", null, ":"), "iconic"),
-        h("div", { class: "icons" }, h("a", { href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Instagram" }, icons.instagram()), menuBtn("")))
+        h("div", { class: "icons" }, h("a", { href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Instagram" }, icon("instagram", 22)), menuBtn("")))
     : h("header", { class: "site-header" },
         h("a", { class: "logo-btn", href: "index.html", "aria-label": C.name + " home" }, logoMark()),
-        h("nav", { class: "pill-nav", "aria-label": "Main" }, NAV.map(link)),
-        h("div", { class: "header-end" }, a11yToggle(), h("a", { class: "cta-pill", href: "membership.html" }, "Join free"), menuBtn("round-btn menu")));
+        h("div", { class: "header-right" },
+          h("nav", { class: "pill-nav", "aria-label": "Main" }, NAV.map(link)),
+          a11yToggle(), h("a", { class: "cta-pill", href: "membership.html" }, "Join free"), menuBtn("round-btn menu")));
   const menu = h("nav", { id: "menu", popover: "auto", "aria-label": "Menu", "data-theme": "wine" },
-    h("button", { class: "close", popovertarget: "menu", popovertargetaction: "hide" }, "Close"), MENU.map(link));
+    h("button", { class: "close", popovertarget: "menu", popovertargetaction: "hide", "aria-label": "Close menu" }, icon("close", 26)), MENU.map(link));
   $("#hdr").replaceWith(header);
   header.after(menu);
 }
