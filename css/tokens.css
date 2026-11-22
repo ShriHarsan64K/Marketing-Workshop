@@ -1,0 +1,28 @@
+/* code:iconic design tokens. Two brand colours only (wine #4A0B0C, pink #E6BDC5); every tint is mixed from them.
+   Type: New York (Apple's system serif via ui-serif) for display and reading, system UI sans for small labels.
+   Scale: 4/8px spacing grid, 12 14 16 18 20 24 32 40 56 type steps, breakpoints 640 / 768 / 1024 / 1280. */
+@layer reset, tokens, base, layout, components, pages, motion;
+
+@layer tokens {
+  :root{
+    --wine:#4A0B0C; --pink:#E6BDC5;
+    --wine-deep:color-mix(in srgb,var(--wine) 55%,#000);
+    --card:color-mix(in srgb,var(--wine) 82%,#000);
+    --card-hi:color-mix(in srgb,var(--wine) 86%,var(--pink));
+    --line:color-mix(in srgb,var(--pink) 16%,transparent);
+    --muted:color-mix(in srgb,var(--pink) 68%,transparent);
+    --pink-soft:color-mix(in srgb,var(--pink) 45%,#fff);
+    --pink-deep:color-mix(in srgb,var(--pink) 75%,var(--wine));
+    --leopard-pink:url("../images/texture/leopard-pink.svg");
+
+    --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --ui:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+    --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+    --gutter:16px;--section:48px;--header:64px;--control:48px;--max:1200px;
+    --r-sm:12px;--r:24px;--gap:16px;
+    --fs-xs:.75rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lead:1.125rem;--fs-h3:1.25rem;--fs-h2:1.5rem;--fs-h1:2rem;--fs-hero:2.5rem;
+  }
+  @media (min-width:768px){:root{--gutter:24px;--section:64px;--gap:18px;--fs-lead:1.25rem;--fs-h3:1.5rem;--fs-h2:2rem;--fs-h1:2.5rem;--fs-hero:3.5rem}}
+  @media (min-width:1024px){:root{--gutter:32px;--section:96px;--fs-h2:2.5rem;--fs-h1:3.5rem;--fs-hero:3.5rem}}
+}

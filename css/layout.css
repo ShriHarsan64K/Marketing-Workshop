@@ -1,0 +1,71 @@
+/* Header (floating, like leborrel.nl) and footer (pink, like sophiawebster.com) */
+@layer layout {
+  /* ---------- header ---------- */
+  .site-header{position:fixed;inset:var(--s4) var(--gutter) auto;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);pointer-events:none;
+    > *{pointer-events:auto}}
+  @media (min-width:1024px){.site-header{inset:var(--s5) var(--s7) auto}}
+  .logo-btn{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--line);box-shadow:0 8px 24px #0006;
+    img{width:28px;height:auto}}
+  @media (min-width:768px){.logo-btn{width:72px;height:72px;img{width:40px}}}
+  .pill-nav{display:none;position:absolute;left:50%;translate:-50% 0;padding:var(--s2);border-radius:999px;background:color-mix(in srgb,var(--wine-deep) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border:1px solid var(--line);box-shadow:0 8px 32px #0005;gap:var(--s1)}
+  .pill-nav a{font:500 var(--fs-base)/1 var(--display);text-decoration:none;padding:var(--s4) var(--s5);border-radius:999px;color:var(--pink);transition:background .2s;
+    &:hover{background:color-mix(in srgb,var(--pink) 12%,transparent)}
+    &[aria-current=page]{background:color-mix(in srgb,var(--pink) 16%,transparent)}}
+  @media (min-width:768px){.pill-nav{display:flex}}
+  .header-end{display:flex;align-items:center;gap:var(--s3)}
+  .round-btn{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--line);color:var(--pink);cursor:pointer;
+    &:hover{background:var(--card-hi)}}
+  @media (min-width:768px){.round-btn{width:56px;height:56px}}
+  .round-btn.menu{display:grid}
+  @media (min-width:768px){.round-btn.menu{display:none}}
+  .cta-pill{display:inline-flex;align-items:center;min-height:48px;padding:0 var(--s5);border-radius:999px;background:var(--pink);color:var(--wine);font:600 var(--fs-base)/1 var(--display);text-decoration:none;box-shadow:0 8px 28px color-mix(in srgb,var(--pink) 30%,transparent);transition:translate .2s,background .2s;
+    &:hover{translate:0 -2px;background:var(--pink-soft)}}
+  @media (min-width:768px){.cta-pill{min-height:60px;padding:0 var(--s6);font-size:var(--fs-lead)}}
+  @media (max-width:767px){.header-end .a11y-btn{display:none}}
+
+  /* bio variant (about page): giant wordmark over the banner, as on sophiawebster.com */
+  .site-header.bio{position:absolute;inset:var(--s4) var(--gutter) auto;color:#fff;justify-content:space-between;align-items:flex-start;
+    .wordmark{font:500 clamp(1.5rem,6.6vw,5.4rem)/1 var(--display);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:#fff;text-shadow:0 2px 24px #0004}
+    .wordmark b{font-weight:500;color:var(--pink)}
+    .icons{display:flex;gap:var(--s3);align-items:center;color:#fff}
+    .icons a,.icons button{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer}}
+  @media (min-width:1024px){.site-header.bio{inset:var(--s5) var(--s6) auto}}
+
+  /* full-screen menu (native popover) */
+  #menu{inset:0;width:100%;max-width:none;height:100dvh;margin:0;border:0;padding:var(--s9) var(--gutter) var(--s6);background:var(--wine);color:var(--pink);opacity:0;transition:opacity .25s,display .25s allow-discrete,overlay .25s allow-discrete;
+    &:popover-open{display:flex;flex-direction:column;justify-content:center;gap:var(--s2);opacity:1;
+      @starting-style{opacity:0}}
+    a{font:italic 400 clamp(2.25rem,10vw,3.5rem)/1.2 var(--display);text-decoration:none;padding-block:var(--s2)}
+    a[aria-current=page]{color:var(--pink-soft)}
+    .close{position:absolute;top:var(--s4);right:var(--gutter);min-height:var(--control);padding:0 var(--s3);background:none;border:0;font:600 var(--fs-sm) var(--ui);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}}
+
+  main{padding-top:clamp(88px,12vw,128px)}
+  body[data-page=about] main{padding-top:0}
+
+  /* ---------- footer (pink) ---------- */
+  .site-footer{background:var(--pink);color:var(--wine);margin-top:var(--section);
+    h2,h3{color:var(--wine)}
+    .signup{display:grid;gap:var(--s6);padding-block:var(--s8);border-bottom:1px solid color-mix(in srgb,var(--wine) 18%,transparent)}
+    .signup h2{font:500 clamp(2.5rem,9vw,7rem)/.95 var(--ui);letter-spacing:.06em;text-transform:uppercase}
+    .signup p{font:400 var(--fs-sm)/1.9 var(--ui);letter-spacing:.22em;text-transform:uppercase;max-width:44ch;margin-block:var(--s4) var(--s5)}
+    .signup form{display:flex;max-width:480px;background:color-mix(in srgb,var(--pink) 50%,#fff);border-radius:999px;padding:var(--s1)}
+    .signup input{flex:1;min-width:0;min-height:var(--control);padding:0 var(--s5);border:0;background:none;color:var(--wine);font:400 var(--fs-sm) var(--ui);letter-spacing:.12em;
+      &::placeholder{color:color-mix(in srgb,var(--wine) 55%,transparent)}
+      &:focus{outline:none}}
+    .signup button{min-height:var(--control);padding:0 var(--s5);border:0;border-radius:999px;background:var(--wine);color:var(--pink);font:600 var(--fs-xs) var(--ui);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+    .signup .art{display:none;border-radius:var(--r);background:var(--leopard-pink) 0 0/160px;border:1px solid color-mix(in srgb,var(--wine) 25%,transparent);min-height:240px}
+    .cols{display:grid;gap:var(--s6);padding-block:var(--s7);font:500 var(--fs-sm)/1 var(--ui);letter-spacing:.2em;text-transform:uppercase}
+    .cols h3{font:700 var(--fs-sm)/1 var(--ui);letter-spacing:.24em;margin-bottom:var(--s5)}
+    .cols a{display:block;text-decoration:none;padding-block:var(--s2);&:hover{text-decoration:underline}}
+    .social{display:flex;gap:var(--s3)}
+    .social a{display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;background:var(--wine);color:var(--pink)}
+    .legal{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s6);align-items:center;justify-content:space-between;padding-block:var(--s5);border-top:1px solid color-mix(in srgb,var(--wine) 18%,transparent);font:400 var(--fs-xs)/1.4 var(--ui);letter-spacing:.2em;text-transform:uppercase;color:color-mix(in srgb,var(--wine) 70%,transparent)}
+    .legal img{display:inline;width:20px;vertical-align:middle;margin-right:var(--s2)}}
+  @media (min-width:768px){.site-footer .cols{grid-template-columns:repeat(3,1fr)}}
+  @media (min-width:1024px){.site-footer .signup{grid-template-columns:1fr 1fr;align-items:center}.site-footer .signup .art{display:block}}
+
+  /* floating pill + chat bubble (bio page) */
+  .promo{position:fixed;left:var(--s4);bottom:var(--s4);z-index:70;display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4) var(--s3) var(--s5);border-radius:999px;background:var(--pink);color:var(--wine);font:500 var(--fs-xs)/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;box-shadow:0 8px 28px #0003;text-decoration:none;
+    button{display:grid;place-items:center;width:28px;height:28px;border:0;background:none;color:inherit;cursor:pointer;font-size:1.1rem}}
+  .chat{position:fixed;right:var(--s4);bottom:var(--s4);z-index:70;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--wine);color:var(--pink);box-shadow:0 8px 28px #0004;text-decoration:none}
+}

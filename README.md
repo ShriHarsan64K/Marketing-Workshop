@@ -1,37 +1,34 @@
-# code: iconic
+# code:iconic
 
-Static events website (plain HTML/CSS/JS, modern CSS, system fonts) for the code:iconic community in Chennai. No server or database:
+Static events website for the code:iconic community in Chennai. No server or database.
 
-- **Events** come from a Google Sheet (published as CSV).
-- **Event registrations** and **membership sign-ups** go into Google Forms (responses land in Google Sheets).
-- **Hosting:** GitHub Pages (free, HTTPS).
+- **Events:** Google Sheet (published as CSV). **Sign-ups:** two Google Forms. **Hosting:** GitHub Pages.
+- **Home** is a bento grid modelled on leborrel.nl. **About** is a biography page modelled on sophiawebster.com. Colours: wine `#4A0B0C` and pink `#E6BDC5` only (all tints are mixed from them), with leopard-print texture. Type: New York (Apple system serif) with the system UI font for labels.
+
+## Structure
+```
+index.html calendar.html past.html event.html membership.html about.html contact.html 404.html   page shells
+css/   tokens → base → layout → components → home / about   (cascade layers, standard 4/8px + type scale)
+js/
+  config.js            everything you edit: text, links, sheet + form IDs, photos, founder story
+  main.js              picks header variant, footer and the page module
+  lib/                 dom.js (helpers, icons) · events.js (sheet, dates, calendar file) · forms.js (Google Forms)
+  components/          header.js · footer.js · tiles.js (bento cards)
+  pages/               one module per page
+images/  archive/ (event photos) · logo/ · texture/ (leopard) · events/ (posters)
+```
 
 ## Edit content
 | What | Where |
 |---|---|
-| Add/edit/hide events | Google Sheet "Events" tab (live in about 5 minutes) |
-| See / confirm registrations | Registration Form > Responses > Sheet (add a Status column) |
-| Site text, Instagram, email, perks, slideshow captions | `js/config.js` |
-| Event posters / gallery photos | add the file to `images/events/`, put its filename in the sheet |
-| Slideshow photos | `images/slide1.jpg` ... (list in `js/config.js`) |
+| Events (add / hide / edit) | Google Sheet "Events" tab, live in ~5 minutes |
+| Registrations and sign-ups | The two Google Forms' response sheets |
+| Text, links, photos, founder story | `js/config.js` |
+| Event posters | add file to `images/events/`, put filename in the sheet |
 
-## Events sheet columns (row 1, exact names)
-`title, date, time, venue, price, description, image, link, published, photos`
-
-- `date`: `2026-12-05` (or `05/12/2026`). Format the column as Plain text.
-- `published`: `TRUE` to show, anything else hides it.
-- `image`: filename in `images/events/` or a full https link. `photos`: comma-separated filenames for the past-events gallery.
-- `link`: payment / details link, shown after someone registers.
+Sheet columns: `title, date, time, venue, price, description, image, link, published, photos` (`published` = `TRUE` to show).
 
 ## Run locally
 ```bash
-python3 -m http.server 8000     # then open http://localhost:8000
+python3 -m http.server 8000     # ES modules need http://, not file://
 ```
-
-## Files
-`index.html calendar.html past.html event.html membership.html about.html contact.html` share `css/style.css` and `js/app.js` (header, footer, rendering). Settings: `js/config.js`.
-
-## Google setup (already done)
-- Events sheet "code iconic - Events": File > Share > Publish to web > CSV (URL in `js/config.js`).
-- Two Forms (registration, membership), each with responses linked to a Sheet. The site posts to each Form's `formResponse` URL using the `entry.NNN` ids in `js/config.js`. If you rebuild a Form, re-read its entry ids (view-source of the live form, search `FB_PUBLIC_LOAD_DATA_`).
-- Confirm/reject: add a "Status" column in the responses sheet and update it by hand.
