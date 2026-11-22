@@ -1,5 +1,5 @@
 /* code:iconic design tokens. Two brand colours only: wine #4A0B0C and pink #E6BDC5. Every tint is mixed from them.
-   The page is PINK with WINE ink; [data-theme=wine] flips it (footer, founder page, full-screen menu).
+   The site is WINE with pink ink, lifted by soft pink glows and gradients so it never reads flat; [data-theme=pink] flips it (footer, founder page).
    Type: New York (Apple's system serif via ui-serif) for text, Classique (Didot/Baskerville-style serif) for headlines, system UI sans for small labels.
    Sizes: everything is in rem and the root is 90%, so the whole site renders at 90% of the browser default.
    Scale: 4/8px spacing grid, 12 14 16 18 20 24 32 40 56 type steps, breakpoints 640 / 768 / 1024 / 1280. */
@@ -8,34 +8,41 @@
 @layer tokens {
   :root{
     --wine:#4A0B0C; --pink:#E6BDC5;
-    --bg:var(--pink); --fg:var(--wine);
-    --bg-glow:color-mix(in srgb,var(--pink) 55%,#fff);
-    --bg-end:color-mix(in srgb,var(--pink) 86%,var(--wine));
-    --muted:color-mix(in srgb,var(--wine) 68%,transparent);
-    --line:color-mix(in srgb,var(--wine) 32%,transparent);
-    --card:color-mix(in srgb,var(--pink) 50%,#fff);
-    --card-hi:color-mix(in srgb,var(--pink) 28%,#fff);
-    --deep:var(--wine); --on-deep:var(--pink);
+    --bg:var(--wine); --fg:var(--pink);
+    --page-bg:
+      radial-gradient(75% 48% at 8% -6%,color-mix(in srgb,var(--pink) 28%,var(--wine)) 0,transparent 70%),
+      radial-gradient(60% 42% at 98% 22%,color-mix(in srgb,var(--pink) 17%,var(--wine)) 0,transparent 68%),
+      radial-gradient(70% 40% at 20% 78%,color-mix(in srgb,var(--pink) 12%,var(--wine)) 0,transparent 70%),
+      linear-gradient(180deg,color-mix(in srgb,var(--wine) 90%,var(--pink)) 0,var(--wine) 42%,color-mix(in srgb,var(--wine) 62%,#000) 100%);
+    --muted:color-mix(in srgb,var(--pink) 72%,transparent);
+    --line:color-mix(in srgb,var(--pink) 30%,transparent);
+    --card:color-mix(in srgb,var(--wine) 84%,var(--pink));
+    --card-hi:color-mix(in srgb,var(--wine) 74%,var(--pink));
+    --card-bg:linear-gradient(155deg,color-mix(in srgb,var(--wine) 80%,var(--pink)),color-mix(in srgb,var(--wine) 92%,#000));
+    --deep:var(--pink); --on-deep:var(--wine);
 
     --display:ui-serif,"New York","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
     --classique:"Didot","Bodoni 72","Baskerville","Iowan Old Style","Palatino Linotype",Georgia,serif;
     --ui:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
     --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.5rem;--s6:2rem;--s7:3rem;--s8:4rem;--s9:6rem;
-    --gutter:1rem;--section:3rem;--header:4rem;--control:2.7rem;--max:75rem;
-    --r-sm:.75rem;--r:1.5rem;--gap:1rem;
+    --gutter:1rem;--section:2.5rem;--header:4rem;--control:2.7rem;--max:75rem;
+    --r-sm:.75rem;--r:1.25rem;--gap:.875rem;
     --fs-xs:.75rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lead:1.125rem;--fs-h3:1.25rem;--fs-h2:1.5rem;--fs-h1:2rem;--fs-hero:2.5rem;
   }
-  [data-theme=wine]{
-    --bg:var(--wine); --fg:var(--pink);
-    --bg-glow:color-mix(in srgb,var(--wine) 82%,var(--pink));
-    --bg-end:color-mix(in srgb,var(--wine) 55%,#000);
-    --muted:color-mix(in srgb,var(--pink) 70%,transparent);
-    --line:color-mix(in srgb,var(--pink) 32%,transparent);
-    --card:color-mix(in srgb,var(--wine) 82%,#000);
-    --card-hi:color-mix(in srgb,var(--wine) 86%,var(--pink));
-    --deep:var(--pink); --on-deep:var(--wine);
+  [data-theme=pink]{
+    --bg:var(--pink); --fg:var(--wine);
+    --page-bg:
+      radial-gradient(75% 48% at 8% -6%,color-mix(in srgb,var(--pink) 40%,#fff) 0,transparent 70%),
+      radial-gradient(60% 42% at 98% 22%,color-mix(in srgb,var(--pink) 60%,#fff) 0,transparent 68%),
+      linear-gradient(180deg,color-mix(in srgb,var(--pink) 80%,#fff) 0,var(--pink) 45%,color-mix(in srgb,var(--pink) 84%,var(--wine)) 100%);
+    --muted:color-mix(in srgb,var(--wine) 70%,transparent);
+    --line:color-mix(in srgb,var(--wine) 30%,transparent);
+    --card:color-mix(in srgb,var(--pink) 50%,#fff);
+    --card-hi:color-mix(in srgb,var(--pink) 28%,#fff);
+    --card-bg:linear-gradient(155deg,color-mix(in srgb,var(--pink) 36%,#fff),color-mix(in srgb,var(--pink) 72%,#fff));
+    --deep:var(--wine); --on-deep:var(--pink);
   }
-  @media (min-width:768px){:root{--gutter:1.5rem;--section:4rem;--gap:1.125rem;--fs-lead:1.25rem;--fs-h3:1.5rem;--fs-h2:2rem;--fs-h1:2.5rem;--fs-hero:3.5rem}}
-  @media (min-width:1024px){:root{--gutter:2rem;--section:6rem;--fs-h2:2.5rem;--fs-h1:3.5rem}}
+  @media (min-width:768px){:root{--gutter:1.5rem;--section:3.25rem;--gap:1rem;--fs-lead:1.25rem;--fs-h3:1.5rem;--fs-h2:2rem;--fs-h1:2.5rem;--fs-hero:3.5rem}}
+  @media (min-width:1024px){:root{--gutter:2rem;--section:4.5rem;--fs-h2:2.5rem;--fs-h1:3.5rem}}
 }

@@ -1,6 +1,6 @@
 /* The small tile section on the home page, modelled on leborrel.nl. */
 import C from "../config.js";
-import { h, svg, arch, logoMark, safeUrl } from "../lib/dom.js";
+import { h, arch, logoMark, safeUrl } from "../lib/dom.js";
 import { icon } from "../lib/icons.js";
 import { startOf, imgSrc, pretty } from "../lib/events.js";
 
@@ -12,14 +12,7 @@ export const heroCard = () => card("hero-card", "section", { "aria-label": "Welc
   h("h1", null, C.headline),
   h("div", { class: "tilt" }, [["group-1.jpg", "The gathering."], ["crochet.jpg", "Together."], ["circle-2.jpg", "Made by us."]].map(([f, t]) => polaroid(arch(f), t, C.city))));
 
-export function orb() {
-  const R = 170, ring = (id, d, text) => [svg("path", { id, d, fill: "none" }), svg("text", null, svg("textPath", { href: "#" + id, startOffset: "50%", "text-anchor": "middle" }, text))];
-  return h("div", { class: "orb", "aria-hidden": "true" },
-    svg("svg", { viewBox: "0 0 400 400" }, svg("circle", { cx: 200, cy: 200, r: 195 }), svg("circle", { cx: 200, cy: 200, r: 150 }),
-      ring("ringTop", `M ${200 - R},200 A ${R},${R} 0 0 1 ${200 + R},200`, C.ringTop),
-      ring("ringBottom", `M ${200 - R - 12},200 A ${R + 12},${R + 12} 0 0 0 ${200 + R + 12},200`, C.ringBottom)),
-    h("div", { class: "ball" }, logoMark()));
-}
+export const orb = () => h("div", { class: "orb", "aria-hidden": "true" }, logoMark(true));
 
 export const archiveCard = () => card("archive", "a", { href: "past.html" },
   h("div", { class: "fan", "aria-hidden": "true" }, [["table-2.jpg", "Together"], ["hug.jpg", "Hellos"], ["circle-1.jpg", "Mood boards"]].map(([f, t]) => polaroid(arch(f), t))),
@@ -33,10 +26,12 @@ export const instaCard = () => card("insta", "a", { href: safeUrl(C.instagram), 
 export const locCard = () => card("loc", "section", {},
   h("p", { class: "eyebrow" }, "Find us"), h("div", null, h("h3", null, C.city), h("p", { class: "muted" }, C.cityLine)));
 
-// Fixed on Chennai: the embed is cropped so its zoom buttons and footer text are out of view, and it ignores the mouse.
-export const mapCard = () => card("map", "section", { "aria-label": "Map of " + C.city },
-  h("iframe", { title: "Map of " + C.city, loading: "lazy", referrerpolicy: "no-referrer", tabindex: "-1", src: "https://www.openstreetmap.org/export/embed.html?bbox=80.19%2C13.02%2C80.35%2C13.15&layer=mapnik" }),
-  h("div", { class: "bubble" }, h("h3", null, C.city)),
+// Fixed on Chennai: the map is centred on Chennai's coordinates and the pin sits exactly on that centre; the embed is cropped evenly on every side so its zoom buttons and
+// footer text are out of view, and it ignores the mouse.
+const [LAT, LON] = C.mapCenter, bbox = [LON - 0.07, LAT - 0.0625, LON + 0.07, LAT + 0.0625].join("%2C");
+export const mapCard = () => card("map", "section", { "aria-label": "Map showing " + C.city },
+  h("iframe", { title: "Map of " + C.city, loading: "lazy", referrerpolicy: "no-referrer", tabindex: "-1", src: `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik` }),
+  h("span", { class: "pin" }), h("div", { class: "bubble" }, h("h3", null, C.city)),
   h("a", { class: "osm", href: "https://www.openstreetmap.org/copyright", rel: "noopener" }, "© OpenStreetMap"));
 
 /* Countdown, event cartridge and ticket: they re-draw themselves whenever update(next) is called. */

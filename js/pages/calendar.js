@@ -1,6 +1,6 @@
 import { h } from "../lib/dom.js";
 import { withEvents, upcoming, monthName, eventRow } from "../lib/events.js";
-import { head } from "./_head.js";
+import { head } from "../components/pagehead.js";
 
 export default async function calendar(main) {
   main.append(head("Calendar", "Upcoming events", "Pick a date, register in a minute, and we'll confirm your spot."));

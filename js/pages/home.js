@@ -1,6 +1,6 @@
 /* Home: full-photo hero, what we do, upcoming events, a small tile section, membership band. Events refresh themselves. */
 import C from "../config.js";
-import { h } from "../lib/dom.js";
+import { h, arch } from "../lib/dom.js";
 import { loadEvents, upcoming, nextEvent, eventRow } from "../lib/events.js";
 import { hero } from "../components/hero.js";
 import * as T from "../components/tiles.js";
@@ -24,13 +24,14 @@ export default async function home(main) {
   main.append(
     hero(),
     section(h("p", { class: "eyebrow" }, "What we do"), h("h2", null, C.whatTitle),
-      h("ul", { class: "pillars" }, C.pillars.map(p => h("li", null, h("h3", null, p[0]), h("p", null, p[1]))))),
+      h("ul", { class: "pillars" }, C.pillars.map(([t, line, photo]) => h("li", null, h("img", { src: photo, alt: t, loading: "lazy", width: 600, height: 450 }), h("h3", null, t), h("p", null, line))))),
     section(h("div", { class: "section-head", id: "events" }, h("div", null, h("p", { class: "eyebrow" }, "Upcoming"), h("h2", null, "Come sit with us."))), list),
     section(h("div", { class: "bento-intro" }, h("p", { class: "eyebrow" }, "Inside code:iconic"), h("h2", null, "Stories, dates and where to find us.")),
       h("div", { class: "bento" }, T.heroCard(), T.orb(), T.archiveCard(), live.count, T.instaCard(), T.locCard(), live.cart, live.ticket, T.freeCard(), T.mapCard())),
     h("div", { class: "wrap" }, h("section", { class: "band" },
-      h("div", null, h("p", { class: "eyebrow" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead" }, C.membershipText)),
-      h("div", null, h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn", href: "membership.html" }, "Join the community")))));
+      h("div", null, h("p", { class: "eyebrow" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead" }, C.membershipText),
+        h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn", href: "membership.html" }, "Join the community")),
+      h("div", { class: "duo", "aria-hidden": "true" }, [["trio.jpg", "New friends"], ["table-2.jpg", "Making together"]].map(([f, t]) => h("figure", { class: "polaroid" }, h("img", { src: arch(f), alt: "", loading: "lazy", width: 400, height: 500 }), h("figcaption", null, t)))))));
 
   // Keep the page current: re-read the sheet every 5 minutes (and when the tab returns), and re-check the clock every 30 seconds.
   const refresh = async () => { try { events = await loadEvents(true); failed = false; paint(); } catch { /* keep what we have */ } };

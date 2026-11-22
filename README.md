@@ -4,7 +4,7 @@ Static events website for the code:iconic community in Chennai. No server or dat
 
 - **Events:** Google Sheet (published as CSV). **Sign-ups:** two Google Forms. **Hosting:** GitHub Pages.
 - **Home:** full-photo hero, what we do (crochet, journaling, picnics, brunch, vision boards, Galentine's, book club), upcoming events, a small tile section modelled on leborrel.nl (next-event countdown, cartridge and ticket refresh themselves from the sheet every 5 minutes), and the membership band. **About** is a biography page modelled on sophiawebster.com.
-- **Look:** wine `#4A0B0C` and pink `#E6BDC5` only (tints are mixed from them): pink page with wine ink, flipped on the founder page, footer and menu. Logo: the lips poster (`images/logo/`). Icons: IBM Carbon (`js/lib/icons.js`). Type: New York for text, Classique (Didot/Baskerville-style serif) for headlines, system UI font for labels. Everything is in rem on a 90% root.
+- **Look:** wine `#4A0B0C` and pink `#E6BDC5` only (tints are mixed from them): a wine page with pink ink and soft pink glows, flipped to pink on the founder page and footer. Logo: the lips poster (`images/logo/`). Icons: IBM Carbon (`js/lib/icons.js`). Type: New York for text, Classique (Didot/Baskerville-style serif) for headlines, system UI font for labels. Everything is in rem on a 90% root. Note: GitHub Pages ignores files that start with an underscore, so never name a module `_something.js`; a `.nojekyll` file is also in the repo root.
 
 ## Structure
 ```

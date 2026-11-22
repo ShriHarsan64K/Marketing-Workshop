@@ -1,6 +1,6 @@
 /* Founder page, modelled on sophiawebster.com/pages/biography */
 import C from "../config.js";
-import { h, safeUrl } from "../lib/dom.js";
+import { h, whatsapp } from "../lib/dom.js";
 import { icon } from "../lib/icons.js";
 
 export default function about(main) {
@@ -16,5 +16,5 @@ export default function about(main) {
   // floating pill + chat bubble, as on the reference
   const promo = h("div", { class: "promo" }, h("a", { href: "membership.html", style: "text-decoration:none" }, "Free to join | Join now"),
     h("button", { type: "button", "aria-label": "Dismiss", onclick: () => promo.remove() }, icon("close", 16)));
-  document.body.append(promo, h("a", { class: "chat", href: safeUrl(C.instagram), rel: "noopener", "aria-label": "Message us on Instagram" }, icon("chat", 24)));
+  document.body.append(promo, h("a", { class: "chat", href: whatsapp(C.phone), rel: "noopener", "aria-label": "Message us on WhatsApp" }, icon("chat", 24)));
 }

@@ -9,7 +9,7 @@
   .bio-title .caps{display:block;padding-top:clamp(.5rem,2vw,1.5rem);font:700 clamp(1.75rem,6vw,3.5rem)/1 var(--ui);letter-spacing:.18em;text-transform:uppercase;text-shadow:0 2px 1rem #4A0B0C}
   .bio-title .script{position:absolute;left:50%;top:50%;translate:-50% -62%;white-space:nowrap;font:italic 400 clamp(2.25rem,8vw,5rem)/1 var(--classique);color:#fff;text-shadow:0 2px 1.5rem #4A0B0Cb0}
 
-  .bio{max-width:44rem;margin-inline:auto;padding:clamp(3rem,8vw,6rem) var(--gutter) var(--s5);text-align:center;color:var(--fg)}
+  .bio{max-width:44rem;margin-inline:auto;padding:clamp(2.5rem,6vw,4.5rem) var(--gutter) var(--s4);text-align:center;color:var(--fg)}
   .bio p{font:400 var(--fs-sm)/2.1 var(--ui);letter-spacing:.2em;text-transform:uppercase;margin-bottom:var(--s5)}
   .bio .first{font-size:var(--fs-base)}
   .bio-photo{width:min(100% - var(--gutter) * 2,68.75rem);margin:var(--s5) auto var(--s8);

@@ -7,20 +7,21 @@ export default {
   instagram: "https://instagram.com/code.iconic",
   instagramHandle: "@code.iconic",
   instagramStats: null,   // e.g. { posts: 12, followers: 340, following: 80 } (hidden until you add real numbers)
-  email: "",              // shown on the Contact page and footer
-  phone: "",
+  contactName: "Jaya Shree S",
+  email: "jayashreesenthilkumar2004@gmail.com",
+  phone: "9677514453",     // shown as written; WhatsApp and call links use +91
   city: "Chennai",
   cityLine: "Tamil Nadu, India",
   timezone: "Asia/Kolkata",
   whatTitle: "What we get up to.",
+  // [title, line, photo in images/archive or images/]
   pillars: [
-    ["Crochet workshops", "Learn a stitch and make something soft."],
-    ["Journaling", "Slow mornings with a pen and a prompt."],
-    ["Picnics", "Blankets, snacks and open sky."],
-    ["Brunch", "Long tables and good food."],
-    ["Vision boards", "Cut, paste and dream out loud."],
-    ["Galentine's", "A night to celebrate your people."],
-    ["Book club", "Read, sip and talk it over."]
+    ["Crochet workshops", "Learn a stitch and make something soft.", "images/archive/crochet.jpg"],
+    ["Journaling & vision boards", "Cut, paste and dream out loud, pen in hand.", "images/slide3.jpg"],
+    ["Picnics", "Blankets, snacks and open sky.", "images/archive/circle-1.jpg"],
+    ["Brunch", "Long tables and good food.", "images/slide1.jpg"],
+    ["Galentine's", "A night to celebrate your people.", "images/slide2.jpg"],
+    ["Book club", "Read, sip and talk it over.", "images/archive/group-1.jpg"]
   ],
   perks: [   // shown in the membership band on the home page
     ["No fee, no catch", "Joining code:iconic costs nothing."],
@@ -36,8 +37,7 @@ export default {
     { image: "images/slide5.jpg", heading: "Cut. Paste. Dream." },
     { image: "images/slide6.jpg", heading: "Proud of what we made" }
   ],
-  ringTop: "BRUNCH · CREATE · CONNECT · ENJOY ·",
-  ringBottom: "CODE:ICONIC · CHENNAI ·",
+  mapCenter: [13.0827, 80.2707],   // Chennai
   membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",
   contactNote: "We'd love to hear from you.",
 

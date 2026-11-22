@@ -1,7 +1,6 @@
 /* Events come from the published Google Sheet (CSV). */
 import C from "../config.js";
 import { h } from "./dom.js";
-import { icon } from "./icons.js";
 
 export function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;
@@ -69,10 +68,13 @@ export function startOf(e) {
 }
 
 
+/* One event row: date chip, photo, details and a real Register button that opens the form. */
 export function eventRow(e) {
   const [d, m] = dayMon(e.date);
-  return h("article", { class: "ev" }, h("a", { href: "event.html?e=" + encodeURIComponent(e.id) },
+  return h("article", { class: "ev" },
     h("div", { class: "ev-date" }, h("b", null, d), h("span", null, m)),
-    h("div", null, h("h3", null, e.title), h("p", { class: "meta" }, [pretty(e.date), e.time, e.venue].filter(Boolean).join(" · ")), e.description && h("p", { class: "desc" }, e.description)),
-    h("div", { class: "ev-side" }, e.price && h("span", { class: "price" }, e.price), h("span", { class: "go" }, "Register", icon("right", 16)))));
+    h("img", { class: "ev-photo", src: e.image ? imgSrc(e.image) : "images/archive/" + PHOTOS[e.id.length % PHOTOS.length], alt: "", loading: "lazy", width: 160, height: 160 }),
+    h("div", { class: "ev-body" }, h("h3", null, e.title), h("p", { class: "meta" }, [pretty(e.date), e.time, e.venue].filter(Boolean).join(" · ")), e.description && h("p", { class: "desc" }, e.description)),
+    h("div", { class: "ev-side" }, e.price && h("span", { class: "price" }, e.price), h("a", { class: "btn", href: "event.html?e=" + encodeURIComponent(e.id) }, "Register")));
 }
+const PHOTOS = ["table-2.jpg", "circle-2.jpg", "mugs.jpg", "hug.jpg", "gather.jpg"];

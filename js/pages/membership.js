@@ -1,7 +1,7 @@
 import C from "../config.js";
 import { h } from "../lib/dom.js";
 import { contactForm, field } from "../lib/forms.js";
-import { head } from "./_head.js";
+import { head } from "../components/pagehead.js";
 
 export default function membership(main) {
   main.classList.add("narrow");

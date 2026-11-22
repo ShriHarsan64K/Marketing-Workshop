@@ -2,7 +2,7 @@ import C from "../config.js";
 import { h, safeUrl } from "../lib/dom.js";
 import { withEvents, pretty, todayISO, imgSrc } from "../lib/events.js";
 import { contactForm } from "../lib/forms.js";
-import { head } from "./_head.js";
+import { head } from "../components/pagehead.js";
 
 export default async function event(main) {
   const id = new URLSearchParams(location.search).get("e");
