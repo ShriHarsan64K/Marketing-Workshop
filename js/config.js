@@ -13,15 +13,15 @@ export default {
   city: "Chennai",
   cityLine: "Tamil Nadu, India",
   timezone: "Asia/Kolkata",
-  whatTitle: "What we get up to.",
+  whatTitle: "What we do",
   // [title, line, photo in images/archive or images/]
   pillars: [
-    ["Crochet workshops", "Learn a stitch and make something soft.", "images/archive/crochet.jpg"],
-    ["Journaling & vision boards", "Cut, paste and dream out loud, pen in hand.", "images/slide3.jpg"],
-    ["Picnics", "Blankets, snacks and open sky.", "images/archive/circle-1.jpg"],
-    ["Brunch", "Long tables and good food.", "images/slide1.jpg"],
-    ["Galentine's", "A night to celebrate your people.", "images/slide2.jpg"],
-    ["Book club", "Read, sip and talk it over.", "images/archive/group-1.jpg"]
+    ["Crochet workshops", "Learn a stitch and make something soft.", "images/archive/crochet.webp"],
+    ["Journaling & vision boards", "Cut, paste and dream out loud, pen in hand.", "images/slide3.webp"],
+    ["Picnics", "Blankets, snacks and open sky.", "images/archive/circle-1.webp"],
+    ["Brunch", "Long tables and good food.", "images/slide1.webp"],
+    ["Galentine's", "A night to celebrate your people.", "images/slide2.webp"],
+    ["Book club", "Read, sip and talk it over.", "images/archive/group-1.webp"]
   ],
   perks: [   // shown in the membership band on the home page
     ["No fee, no catch", "Joining code:iconic costs nothing."],
@@ -30,12 +30,12 @@ export default {
   ],
   // Home page slideshow photos live in /images
   slides: [
-    { image: "images/slide1.jpg", heading: "Good company, great afternoons" },
-    { image: "images/slide2.jpg", heading: "Women who show up for each other" },
-    { image: "images/slide3.jpg", heading: "Make something that's yours" },
-    { image: "images/slide4.jpg", heading: "Laughter is part of the plan" },
-    { image: "images/slide5.jpg", heading: "Cut. Paste. Dream." },
-    { image: "images/slide6.jpg", heading: "Proud of what we made" }
+    { image: "images/slide1.webp", heading: "Good company, great afternoons" },
+    { image: "images/slide2.webp", heading: "Women who show up for each other" },
+    { image: "images/slide3.webp", heading: "Make something that's yours" },
+    { image: "images/slide4.webp", heading: "Laughter is part of the plan" },
+    { image: "images/slide5.webp", heading: "Cut. Paste. Dream." },
+    { image: "images/slide6.webp", heading: "Proud of what we made" }
   ],
   mapCenter: [13.0827, 80.2707],   // Chennai
   membershipText: "Membership is free. Join our community of women in Chennai, tell us a little about you, and hear about every event first.",
@@ -52,25 +52,25 @@ export default {
 
   // Photos for the home tiles, gallery and past-events page. Files live in /images/archive
   archive: [
-    ["group-1.jpg", "The whole circle"], ["crochet.jpg", "Crochet and chats"], ["table-1.jpg", "Around the workshop table"],
-    ["table-2.jpg", "Making things together"], ["circle-1.jpg", "Mood board morning"], ["circle-2.jpg", "Proud of what we made"],
-    ["hug.jpg", "Hellos at the door"], ["sparkle.jpg", "Little sparkly details"], ["gather.jpg", "Everyone arrives"],
-    ["mugs.jpg", "Journals and smiles"], ["trio.jpg", "New friends"]
+    ["group-1.webp", "The whole circle"], ["crochet.webp", "Crochet and chats"], ["table-1.webp", "Around the workshop table"],
+    ["table-2.webp", "Making things together"], ["circle-1.webp", "Mood board morning"], ["circle-2.webp", "Proud of what we made"],
+    ["hug.webp", "Hellos at the door"], ["sparkle.webp", "Little sparkly details"], ["gather.webp", "Everyone arrives"],
+    ["mugs.webp", "Journals and smiles"], ["trio.webp", "New friends"]
   ],
 
   // Founder page (about.html). Design only: swap in the real words later.
   story: {
     kicker: "Founder",
     title: "Jaisu's Story",
-    banner: "images/archive/group-1.jpg",
+    banner: "images/archive/group-1.webp",
     paragraphs: [
       "A short opening that tells people who Jaisu is and why code:iconic exists. Two or three sentences work best.",
       "How it began. Add the moment the idea for code:iconic came to life, in Jaisu's own words.",
       "Who it is for. Add a few lines about the women who come along and what they find here.",
       "Where it is going. Add what Jaisu hopes the community becomes in Chennai and beyond."
     ],
-    photo: ["images/archive/table-2.jpg", "Making things together"],
+    photo: ["images/archive/table-2.webp", "Making things together"],
     quote: "A line from Jaisu that sums up what code:iconic is about.",
-    pair: [["images/archive/crochet.jpg", "Crochet and chats"], ["images/archive/circle-2.jpg", "Proud of what we made"]]
+    pair: [["images/archive/crochet.webp", "Crochet and chats"], ["images/archive/circle-2.webp", "Proud of what we made"]]
   }
 };

@@ -1,13 +1,16 @@
-import { h } from "../lib/dom.js?v=20261122173409";
-import { withEvents, upcoming, monthName, eventRow } from "../lib/events.js?v=20261122173409";
-import { head } from "../components/pagehead.js?v=20261122173409";
+import { h } from "../lib/dom.js?v=20261122174300";
+import { upcoming, monthName, eventRow } from "../lib/events.js?v=20261122174300";
+import { liveEvents } from "../lib/events-live.js?v=20261122174300";
+import { head } from "../components/pagehead.js?v=20261122174300";
 
 export default async function calendar(main) {
-  main.append(head("Calendar", "Upcoming events", "Pick a date, register in a minute, and we'll confirm your spot."));
-  await withEvents(main, evs => {
+  const list = h("div");
+  main.append(head("Events", "Pick a date and register. We confirm your spot by message."), list);
+  await liveEvents(list, evs => {
     const up = upcoming(evs);
-    if (!up.length) main.append(h("p", { class: "note" }, "No upcoming events yet. Check back soon, or join free to hear first."));
-    let last = "";
-    for (const e of up) { const m = monthName(e.date); if (m !== last) { main.append(h("div", { class: "month" }, m)); last = m; } main.append(eventRow(e)); }
+    if (!up.length) return h("p", { class: "note" }, "No dates yet. Join free and we'll tell you first.");
+    const out = []; let last = "";
+    for (const e of up) { const m = monthName(e.date); if (m !== last) { out.push(h("h2", { class: "month" }, m)); last = m; } out.push(eventRow(e)); }
+    return out;
   });
 }

@@ -39,6 +39,7 @@
     .close{position:absolute;top:var(--s4);right:var(--gutter);display:grid;place-items:center;width:2.7rem;height:2.7rem;border:1px solid var(--line);border-radius:50%;background:none;color:var(--fg);cursor:pointer}}
 
   main{padding-top:clamp(5.5rem,12vw,8rem)}
+  main:empty{min-height:60dvh}
   body[data-page=about] main,body[data-page=home] main{padding-top:0}
 
   /* ---------- footer ---------- */

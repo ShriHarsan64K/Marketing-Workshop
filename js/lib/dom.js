@@ -22,7 +22,7 @@ export function svg(tag, attrs, ...kids) {
 }
 
 export const safeUrl = u => /^https?:\/\//i.test((u || "").trim()) ? u.trim() : "";
-export const logoMark = (light = false) => h("img", { src: `images/logo/${light ? "logo-light" : "logo"}.png`, alt: "code:iconic", width: 640, height: 440 });
+export const logoMark = (light = false) => h("img", { src: `images/logo/${light ? "logo-light" : "logo"}.webp`, alt: "code:iconic", width: 640, height: 440 });
 export const arch = n => "images/archive/" + n;
 
 

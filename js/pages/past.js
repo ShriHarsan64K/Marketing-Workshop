@@ -1,15 +1,15 @@
-import C from "../config.js?v=20261122173409";
-import { h, arch } from "../lib/dom.js?v=20261122173409";
-import { withEvents, past, pretty, imgSrc } from "../lib/events.js?v=20261122173409";
-import { head } from "../components/pagehead.js?v=20261122173409";
+import C from "../config.js?v=20261122174300";
+import { h, arch } from "../lib/dom.js?v=20261122174300";
+import { past, pretty, imgSrc } from "../lib/events.js?v=20261122174300";
+import { liveEvents } from "../lib/events-live.js?v=20261122174300";
+import { head } from "../components/pagehead.js?v=20261122174300";
 
 export default async function pastEvents(main) {
-  main.append(head("Archive", "Past events", "Photos and memories from afternoons gone by."),
-    h("div", { class: "moments", style: "margin-bottom:4rem" }, C.archive.map(([f, t]) => h("figure", null, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 }), h("figcaption", null, t)))));
-  await withEvents(main, evs => {
-    for (const e of past(evs)) main.append(h("article", { style: "margin-bottom:4rem" }, h("p", { class: "eyebrow" }, pretty(e.date) + (e.venue ? " · " + e.venue : "")), h("h2", null, e.title),
-      e.description && h("p", { class: "lead", style: "margin-top:.75rem" }, e.description),
-      e.image && h("img", { class: "event-img", src: imgSrc(e.image), alt: e.title, loading: "lazy" }),
-      e.photoList.length > 0 && h("div", { class: "moments", style: "margin-top:1.5rem" }, e.photoList.map(p => h("figure", null, h("img", { src: imgSrc(p), alt: e.title + " photo", loading: "lazy" }))))));
-  });
+  const list = h("div");
+  main.append(head("Archive", "Photos from past events."),
+    h("div", { class: "moments gap-after" }, C.archive.map(([f, t]) => h("figure", null, h("img", { src: arch(f), alt: t, loading: "lazy", width: 800, height: 1000 })))), list);
+  await liveEvents(list, evs => past(evs).map(e => h("article", { class: "past-event" }, h("h2", null, e.title), h("p", { class: "meta" }, pretty(e.date) + (e.venue ? " · " + e.venue : "")),
+    e.description && h("p", { class: "lead" }, e.description),
+    e.image && h("img", { class: "event-img", src: imgSrc(e.image), alt: e.title, loading: "lazy" }),
+    e.photoList.length > 0 && h("div", { class: "moments" }, e.photoList.map(p => h("figure", null, h("img", { src: imgSrc(p), alt: e.title + " photo", loading: "lazy" })))))));
 }

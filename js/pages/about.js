@@ -1,7 +1,7 @@
 /* Founder page, modelled on sophiawebster.com/pages/biography */
-import C from "../config.js?v=20261122173409";
-import { h, whatsapp } from "../lib/dom.js?v=20261122173409";
-import { icon } from "../lib/icons.js?v=20261122173409";
+import C from "../config.js?v=20261122174300";
+import { h, whatsapp } from "../lib/dom.js?v=20261122174300";
+import { icon } from "../lib/icons.js?v=20261122174300";
 
 export default function about(main) {
   const S = C.story;

@@ -27,10 +27,11 @@
   .pillars p{color:var(--muted);font:400 var(--fs-sm)/1.5 var(--ui)}
 
   /* ---------- tiles (bento) ---------- */
+  .tiles{max-width:calc(60rem + var(--gutter) * 2)}
   .bento-intro{text-align:center;max-width:44rem;margin:0 auto var(--s5)}
   .bento{position:relative;display:grid;gap:var(--s3);max-width:60rem;margin-inline:auto;font-size:.875rem;grid-template-columns:1fr;
     grid-template-areas:"hero" "orb" "archive" "count" "insta" "loc" "cart" "ticket" "since" "map"}
-  .bento > .card{min-height:10rem;padding:var(--s3);border-radius:1.25rem}
+  .bento > .card{min-height:10rem;padding:var(--s3);border-radius:1.25rem;background:var(--card-bg)}
   @media (min-width:768px){
     .bento{grid-template-columns:repeat(2,1fr);grid-template-areas:"hero hero" "orb orb" "archive count" "insta loc" "cart ticket" "since map"}
   }
@@ -57,6 +58,13 @@
     .orb{position:absolute;left:50%;top:calc(var(--r1) + var(--r2) + var(--s3) * 1.5);translate:-50% -50%;width:13rem;margin:0;pointer-events:none}
   }
 
+  /* the logo circle is cut out of the three cards it overlaps (hero card, cartridge, ticket); the same circle masks each card */
+  @media (min-width:1024px){
+    .bento{--cut:7.25rem;--half:calc(var(--s3) / 2)}
+    .hero-card{-webkit-mask:radial-gradient(circle at 50% calc(100% + var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at 50% calc(100% + var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
+    .cart{-webkit-mask:radial-gradient(circle at calc(100% + var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at calc(100% + var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
+    .ticket-card{-webkit-mask:radial-gradient(circle at calc(0px - var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px));mask:radial-gradient(circle at calc(0px - var(--half)) calc(0px - var(--half)),#0000 var(--cut),#000 calc(var(--cut) + .5px))}
+  }
   .archive{grid-area:archive;padding-bottom:var(--s4)}
   .fan{position:relative;flex:1;min-height:9rem}
   .fan .polaroid{position:absolute;left:50%;top:0;width:min(54%,10.625rem);translate:-50% 0;transform-origin:50% 100%;transition:rotate .4s,translate .4s;
@@ -73,7 +81,7 @@
   .cd span{display:block;margin-top:var(--s2);font:500 .625rem/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
   /* membership / free: plain solid pink with wine ink */
-  .since{grid-area:since;background:var(--deep);color:var(--on-deep);border-color:var(--deep);
+  .bento > .since{grid-area:since;background:var(--deep);color:var(--on-deep);border-color:var(--deep);
     .eyebrow{color:var(--on-deep);opacity:.75;margin:0}
     b{font:400 clamp(2.5rem,4vw,3.25rem)/1 var(--classique);color:var(--on-deep)}}
   a.since:hover{border-color:var(--deep)}
@@ -116,14 +124,11 @@
   .map .osm{position:absolute;z-index:3;right:var(--s2);bottom:var(--s1);font:400 .625rem var(--ui);color:var(--pink);text-decoration:none}
 
   /* ---------- membership band ---------- */
-  .perks{margin:var(--s4) 0;
-    li{padding:var(--s2) 0;border-top:1px solid color-mix(in srgb,var(--on-deep) 28%,transparent);display:grid;grid-template-columns:var(--s6) 1fr;
-      &::before{content:"";width:1.125rem;height:1.125rem;margin-top:.2rem;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M13 24 4 15l1.414-1.414L13 21.171 26.586 7.586 28 9z'/%3E%3C/svg%3E") center/contain no-repeat}}
-    b{display:block;font-weight:600}}
-  .band{margin-top:var(--s6);background:var(--deep);color:var(--on-deep);border:1px solid var(--deep);border-radius:var(--r);padding:var(--s6) var(--s5);display:grid;gap:var(--s5);align-items:center}
-  .band h2{color:var(--on-deep);max-width:14ch;margin-bottom:var(--s3)}
-  .band .eyebrow{color:var(--on-deep);opacity:.7}
+  .band{margin-top:var(--s7);background:var(--deep);color:var(--on-deep);border:1px solid var(--deep);border-radius:var(--r);padding:var(--s6) var(--s5);display:grid;gap:var(--s5);align-items:center}
+  .band h2{color:var(--on-deep);font-size:clamp(2.5rem,6vw,4.5rem);line-height:1;margin-bottom:var(--s3)}
   .band .lead{color:var(--on-deep);opacity:.85}
+  .perks{margin:var(--s4) 0;display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s4);border-top:1px solid color-mix(in srgb,var(--on-deep) 28%,transparent);padding-top:var(--s3)
+    ;dt{font-weight:600}dd{margin:0;opacity:.85}}
   .band .btn{background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
   .duo{position:relative;min-height:15rem;
     figure{position:absolute;width:52%}

@@ -1,11 +1,8 @@
-import { $ } from "./lib/dom.js?v=20261122173409";
-import { renderHeader } from "./components/header.js?v=20261122173409";
-import { renderFooter } from "./components/footer.js?v=20261122173409";
+import { $ } from "./lib/dom.js?v=20261122174300";
 
 const page = document.body.dataset.page;
-document.body.dataset.theme = page === "about" ? "pink" : "wine";   // wine page with pink ink; the founder page flips to pink with wine ink
-renderHeader(page === "about" ? "bio" : "default");
-renderFooter();
-const { default: render } = await import(`./pages/${page}.js?v=20261122173409`);
-const main = $("#main"); main.classList.add("wrap");
+const main = $("#main");
+if (page !== "home") main.classList.add("wrap");
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+const { default: render } = await import(`./pages/${page}.js?v=20261122174300`);
 await render(main);

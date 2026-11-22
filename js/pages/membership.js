@@ -1,11 +1,11 @@
-import C from "../config.js?v=20261122173409";
-import { h } from "../lib/dom.js?v=20261122173409";
-import { contactForm, field } from "../lib/forms.js?v=20261122173409";
-import { head } from "../components/pagehead.js?v=20261122173409";
+import C from "../config.js?v=20261122174300";
+import { h } from "../lib/dom.js?v=20261122174300";
+import { contactForm, field } from "../lib/forms.js?v=20261122174300";
+import { head } from "../components/pagehead.js?v=20261122174300";
 
 export default function membership(main) {
   main.classList.add("narrow");
-  main.append(head("Membership", "Join code:iconic. It's free.", C.membershipText));
+  main.append(head("Join code:iconic. It's free.", C.membershipText));
   const box = h("div"); main.append(box);
   const prefill = new URLSearchParams(location.search).get("email") || "";
   box.append(contactForm({ cfg: C.memberForm, button: "Join for free", extraValues: {}, prefillEmail: prefill.slice(0, 200),

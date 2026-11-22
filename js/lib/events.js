@@ -1,6 +1,6 @@
 /* Events come from the published Google Sheet (CSV). */
-import C from "../config.js?v=20261122173409";
-import { h } from "./dom.js?v=20261122173409";
+import C from "../config.js?v=20261122174300";
+import { h } from "./dom.js?v=20261122174300";
 
 export function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;
@@ -32,32 +32,42 @@ export const monthName = iso => fmt(iso, { month: "long", year: "numeric" });
 export const dayMon = iso => [fmt(iso, { day: "2-digit" }), fmt(iso, { month: "short" })];
 
 let cache;
-export async function loadEvents(fresh = false) {
-  if (cache && !fresh) return cache;
-  if (!C.eventsCsv) throw new Error("not-configured");
-  const res = await fetch(fresh ? C.eventsCsv + (C.eventsCsv.includes("?") ? "&" : "?") + "_=" + Date.now() : C.eventsCsv);
-  if (!res.ok) throw new Error("fetch");
-  const [head, ...rows] = parseCSV(await res.text());
+export const peekEvents = () => cache;
+const KEY = "ci-events-csv";
+const parse = text => {
+  const [head, ...rows] = parseCSV(text);
   const keys = head.map(k => k.trim().toLowerCase());
-  cache = rows.filter(r => r.some(x => x.trim())).map(r => {
+  return rows.filter(r => r.some(x => x.trim())).map(r => {
     const o = {}; keys.forEach((k, i) => o[k] = (r[i] || "").trim());
     o.date = normDate(o.date); o.photoList = (o.photos || "").split(",").map(x => x.trim()).filter(Boolean);
     o.id = slug(o); return o;
   }).filter(e => e.title && e.date && /^(true|yes|1)$/i.test(e.published));
+};
+async function fetchCsv(fresh) {
+  const res = await fetch(fresh ? C.eventsCsv + (C.eventsCsv.includes("?") ? "&" : "?") + "_=" + Date.now() : C.eventsCsv);
+  if (!res.ok) throw new Error("fetch");
+  const text = await res.text();
+  try { localStorage.setItem(KEY, text); } catch {}
+  return text;
+}
+/* Stale-while-revalidate: show the last copy instantly, then refresh it in the background (fires "events-updated"). */
+export async function loadEvents(fresh = false) {
+  if (!C.eventsCsv) throw new Error("not-configured");
+  if (cache && !fresh) return cache;
+  let saved = null;
+  if (!fresh) { try { saved = localStorage.getItem(KEY); } catch {} }
+  if (saved) {
+    cache = parse(saved);
+    fetchCsv(true).then(t => { cache = parse(t); dispatchEvent(new Event("events-updated")); }).catch(() => {});
+    return cache;
+  }
+  cache = parse(await fetchCsv(fresh));
   return cache;
 }
 export const upcoming = evs => evs.filter(e => e.date >= todayISO()).sort((a, b) => a.date.localeCompare(b.date));
 /* The next event that has not started yet (flips to the following one the moment it starts). */
 export const nextEvent = evs => evs.filter(e => startOf(e) > Date.now()).sort((a, b) => startOf(a) - startOf(b))[0] || null;
 export const past = evs => evs.filter(e => e.date < todayISO()).sort((a, b) => b.date.localeCompare(a.date));
-
-/* Runs render(events); shows a friendly message instead if the sheet can't be read. */
-export async function withEvents(into, render) {
-  try { return render(await loadEvents()); }
-  catch (e) {
-    into.append(h("p", { class: "note", role: "status" }, e.message === "not-configured" ? "Events are not connected yet." : "We couldn't load events right now. Please refresh in a moment."));
-  }
-}
 
 /* "2:30 PM - 4:00 PM" -> Date in the site's timezone (IST, +05:30) */
 export function startOf(e) {
@@ -77,4 +87,4 @@ export function eventRow(e) {
     h("div", { class: "ev-body" }, h("h3", null, e.title), h("p", { class: "meta" }, [pretty(e.date), e.time, e.venue].filter(Boolean).join(" · ")), e.description && h("p", { class: "desc" }, e.description)),
     h("div", { class: "ev-side" }, e.price && h("span", { class: "price" }, e.price), h("a", { class: "btn", href: "event.html?e=" + encodeURIComponent(e.id) }, "Register")));
 }
-const PHOTOS = ["table-2.jpg", "circle-2.jpg", "mugs.jpg", "hug.jpg", "gather.jpg"];
+const PHOTOS = ["table-2.webp", "circle-2.webp", "mugs.webp", "hug.webp", "gather.webp"];

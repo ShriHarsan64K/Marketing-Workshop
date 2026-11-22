@@ -9,12 +9,12 @@ Static events website for the code:iconic community in Chennai. No server or dat
 ## Structure
 ```
 index.html calendar.html past.html event.html membership.html about.html contact.html 404.html   page shells
-css/   tokens → base → layout → components → home / about   (cascade layers, standard 4/8px + type scale)
+css/   tokens → base → layout → components → home / about / contact   (bundled into css/site.css by the build)   (cascade layers, standard 4/8px + type scale)
 js/
   config.js            everything you edit: text, links, sheet + form IDs, photos, founder story
   main.js              picks header variant, footer and the page module
   lib/                 dom.js (helpers, icons) · events.js (sheet, dates, calendar file) · forms.js (Google Forms)
-  components/          header.js · footer.js · tiles.js (bento cards)
+  components/          hero.js (slideshow) · tiles.js (tile cards) · pagehead.js
   pages/               one module per page
 images/  archive/ (event photos) · logo/ · events/ (posters)
 ```
@@ -30,7 +30,13 @@ images/  archive/ (event photos) · logo/ · events/ (posters)
 Sheet columns: `title, date, time, venue, price, description, image, link, published, photos` (`published` = `TRUE` to show).
 
 ## Deploy
-GitHub Pages caches files for 10 minutes, so before every push run `python3 tools/stamp.py` (adds `?v=<time>` to every import, script and stylesheet).
+GitHub Pages caches files for 10 minutes and serves no build step, so before every push run:
+
+```bash
+python3 tools/build.py
+```
+
+It writes every page with a static header, footer and Home hero (they paint before any JavaScript), bundles `css/*.css` into `css/site.css`, stamps `?v=<time>` on every import, adds preloads, and versions the service worker (`sw.js`). Edit the sources (`css/*.css`, `js/`, `tools/build.py`), never the generated `*.html` or `css/site.css`.
 
 ## Run locally
 ```bash

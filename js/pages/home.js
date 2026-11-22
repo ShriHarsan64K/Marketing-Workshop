@@ -1,9 +1,9 @@
 /* Home: full-photo hero, what we do, upcoming events, a small tile section, membership band. Events refresh themselves. */
-import C from "../config.js?v=20261122173409";
-import { h, arch } from "../lib/dom.js?v=20261122173409";
-import { loadEvents, upcoming, nextEvent, eventRow } from "../lib/events.js?v=20261122173409";
-import { hero } from "../components/hero.js?v=20261122173409";
-import * as T from "../components/tiles.js?v=20261122173409";
+import C from "../config.js?v=20261122174300";
+import { h, arch } from "../lib/dom.js?v=20261122174300";
+import { loadEvents, upcoming, nextEvent, eventRow } from "../lib/events.js?v=20261122174300";
+import { hero } from "../components/hero.js?v=20261122174300";
+import * as T from "../components/tiles.js?v=20261122174300";
 
 const section = (...kids) => h("section", { class: "wrap section" }, ...kids);
 
@@ -12,6 +12,7 @@ export default async function home(main) {
   try { events = await loadEvents(); } catch { failed = true; }
   main.className = "";
 
+  hero();
   const list = h("div"), live = T.liveTiles();
   const paint = () => {
     const up = upcoming(events).slice(0, 5);
@@ -22,19 +23,19 @@ export default async function home(main) {
   paint();
 
   main.append(
-    hero(),
-    section(h("p", { class: "eyebrow" }, "What we do"), h("h2", null, C.whatTitle),
+    section(h("div", { class: "section-head" }, h("h2", null, C.whatTitle)),
       h("ul", { class: "pillars" }, C.pillars.map(([t, line, photo]) => h("li", null, h("img", { src: photo, alt: t, loading: "lazy", width: 600, height: 450 }), h("h3", null, t), h("p", null, line))))),
-    section(h("div", { class: "section-head", id: "events" }, h("div", null, h("p", { class: "eyebrow" }, "Upcoming"), h("h2", null, "Come sit with us."))), list),
-    section(h("div", { class: "bento-intro" }, h("p", { class: "eyebrow" }, "Inside code:iconic"), h("h2", null, "Stories, dates and where to find us.")),
+    section(h("div", { class: "section-head", id: "events" }, h("h2", null, "Upcoming events")), list),
+    h("section", { class: "wrap section tiles" }, h("div", { class: "section-head" }, h("h2", null, "Inside code:iconic")),
       h("div", { class: "bento" }, T.heroCard(), T.orb(), T.archiveCard(), live.count, T.instaCard(), T.locCard(), live.cart, live.ticket, T.freeCard(), T.mapCard())),
     h("div", { class: "wrap" }, h("section", { class: "band" },
-      h("div", null, h("p", { class: "eyebrow" }, "Membership"), h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead" }, C.membershipText),
-        h("ul", { class: "perks" }, C.perks.map(p => h("li", null, h("div", null, h("b", null, p[0]), p[1])))), h("a", { class: "btn", href: "membership.html" }, "Join the community")),
-      h("div", { class: "duo", "aria-hidden": "true" }, [["trio.jpg", "New friends"], ["table-2.jpg", "Making together"]].map(([f, t]) => h("figure", { class: "polaroid" }, h("img", { src: arch(f), alt: "", loading: "lazy", width: 400, height: 500 }), h("figcaption", null, t)))))));
+      h("div", null, h("h2", null, "Free to join. ", h("em", null, "Always.")), h("p", { class: "lead" }, C.membershipText),
+        h("dl", { class: "perks" }, C.perks.flatMap(p => [h("dt", null, p[0]), h("dd", null, p[1])])), h("a", { class: "btn", href: "membership.html" }, "Join the community")),
+      h("div", { class: "duo", "aria-hidden": "true" }, [["trio.webp", "New friends"], ["table-2.webp", "Making together"]].map(([f, t]) => h("figure", { class: "polaroid" }, h("img", { src: arch(f), alt: "", loading: "lazy", width: 400, height: 500 }), h("figcaption", null, t)))))));
 
   // Keep the page current: re-read the sheet every 5 minutes (and when the tab returns), and re-check the clock every 30 seconds.
   const refresh = async () => { try { events = await loadEvents(true); failed = false; paint(); } catch { /* keep what we have */ } };
   setInterval(refresh, 5 * 60e3); setInterval(paint, 30e3);
+  addEventListener("events-updated", () => { events = peekEvents(); paint(); });
   document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
 }
