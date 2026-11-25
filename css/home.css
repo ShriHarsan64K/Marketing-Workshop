@@ -46,6 +46,7 @@
     .hero-card{padding-bottom:0}
   }
 
+  .hero-card h2{font-size:var(--fs-h1)}
   .hero-card{grid-area:hero;justify-content:flex-start;min-height:14rem;
     h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
   .tilt{display:flex;gap:var(--s2);justify-content:center;align-items:flex-start;padding-top:var(--s2)}

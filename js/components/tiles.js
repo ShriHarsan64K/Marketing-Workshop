@@ -1,14 +1,14 @@
 /* The small tile section on the home page, modelled on leborrel.nl. Nothing here is a link except the Instagram strip. */
-import C from "../config.js?v=20261122182123";
-import { h, arch, logoMark, safeUrl } from "../lib/dom.js?v=20261122182123";
-import { icon } from "../lib/icons.js?v=20261122182123";
-import { startOf, imgSrc, pretty } from "../lib/events.js?v=20261122182123";
+import C from "../config.js?v=20261125112103";
+import { h, arch, logoMark, safeUrl } from "../lib/dom.js?v=20261125112103";
+import { icon } from "../lib/icons.js?v=20261125112103";
+import { startOf, imgSrc, pretty } from "../lib/events.js?v=20261125112103";
 
 const polaroid = (src, caption, small) => h("figure", { class: "polaroid" }, h("img", { src, alt: caption, loading: "lazy", width: 400, height: 500 }), h("figcaption", null, caption, small && h("small", null, small)));
 const card = (cls, ...kids) => h("section", { class: "card " + cls }, ...kids);
 
 export const heroCard = () => card("hero-card",
-  h("h1", null, C.headline),
+  h("h2", null, C.headline),
   h("div", { class: "tilt" }, [["group-1.webp", "The gathering."], ["crochet.webp", "Together."], ["circle-2.webp", "Made by us."]].map(([f, t]) => polaroid(arch(f), t, C.city))));
 
 export const orb = () => h("div", { class: "orb", "aria-hidden": "true" }, logoMark(true));

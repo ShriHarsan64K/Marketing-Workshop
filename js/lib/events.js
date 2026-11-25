@@ -1,6 +1,6 @@
 /* Events come from the published Google Sheet (CSV). */
-import C from "../config.js?v=20261122182123";
-import { h } from "./dom.js?v=20261122182123";
+import C from "../config.js?v=20261125112103";
+import { h } from "./dom.js?v=20261125112103";
 
 export function parseCSV(t) {
   const rows = []; let r = [], f = "", q = false;

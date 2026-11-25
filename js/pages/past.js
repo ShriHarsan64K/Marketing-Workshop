@@ -1,8 +1,8 @@
-import C from "../config.js?v=20261122182123";
-import { h, arch } from "../lib/dom.js?v=20261122182123";
-import { past, pretty, imgSrc } from "../lib/events.js?v=20261122182123";
-import { liveEvents } from "../lib/events-live.js?v=20261122182123";
-import { head } from "../components/pagehead.js?v=20261122182123";
+import C from "../config.js?v=20261125112103";
+import { h, arch } from "../lib/dom.js?v=20261125112103";
+import { past, pretty, imgSrc } from "../lib/events.js?v=20261125112103";
+import { liveEvents } from "../lib/events-live.js?v=20261125112103";
+import { head } from "../components/pagehead.js?v=20261125112103";
 
 export default async function pastEvents(main) {
   const list = h("div");

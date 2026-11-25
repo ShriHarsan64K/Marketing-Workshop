@@ -1,5 +1,5 @@
 /* Forms post straight into Google Forms (formResponse). The browser can't read the reply (no-cors), so a resolved request counts as sent. */
-import { h, $ } from "./dom.js?v=20261122182123";
+import { h, $ } from "./dom.js?v=20261125112103";
 
 const PHONE = /^\+?[0-9][0-9 \-]{8,17}[0-9]$/, EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
